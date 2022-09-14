@@ -47,7 +47,16 @@ app.use(function (req, res, next) {
 // Set security HTTP headers
 app.use(
   helmet({
-    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: {
+      allowOrigins: ['*'],
+    },
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ['*'],
+        scriptSrc: ["* data: 'unsafe-eval' 'unsafe-inline' blob:"],
+      },
+    },
   })
 );
 
