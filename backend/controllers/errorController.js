@@ -16,11 +16,10 @@ const handleValidatorErrorDB = (error) => {
   return new AppError(message, 400);
 };
 
-const handleJWTError = () =>
-  new AppError('Invalid token. Please log in again!', 401);
+const handleJWTError = () => new AppError('يرجى تسجيل الدخول مرة أخرى', 401);
 
 const handleTokenExpiredError = () =>
-  new AppError('Token is expired! Please log in again!', 401);
+  new AppError('يرجى تسجيل الدخول مرة أخرى', 401);
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -39,7 +38,7 @@ const sendErrorProd = (err, res) => {
     console.error('ERROR 💥', err);
     res.status(500).json({
       status: 'error',
-      message: 'Something went very wrong!',
+      message: 'حدث خطأ ما',
     });
   }
 };

@@ -41,10 +41,10 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password)
-    return next(new AppError('Please provide email and password!', 401));
+    return next(new AppError('يرجى تقديم البريد الإلكتروني وكلمة المرور', 401));
   const user = await User.findOne({ email }).select('+password'); // {email: email} = {email}
   if (!user || !(await user.correctPassword(password, user.password)))
-    return next(new AppError('Incorrect email or password!', 401));
+    return next(new AppError('البريد أو كلمة المرور غير صحيحة', 401));
   createAndSendToken(user, 200, res);
 });
 
@@ -58,7 +58,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   // Check if there is no token
   if (!token)
     return next(
-      new AppError('You are not logged in! Please log in to get access.', 401)
+      new AppError('لم يتم تسجيل دخولك! الرجاء تسجيل الدخول للوصول', 401)
     ); // 401 unauthorized
   // payload here is user id
   // verify the token
@@ -70,16 +70,15 @@ exports.protect = catchAsync(async (req, res, next) => {
   const user = await User.findById(decodedPayload.id);
   if (!user)
     return next(
-      new AppError(
-        'The user belonging to this token does no longer exist.',
-        401
-      )
+      new AppError('لم يعد المستخدم الذي ينتمي إلى هذا الحساب موجودًا', 401)
     );
   // check if the user changed his password after this token
   if (user.changedPasswordAfter(decodedPayload.iat))
     // iat: issued at
     return next(
-      new AppError('User recently changed password! Please log in again.'),
+      new AppError(
+        'قام المستخدم بتغيير كلمة المرور مؤخرًا! الرجاد الدخول على الحساب من جديد'
+      ),
       401
     );
 
@@ -87,3 +86,10 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = user;
   next();
 });
+
+exports.isAdmin = (req, res, next) => {
+  console.log(req.user.isAdmin);
+  if (!req.user.isAdmin)
+    return next(new AppError('ليس لديك إذن للقيام بهذا الإجراء', 403));
+  next();
+};

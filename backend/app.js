@@ -1,6 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 const userRouter = require('./routes/userRoutes');
+const activityRouter = require('./routes/activityRoutes');
+const deliveryTeamRouter = require('./routes/deliveryTeamRoutes');
+const deliveryWayRouter = require('./routes/deliveryWayRoutes');
+const projectRouter = require('./routes/projectRoutes');
+const rowRouter = require('./routes/rowRoutes');
+const siteEngineerRouter = require('./routes/siteEngineerRoutes');
+const siteSupervisorMainRouter = require('./routes/siteSupervisorMainRoutes');
+const siteSupervisorAssistantRouter = require('./routes/siteSupervisorAssistantRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -98,11 +106,18 @@ const limiter = rateLimit({
 app.use('/api', limiter); // limit only api requests
 
 // ROUTES
-
+app.use('/api/activities', activityRouter);
+app.use('/api/deliveryTeams', deliveryTeamRouter);
+app.use('/api/deliveryWays', deliveryWayRouter);
+app.use('/api/projects', projectRouter);
+app.use('/api/rows', rowRouter);
+app.use('/api/siteEngineers', siteEngineerRouter);
+app.use('/api/siteSupervisorMain', siteSupervisorMainRouter);
+app.use('/api/siteSupervisorAssistant', siteSupervisorAssistantRouter);
 app.use('/api/users', userRouter);
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+  next(new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404));
 });
 
 // Error handler middleware
