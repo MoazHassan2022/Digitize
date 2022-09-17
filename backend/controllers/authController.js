@@ -118,7 +118,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       message,
     });
     res.status(200).json({
-      status: 'succes',
+      status: 'success',
       message: 'تم ارسال رابط التفعيل الى البريد الالكتروني',
     });
   } catch (err) {
