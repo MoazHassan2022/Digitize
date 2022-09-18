@@ -4,6 +4,7 @@ const projectSchema = mongoose.Schema({
   projectCode: {
     type: String,
     required: [true, 'يجب أن تدخل كود المشروع'],
+    unique: [true, 'هذا المشروع موجود من قبل'],
     trim: true, // Remove all the white space in the beginning or end of the field
   },
   siteNames: [String],
