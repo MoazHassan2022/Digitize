@@ -6,51 +6,45 @@ const crypto = require('crypto');
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A user must have a name'],
+    required: [true, 'يجب أن يمتلك المستخدم اسم'],
     trim: true, // Remove all the white space in the beginning or end of the field
-    maxLength: [
-      40,
-      'A user name must have less than or equal to 40 characters',
-    ],
-    minLength: [4, 'A user name must have more than or equal to 8 characters'],
+    maxLength: [40, 'يجب أن يحتوي اسم المستخدم على 40 حرفًا أو أقل'],
+    minLength: [4, 'يجب أن يحتوي اسم المستخدم على أكثر من أو يساوي 4 أحرف'],
   },
   email: {
     type: String,
-    required: [true, 'A user must have an email'],
-    unique: [true, 'A user must have a unique email'],
+    required: [true, 'يجب أن يكون لدى المستخدم بريد إلكتروني'],
+    unique: [true, 'يجب أن يكون لدى المستخدم بريد إلكتروني فريد'],
     trim: true, // Remove all the white space in the beginning or end of the field
     lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email address'],
+    validate: [validator.isEmail, 'يرجى تقديم عنوان بريد إلكتروني صالح'],
   },
   password: {
     type: String,
-    required: [true, 'A user must have a password'],
-    maxLength: [
-      40,
-      'A user password must have less than or equal to 40 characters',
-    ],
+    required: [true, 'يجب أن يكون لدى المستخدم كلمة مرور'],
+    maxLength: [40, 'يجب أن تحتوي كلمة مرور المستخدم على 40 حرفًا أو أقل'],
     minLength: [
       8,
-      'A user password must have more than or equal to 8 characters',
+      'يجب أن تحتوي كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف',
     ],
     select: false,
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'A user must have a password cofirm'],
+    required: [true, 'يجب أن يكون لدى المستخدم كلمة مرور مؤكدة'],
     maxLength: [
       40,
-      'A user password confirm must have less than or equal to 40 characters',
+      'يجب أن يحتوي تأكيد كلمة مرور المستخدم على 40 حرفًا أو أقل',
     ],
     minLength: [
       8,
-      'A user password confirm must have more than or equal to 8 characters',
+      'يجب أن يحتوي تأكيد كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف',
     ],
     validate: {
       validator: function (value) {
         return value === this.password;
       },
-      message: 'Password Confirm must be equal to your password',
+      message: 'يجب أن يكون تأكيد كلمة المرور مساويًا لكلمة المرور الخاصة بك',
     },
     select: false,
   },

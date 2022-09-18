@@ -3,6 +3,8 @@ const User = require('./../models/usersModel');
 const catchAsync = require('./../utils/catchAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
+const sendEmail = require('./../utils/email');
+const crypto = require('crypto');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -93,3 +95,60 @@ exports.isAdmin = (req, res, next) => {
     return next(new AppError('ليس لديك إذن للقيام بهذا الإجراء', 403));
   next();
 };
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  // 1) Get user with POSTed email
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return next(new AppError('لا يوجد مستخدم بهذا الايميل', 404));
+  }
+  // 2) Generate the random reset token
+  const resetToken = await user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false }); // in order to save the passwordResetToken and passwordResetExpires
+  // 3) Send the reset token to the user email
+  const reqURL = `${req.protocol}://${req.get(
+    'host'
+  )}/users/resetPassword/${resetToken}`;
+  const message = `لتعيد كتابتها ${reqURL} هل نسيت كلمة المرور؟ اضغط على هذا الرابط\nفي حالة لم تنسى كلمة المرور. من فضلك تجاهل هذا البريد الالكتروني`;
+  try {
+    await sendEmail({
+      email: req.body.email,
+      subject: 'رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)',
+      message,
+    });
+    res.status(200).json({
+      status: 'success',
+      message: 'تم ارسال رابط التفعيل الى البريد الالكتروني',
+    });
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(new AppError('حدث خطأ في ارسال البريد الالكتروني', 500));
+  }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  // Get user with token
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passswordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  // If token is not expired and there is a user, set the new password
+
+  if (!user) return next(new AppError('الرابط غير صالح أو انتهت صلاحيته', 400));
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+  // Log the user in: send JWT
+  createAndSendToken(user, 200, res);
+});

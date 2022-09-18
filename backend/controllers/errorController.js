@@ -1,18 +1,18 @@
 const AppError = require('./../utils/appError');
 
 const handleCastErrorDB = (error) => {
-  const message = `Invalid ${error.path}: ${error.value}.`;
+  const message = `لم يتم ايجاد البيانات المطلوبة`;
   return new AppError(message, 400);
 };
 
 const handleDuplicateFieldDB = (error) => {
-  const message = `Duplicate field value: ${error.keyValue.name}. Please use another value!`;
+  const message = `هذه البيانات موجودة من قبل. من فضلك استخدم قيم أخرى`;
   return new AppError(message, 400);
 };
 
 const handleValidatorErrorDB = (error) => {
   const errors = Object.values(error.errors).map((val) => val.message);
-  const message = `Invalid input data. ${errors.join('. ')}`;
+  const message = `${errors.join('. ')} يوجد خطأ في البيانات التي أدخلتها`;
   return new AppError(message, 400);
 };
 
@@ -47,6 +47,7 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || 'error';
   if (process.env.NODE_ENV !== 'development') {
     let error = { ...err };
+    error.message = err.message;
     if (err.name === 'CastError') error = handleCastErrorDB(error);
     if (err.code === 11000) error = handleDuplicateFieldDB(error);
     if (err.name === 'ValidationError') error = handleValidatorErrorDB(error);
