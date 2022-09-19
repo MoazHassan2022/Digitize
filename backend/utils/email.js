@@ -1,27 +1,47 @@
 const nodemailer = require('nodemailer');
-const catchAsync = require('./catchAsync');
+const pug = require('pug');
 
-const sendEmail = catchAsync(async (options) => {
-  // Create a transporter
-  const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-    tls: { rejectUnauthorized: false },
-    // Activate in gmail less secure app option
-  });
+module.exports = class Email {
+  constructor(user, url) {
+    this.to = user.email;
+    this.firstName = user.name.split(' ')[0];
+    this.url = url;
+    this.from = `Admin 1 <${process.env.EMAIL_USERNAME}>`;
+  }
+  newTransport() {
+    return nodemailer.createTransport({
+      service: 'SendGrid',
+      auth: {
+        user: process.env.SENDGRID_USERNAME,
+        pass: process.env.SENDGRID_PASSWORD, // App password in gmail
+      },
+      tls: { rejectUnauthorized: false },
+    });
+  }
+  async send(template, subject) {
+    const html = pug.renderFile(
+      `${__dirname}/../views/emails/${template}.pug`,
+      {
+        firstName: this.firstName,
+        url: this.url,
+        subject,
+      }
+    );
+    console.log(html);
+    const emailOptions = {
+      from: this.from,
+      to: this.to,
+      subject,
+      html,
+    };
 
-  // define email options
-  const emailOptions = {
-    from: 'Admin 1 <admin1@digitize-web.com>',
-    to: options.email,
-    subject: options.subject,
-    text: options.message,
-  };
-  // actually send the email
-  await transporter.sendMail(emailOptions);
-});
+    await this.newTransport().sendMail(emailOptions);
+  }
 
-module.exports = sendEmail;
+  async sendPasswordReset() {
+    await this.send(
+      'passwordReset',
+      'رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)'
+    );
+  }
+};
