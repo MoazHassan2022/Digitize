@@ -43,10 +43,6 @@ const rowSchema = mongoose.Schema({
   deliveryWay: {
     type: String,
     required: [true, 'يجب أن تدخل طريقة التسليم'],
-    enum: {
-      values: ['في المنزل', 'مقاول فرعي'],
-      message: 'طريقة التسليم يجب أن تكون في المنزل أو مقاول فرعي',
-    },
   },
   deliveryTeam: {
     type: String,
