@@ -90,7 +90,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isAdmin = (req, res, next) => {
-  console.log(req.user.isAdmin);
   if (!req.user.isAdmin)
     return next(new AppError('ليس لديك إذن للقيام بهذا الإجراء', 403));
   next();
@@ -99,7 +98,6 @@ exports.isAdmin = (req, res, next) => {
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user with POSTed email
   const user = await User.findOne({ email: req.body.email });
-
   if (!user) {
     return next(new AppError('لا يوجد مستخدم بهذا الايميل', 404));
   }
@@ -144,6 +142,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
+  console.log(user);
   await user.save();
   // Log the user in: send JWT
   createAndSendToken(user, 200, res);

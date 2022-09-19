@@ -9,6 +9,7 @@ module.exports = class Email {
     this.from = `Admin 1 <${process.env.EMAIL_USERNAME}>`;
   }
   newTransport() {
+    try{
     return nodemailer.createTransport({
       service: 'SendGrid',
       auth: {
@@ -17,6 +18,7 @@ module.exports = class Email {
       },
       tls: { rejectUnauthorized: false },
     });
+  }catch(err){console.log(err)}
   }
   async send(template, subject) {
     const html = pug.renderFile(
@@ -27,7 +29,6 @@ module.exports = class Email {
         subject,
       }
     );
-    console.log(html);
     const emailOptions = {
       from: this.from,
       to: this.to,
