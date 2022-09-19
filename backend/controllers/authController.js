@@ -3,7 +3,7 @@ const User = require('./../models/usersModel');
 const catchAsync = require('./../utils/catchAsync');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
-const sendEmail = require('./../utils/email');
+const Email = require('./../utils/email');
 const crypto = require('crypto');
 
 const signToken = (id) => {
@@ -107,16 +107,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = await user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false }); // in order to save the passwordResetToken and passwordResetExpires
   // 3) Send the reset token to the user email
-  console.log(req.get("host"));
-  const reqURL = `${req.protocol}://127.0.0.1:3001/users/resetPassword/${resetToken}`;
-  const message = `لتعيد كتابتها ${reqURL} هل نسيت كلمة المرور؟ اضغط على هذا الرابط\nفي حالة لم تنسى كلمة المرور. من فضلك تجاهل هذا البريد الالكتروني`;
+  const reqURL = `${req.protocol}://${req.get(
+    'host'
+  )}/users/resetPassword/${resetToken}`;
   try {
-    console.log(req.body.email);
-    await sendEmail({
-      email: req.body.email,
-      subject: 'رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)',
-      message,
-    });
+    await new Email(user, reqURL).sendPasswordReset();
     res.status(200).json({
       status: 'success',
       message: 'تم ارسال رابط التفعيل الى البريد الالكتروني',
@@ -125,6 +120,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
+    console.log(err);
     return next(new AppError('حدث خطأ في ارسال البريد الالكتروني', 500));
   }
 });
