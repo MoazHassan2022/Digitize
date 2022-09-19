@@ -34,9 +34,14 @@ const createAndSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  if (!req.user.isAdmin)
+    return next(
+      new AppError(
+        'أنت لست أدمن. الأدمن فقط هو من لديه الحق في انشاء مشرف جديد'
+      )
+    );
   if (req.body.isAdmin) delete req.body.isAdmin;
   const newUser = await User.create(req.body);
-  const token = signToken(newUser._id);
   createAndSendToken(newUser, 201, res);
 });
 
@@ -134,7 +139,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passswordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() },
   });
-
+  console.log(user);
   // If token is not expired and there is a user, set the new password
 
   if (!user) return next(new AppError('الرابط غير صالح أو انتهت صلاحيته', 400));
