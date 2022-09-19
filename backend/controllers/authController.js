@@ -107,11 +107,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = await user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false }); // in order to save the passwordResetToken and passwordResetExpires
   // 3) Send the reset token to the user email
-  const reqURL = `${req.protocol}://${req.get(
-    'host'
-  )}/users/resetPassword/${resetToken}`;
+  console.log(req.get("host"));
+  const reqURL = `${req.protocol}://127.0.0.1:3001/users/resetPassword/${resetToken}`;
   const message = `لتعيد كتابتها ${reqURL} هل نسيت كلمة المرور؟ اضغط على هذا الرابط\nفي حالة لم تنسى كلمة المرور. من فضلك تجاهل هذا البريد الالكتروني`;
   try {
+    console.log(req.body.email);
     await sendEmail({
       email: req.body.email,
       subject: 'رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)',

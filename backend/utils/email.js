@@ -20,6 +20,7 @@ const sendEmail = catchAsync(async (options) => {
     subject: options.subject,
     text: options.message,
   };
+  console.log(emailOptions)
   // actually send the email
   await transporter.sendMail(emailOptions);
 });
