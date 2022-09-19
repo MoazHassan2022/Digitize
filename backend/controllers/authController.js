@@ -139,7 +139,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passswordResetToken: hashedToken,
     passwordResetExpires: { $gt: Date.now() },
   });
-  console.log(user);
   // If token is not expired and there is a user, set the new password
 
   if (!user) return next(new AppError('الرابط غير صالح أو انتهت صلاحيته', 400));
@@ -147,7 +146,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  console.log(user);
   await user.save();
   // Log the user in: send JWT
   createAndSendToken(user, 200, res);

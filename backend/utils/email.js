@@ -11,16 +11,16 @@ module.exports = class Email {
   newTransport() {
     try{
     return nodemailer.createTransport({
-      service: 'SendGrid',
+      service: 'Gmail',
       auth: {
-        user: process.env.SENDGRID_USERNAME,
-        pass: process.env.SENDGRID_PASSWORD, // App password in gmail
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD, // App password in gmail
       },
       tls: { rejectUnauthorized: false },
     });
   }catch(err){console.log(err)}
   }
-  async send(template, subject) {
+  send(template, subject) {
     const html = pug.renderFile(
       `${__dirname}/../views/emails/${template}.pug`,
       {
@@ -35,7 +35,10 @@ module.exports = class Email {
       subject,
       html,
     };
-    await this.newTransport().sendMail(emailOptions);
+
+    this.newTransport().sendMail(emailOptions, (err) => {
+      if (err) console.log(err);
+    });
   }
 
   async sendPasswordReset() {
