@@ -22,6 +22,11 @@ exports.getAllRows = catchAsync(async (req, res, next) => {
 
   let model = [
     {
+      displayName: 'Date',
+      access: 'date',
+      type: 'string',
+    },
+    {
       displayName: 'Project Code',
       access: 'projectCode',
       type: 'string',
