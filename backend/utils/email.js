@@ -10,10 +10,10 @@ module.exports = class Email {
   }
   newTransport() {
     return nodemailer.createTransport({
-      service: 'SendGrid',
+      service: 'Gmail',
       auth: {
-        user: process.env.SENDGRID_USERNAME,
-        pass: process.env.SENDGRID_PASSWORD, // App password in gmail
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD, // App password in gmail
       },
       tls: { rejectUnauthorized: false },
     });
