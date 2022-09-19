@@ -18,7 +18,7 @@ module.exports = class Email {
       tls: { rejectUnauthorized: false },
     });
   }
-  async send(template, subject) {
+  send(template, subject) {
     const html = pug.renderFile(
       `${__dirname}/../views/emails/${template}.pug`,
       {
@@ -34,7 +34,9 @@ module.exports = class Email {
       html,
     };
 
-    await this.newTransport().sendMail(emailOptions);
+    this.newTransport().sendMail(emailOptions, (err) => {
+      if (err) console.log(err);
+    });
   }
 
   async sendPasswordReset() {
