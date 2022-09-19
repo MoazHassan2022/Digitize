@@ -10,7 +10,7 @@ router.route('/').get((req, res, next) => {
     requestedAt: req.requestTime,
     results: 3,
     data: {
-      data: ['م3', 'م', 'وحدة'],
+      data: [{ unit: 'م3' }, { unit: 'م' }, { unit: 'وحدة' }],
     },
   });
 });
