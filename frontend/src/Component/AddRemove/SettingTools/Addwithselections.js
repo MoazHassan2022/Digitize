@@ -33,7 +33,7 @@ export const Addwithselections = ({ getapi , getlabel , obsenget , sendapi, obse
     const auth = "Bearer " + cookies.token;
     await axios.patch(sendapi+`/${selections["_id"]}`, ob,{headers:{authorization: auth,}})
     .then(res => {
-        setSnakeData([true, " تمت الاضافه بنجاح" , "success"]);
+        setSnakeData([true, " تمت الاضافة بنجاح" , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -68,7 +68,6 @@ useEffect(() => {
 
     return(
         <Grid item container  xs={10} md={10}>
-          <form >
             <Grid item container  xs={12} md={12} spacing={3} >
               <Grid item xs={12}>
               <Autocomplete
@@ -107,7 +106,6 @@ useEffect(() => {
                 <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
               </Grid>
             </Grid>
-          </form>
         </Grid>
     );
 }

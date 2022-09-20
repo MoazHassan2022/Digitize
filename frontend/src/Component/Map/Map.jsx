@@ -7,6 +7,20 @@ import {GiFinishLine} from "react-icons/gi"
 import { useTheme } from "@emotion/react";
 
 
+
+const Mapshow =({existMap , children})=>{
+
+
+  if(!existMap){
+    return <Grid item xs={12} md={12} sx={{maxHeight:"30vh", marginTop:5}} textAlign="center"   >
+      <Typography variant="h2" >  هذا المشروع لا يمتلك خريطة بعد. يجب عليك ارفاق صورة</Typography>
+    </Grid>
+  }
+  return children;
+
+}
+
+
 export const Map =({setselection , sd, imgurl,initsq}) =>{
   const theme = useTheme();
   const [pos , setpos] = useState([0,0]);
@@ -17,28 +31,35 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   const [squares , setsquers] = useState(initsq);
   const [trival , settrival] = useState(true);
   const [showloadimg, setshowloadimg] =useState(true);
+  const mapexist = imgurl.slice(imgurl.length-9) !== "undefined";
 
-  var notchoosesquare = pos[0] === -1 || pos[1] === -1;
+
 
   const handlechose = () => {
-      if(Imgs.length === 0 && (notchoosesquare)) {sd([true , "من فضلك قم بالاختيار من الخريطه او ارفق صوره", "error"]); return;}
-      if(!notchoosesquare) {
+      if(!mapexist){
+        if(Imgs.length === 0) {sd([true , "من فضلك ارفق صورة", "error"]); return;}
+        let x= Imgs.target.files[0];
+        setselection({"img":x, "sq":squares});
+        sd([true , "تم ارفاق الصورة بنجاح", "success"]); 
+        return;
+      }else{
+      if(Imgs.length === 0 && choses.length === 0) {sd([true , "من فضلك قم بالاختيار من الخريطة او ارفق صورة", "error"]); return;}
         let ind = choses.findIndex( x => x[0] === pos[0] && x[1] === pos[1] );
         if(ind !== -1 ){
           if(choses[ind][2] === mapselections.indexOf(sel)){ 
-            sd([true , "لقد قمت باضافه هذا العمل من قبل ","info"])
+            sd([true , "لقد قمت باضافة هذا العمل من قبل ","info"])
             return;
           }else{
             setChoses(prev => {
               let p= prev;
-              p[ind][2] =mapselections.indexOf(sel);
+              p[ind][2] = mapselections.indexOf(sel);
               return p;
              })
              setsquers(prev => {
               let p = prev;
               p[pos[0]][pos[1]] = mapselections.indexOf(sel);
               return p;});
-            sd([true , "تم تغيير اختيارك لتلك المنطقه ","info"])
+            sd([true , "تم تغيير اختيارك لتلك المنطقة ","info"])
             settrival(!trival);
             return;
           }
@@ -52,8 +73,10 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
           let p = prev;
           p[pos[0]][pos[1]] = mapselections.indexOf(sel);
           return p;});
-      }
-      setselection({"img":Imgs[0].target.files[0], "sq":squares});
+      let x= Imgs.target.files[0];
+      setselection({"img":x, "sq":squares});
+      sd([true , "تم ارفاق البيانات بنجاح", "success"]); 
+    }
     settrival(!trival);
   }
 
@@ -81,14 +104,16 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
 
   const UploadImgs = (e) => {
     if (e) {
-      setImgs([...Imgs, e]);
+      setImgs(e);
       setshowloadimg(false);
+      settrival(!trival);
     }
     
   }
       return(
         <Grid container xs={12} md={12}  sx={{ minHeight:"30vh"}} >
-            <Grid item xs={12} md={12} sx={{maxHeight:"60vh", margin:1}} >
+          <Mapshow existMap={mapexist} >
+          <Grid item xs={12} md={12} sx={{maxHeight:"60vh", margin:1}} >
               <MapImg setp={setpos} imgurl={imgurl} squares={squares} curs={pos} trival={trival}/>
             </Grid>
             <Grid item container xs={12} md={12}  textAlign="center">
@@ -123,19 +148,24 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
               </Grid>
             </Grid>
 
+          </Mapshow>
+
+
             <Grid item container xs={12} md={12} textAlign="center" lineHeight="4"  >
                 <Grid item xs={12} md={6} textAlign="center" justifyItems="center" >
+                  {mapexist && 
                 <DropDownwithselctions selection={sel} selections={mapselections}  setselection={setsel} label={" اختر مقدار تقدمك"} />
+                }
                 </Grid>
                 <Grid item xs={12} md={6} textAlign="center" justifyItems="center">
                  {showloadimg && 
                   <Button variant="contained" startIcon={<BsImageFill color="white" />} component="label" onChange={UploadImgs}>
-                      ارفق صوره
+                      ارفق صورة
                     <input hidden accept="image/*" type="file" />
                   </Button>
                   }
 
-                  <Button variant="contained" onClick={handlechose} startIcon={<GiFinishLine color="white" />} sx={{marginLeft:1}} >اضف الاختيار</Button>
+                  <Button variant="contained" onClick={handlechose} startIcon={<GiFinishLine color="white" />} sx={{marginLeft:1}} >اضف الاختيار او الصورة</Button>
                 </Grid>
             </Grid>
 

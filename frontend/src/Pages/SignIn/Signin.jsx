@@ -113,7 +113,7 @@ return (
             />
           </Grid>
           <Grid item xs={12} md={12} align="center">
-            <Link onClick={() => history("/SubmitEmail")} sx={{ textDecoration:"none" , cursor:"pointer" }}>هل نسيت الباسورد الخاص بك ؟اضغط لاعاده التعيين</Link>
+            <Link onClick={() => history("/SubmitEmail")} sx={{ textDecoration:"none" , cursor:"pointer" }}>هل نسيت الباسورد الخاص بك ؟اضغط لاعادة التعيين</Link>
           </Grid>
           <Grid item xs={12} align="center">
             <Button type="submit" variant="contained" endIcon={<BiLogInCircle /> } >سجل الدخول</Button>

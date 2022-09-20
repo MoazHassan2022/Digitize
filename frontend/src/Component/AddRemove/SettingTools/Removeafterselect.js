@@ -17,6 +17,8 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
     const [allspecifcselections , setallspecifcselections] = useState([]);
     const [specifcselections , setspecifcselections] = useState([]); 
 
+    console.log(getapi , getlabel , obsenget , sendapi, obsen , label);
+
   const HandleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,6 +65,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
       }}
       ).then(response =>{
         setallselections(response.data.data.data);
+        console.log(response.data.data.data);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
       });
@@ -117,7 +120,7 @@ useEffect(() => {
                     <TextField
                         required={selections.length === 0}
                         {...params}
-                      label={"احذف من "+label+"ك"}
+                      label={"اختر من "+getlabel+"ك"}
                       placeholder="احذف المزيد"
                     />)
                   }}

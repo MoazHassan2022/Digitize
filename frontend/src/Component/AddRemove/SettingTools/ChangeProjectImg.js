@@ -26,21 +26,19 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     if(selection.length === 0){
-        setSnakeData([true, `من فضلك اختر المشروع التي تود تغييره ` , "error"]);
+        setSnakeData([true, `من فضلك اختر المشروع التي تود تغييرة ` , "error"]);
         return ;
     }
     if( Imgs.length === 0){
-      setSnakeData([true, `من فضلك ارفق صوره ` , "error"]);
+      setSnakeData([true, `من فضلك ارفق صورة ` , "error"]);
       return ;
     }
     let formData = new FormData();
     formData.append('map', Imgs[0].target.files[0]);
     const auth = "Bearer " + cookies.token;
-    console.log(baseapi +"/projects/"+selection["_id"]);
     await axios.patch(baseapi +"/projects/"+selection["_id"] , formData,{headers:{authorization: auth,}})
     .then(res => { 
-        console.log(res)
-        setSnakeData([true, ` تم تغيير الصوره بنجاح ` , "success"]);
+        setSnakeData([true, ` تم تغيير الصورة بنجاح ` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -63,7 +61,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
             
               <Grid item xs={12} style={{textAlign: "center"}}>
                 <Button variant="contained" startIcon={<BsImageFill color="white" />} sx={{ marginRight: 1}} component="label" onChange={UploadImgs}>
-                     ارفق الخريطه الجديده
+                     ارفق الخريطة الجديدة
                     <input hidden accept="image/*" type="file" />
                 </Button>
                 <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>

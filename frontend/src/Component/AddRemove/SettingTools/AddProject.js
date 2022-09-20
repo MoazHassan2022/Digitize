@@ -34,7 +34,7 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
     const auth = "Bearer " + cookies.token;
     await axios.post(sendapi, formData,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافه ${enterdtext} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة ${enterdtext} بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -59,7 +59,7 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
             
               <Grid item xs={12} style={{textAlign: "end"}}>
                 <Button variant="contained" startIcon={<BsImageFill color="white" />} sx={{ marginRight: 1}} component="label" onChange={UploadImgs}>
-                     ارفق خريطه الموقع
+                     ارفق خريطة الموقع
                     <input hidden accept="image/*" type="file" />
                 </Button>
                 <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>

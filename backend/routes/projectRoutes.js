@@ -20,7 +20,6 @@ router
   .get(projectController.getProject)
 
   .patch(
-    authController.isAdmin,
     projectController.uploadProjectMap,
     projectController.resizeProjectMap,
     projectController.updateProject

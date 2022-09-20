@@ -7,52 +7,59 @@ import {IoAddCircle} from "react-icons/io5"
 import Addwithtags from "../../Addwithtages/Addwithtags";
 
 
-export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) => {
+export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
   const theme = useTheme();
   const [cookies] = useCookies();
-  const [enterdtext , setEnterdtext] = useState("");
+  const [selectedId , setSelectedId] = useState("");
+  const [Name , setName] = useState("");
 
   console.log(sendapi, obsen , label);
   const HandleSubmit = async (e) => {
     e.preventDefault();
-    if(enterdtext.length === 0){
-      setSnakeData([true, `من فضلك قم بملي احدي ال${label} عل الاقل` , "error"])
+    if(Name.length === 0){
+      setSnakeData([true, "قم بملي اسم المجموعه من فضلك " , "error"])
       return ;
     }
-    enterdtext.map(p => add(p));
-  }
+    if(selectedId.length === 0){
+      setSnakeData([true, "الخاص المجموعه من فضلك Id  قم بملي ال " , "error"])
+      return ;
+    }
 
-  const add = async (pp) =>{
-    let ob={}; ob[obsen] = pp;
+
+    
     const auth = "Bearer " + cookies.token;
+    let ob={}; ob["activityGroupName"] = Name;
+    ob["activityGroupID"] = selectedId;
     await axios.post(sendapi, ob,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافة ${pp} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة ${Name} بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
       });
   }
 
-  function handleSelecetedTags(items) {
-    setEnterdtext(items)
-  }
-
-  useEffect(()=>{
-    setSnakeData([true, `بعد كتابة كل مجموعة  Enter  اضغط` , "info"]);
-  },[])
-
     return(
         <Grid item container  xs={10} md={10}>
             <Grid item container  xs={12} md={12} spacing={3} >
               <Grid item xs={12} >
-              <Addwithtags
-                selectedTags={handleSelecetedTags}
+              <TextField
                 variant="outlined"
                 fullWidth
                 sx={{maxWidth: 530,}}
-                placeholder={`اضف ${label}`}
-                label={`اضف ${label}`}
+                placeholder={`اضف اسم للمجموعه`}
+                label={`اضف اسم للمجموعه`}
+                onChange={(e) => setName(e.target.value)}
+              />
+              </Grid>
+              <Grid item xs={12} >
+              <TextField
+                variant="outlined"
+                fullWidth
+                sx={{maxWidth: 530,}}
+                placeholder={`للمجموعه Id اضف `}
+                label={`للمجموعه Id اضف `}
+                onChange={(e) => setSelectedId(e.target.value)}
               />
               </Grid>
               <Grid item xs={12} style={{textAlign: "end"}}>
@@ -62,4 +69,4 @@ export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) =
         </Grid>
     );
 }
-export default AddwithoutSelction;
+export default Addwith2Input;

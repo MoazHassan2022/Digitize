@@ -39,7 +39,7 @@ export const AddSuperVisorForm = () => {
     };
     axios.post(baseapi + "/users/signup", supervisor)
     .then(res => { 
-        setSnakeData([true, "تم اضافه مشرف جديد" , "success"]);
+        setSnakeData([true, "تم اضافة مشرف جديد" , "success"]);
         setTimeout( () => window.location.reload() , 3000 );
     } )
     .catch((err) =>
@@ -90,7 +90,7 @@ return (
               value={Email}
               onChange={(e) => {setEmail(e.target.value)}}
               className={classes.textField}
-              helperText="كن حذرا فهذا الايميل سيستخدم في حاله نسيان الباسورد"
+              helperText="كن حذرا فهذا الايميل سيستخدم في حالة نسيان الباسورد"
               />
           </Grid>
 

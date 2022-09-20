@@ -12,8 +12,18 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
   const [allselections , setallselections] = useState([]);
   const [selections , setselections] = useState([]); 
 
+  console.log(getapi  , sendapi, obsen , label , setSnakeData)
+
   const HandleSubmit = (e) => {
     e.preventDefault();
+    if(selections.length === 0){
+      setSnakeData([true, "من فضلك اختر واحدة عل الاقل", "error"]);
+      return;
+    }
+
+
+
+
     selections.map(m => {deletesel(m);});
   }
 
@@ -36,6 +46,7 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
       }}
       ).then(response =>{
         setallselections(response.data.data.data);
+        console.log(response.data.data.data);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
       });
@@ -49,7 +60,6 @@ useEffect(() => {
 
     return(
         <Grid item container  xs={10} md={10}>
-          <form onSubmit={HandleSubmit}>
             <Grid item container  xs={12} md={12} spacing={3} >
               <Grid item xs={12} >
               <Autocomplete
@@ -74,10 +84,9 @@ useEffect(() => {
               </Grid>
             
               <Grid item xs={12} style={{textAlign: "end"}}>
-                <Button type="submit" variant="contained" startIcon={<IoRemoveCircle />}>احذف </Button>
+                <Button onClick={HandleSubmit} variant="contained" startIcon={<IoRemoveCircle />}>احذف </Button>
               </Grid>
             </Grid>
-          </form>
         </Grid>
     );
 }

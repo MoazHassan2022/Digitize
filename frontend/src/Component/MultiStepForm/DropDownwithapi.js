@@ -7,7 +7,7 @@ import {baseapi} from "../../Utilities/utilitesFunction"
 
 export const DropDownwithapi = ({setselection, chose ,getapi , label, setSnakeData }) => {
   const theme = useTheme();
-  const [ss , setss] = useState();
+  const [ss , setss] = useState("");
   const [selections , setselections] = useState([]);
   const [cookies, setCookie] = useCookies(['user']);
 

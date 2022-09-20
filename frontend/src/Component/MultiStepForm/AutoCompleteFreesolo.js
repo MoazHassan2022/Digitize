@@ -31,6 +31,7 @@ export const AutoCompleteFreesolo = ({setselection, chose ,getapi , label, setSn
 
 useEffect(() => {
   requestAvailabeleSelection();   
+  setSnakeData([true,"اذا قررت اضافة خانة جديدة اكتبها في المربع ثم اضغط  علي اختيارك","info"]);
   return () => {}
 } , [])
 

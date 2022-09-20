@@ -52,37 +52,44 @@ export default function SettingTabs() {
     setValue(newValue);
   };
 
-  var tabschose = ["اضف / احذف نوع قياس" , "اضف / احذف شركه توصيل" , "اضف / احذف طريقه توصيل" ,
+  var tabschose = ["اضف / احذف ممثل فريق توصيل" , "اضف / احذف طريقة توصيل" ,
     "اضف / احذف مشرف ثانوي" , "اضف / احذف مشرف اساسي" , "اضف / احذف مهندس موقع"  ,
-     "اضف / احذف نوع نشاط" ,  "اضف / احذف مجموعه انشطه" , " اضف / احذف موقع " , "اضف / احذف مشروع", "غير صوره لمشروع" ];
+     "اضف / احذف نوع نشاط" ,  "اضف / احذف مجموعة انشطة" , " اضف / احذف موقع " , "اضف / احذف مشروع", "غير صورة لمشروع" ];
 
 
   const [value, setValue] = React.useState(tabschose.length - 1);
 
-  const getapi = ["0","/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities ","/projects","/projects"];
-  const setapi = ["0","/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities","/projects","/projects"];
-  const labels = ["نوع قياس","شركه توصيل","طريقه توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع النشاط","مجموعات نشاط","مواقع","مشاريع"];
-  const objectlabel = ["measurmentUnit","DeliveryTeam","DeliveryWay","SiteSupervisorAssistant",
-  "SiteSupervisorMain","SiteEngineer","activityTypes","activityGroupID"
+  const getapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities ","/projects","/projects"];
+  const setapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities","/projects","/projects"];
+  const labels = ["ممثل فريق توصيل","طريقة توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع نشاط","مجموعات نشاط","مواقع","مشاريع"];
+  const objectlabel = ["name","way","name",
+  "name","name","activityTypes","activityGroupName"
   ,"siteNames","projectCode"];
-  const objectgetlabel = ["","","","",
-  "","","activityGroupID",""
-  ,"projectCode",""];
+  const objectgetlabel = ["","","","","","activityGroupName","","projectCode",""];
 
 
   const renderChose = () => {
     switch (value) {
+      //شركة توصيل
         case 0: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // measerment wy
+      //طريقة توصيل
         case 1: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> //delever company
+      //مشرف ثانوي  
         case 2: return <AddRemove key={value} textonly={true}  obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> //deleiver way
+      //مشرف اساسي 
         case 3: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site assest super visor
+      //مهندس موقع
         case 4: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site main supervisor
-        case 5: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity site engineer
-        case 6: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity type
-        case 7: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
-        case 8: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
-        case 9: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]}  getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]} setApi={setapi[value]}  label={labels[value]} /> // project
-        case 10: return  <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value-1]}  getlabel={labels[value-1]} obcal={objectlabel[value-1]} getApi={getapi[value-1]} setApi={setapi[value-1]}  label={"عدل صور خرائط"} />
+      //انواع النشاط
+        case 5: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity site engineer
+      //مجموعات نشاط
+        case 6: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity type
+      //مواقع
+        case 7: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
+      //مشاريع
+        case 8: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
+      // غير صور المشاريع مش تبع الجداول
+        case 9: return  <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value-1]}  getlabel={labels[value-1]} obcal={objectlabel[value-1]} getApi={getapi[value-1]} setApi={setapi[value-1]}  label={"عدل صور خرائط"} />
       }
   }
 

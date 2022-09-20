@@ -4,7 +4,6 @@ import { useEffect } from "react";
   
 export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
 
-    console.log(imgurl , squares, keyy);
     var id=`canvas${keyy}`
     var can,ctx;
     var myImg;
@@ -20,29 +19,33 @@ export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
                 drawLine(0,i,can.width,i)  
             }
 
+
             squares.forEach((row,i) => {
                 row.forEach((cell,j) => {
                     if(cell === 1) {
-                        drawLine( i*15 , j*15, i*15+15, j*15+15 , "yellow", 2)
+                        fillSquare(i,j,"#f1ee153a");
                     }
                     if(cell === 2) {
-                        drawLine( i*15 , j*15, i*15+15, j*15+15 , "blue", 2)
-                        drawLine( i*15+15 , j*15, i*15, j*15+15 ,"blue", 2)
+                        fillSquare(i,j,"#0510a849");
                     }
                 })
             });
 
             if(curs[0] > 0 || curs[1]  > 0){
+                fillSquare(curs[0],curs[1],"#cb0d0d52");
                 let i = curs[0];let j = curs[1];
                 drawLine( i*15 , j*15, i*15+15, j*15+15 , "red", 2)
                 drawLine( i*15+15 , j*15, i*15, j*15+15 ,"red", 2)
-                drawLine( i*15 , j*15+8, i*15+15, j*15+8 ,"red", 2)
-                drawLine( i*15 +7 , j*15, i*15+7, j*15+15 ,"red", 2)
             }
 
         },)
 
-        function drawLine( x , y, stopX, stopY , color = "black", width = .1){
+        function fillSquare(row, col , color){
+            ctx.fillStyle =color;
+            ctx.fillRect(row * 15 , col * 15 , 15 , 15);
+        }
+
+        function drawLine( x , y, stopX, stopY , color = "black", width = .1) {
             ctx.beginPath();
             ctx.moveTo(x, y);
             ctx.lineWidth=width;

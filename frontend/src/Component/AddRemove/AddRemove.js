@@ -11,6 +11,7 @@ import Addwithselections from "./SettingTools/Addwithselections";
 import Removeafterselect from "./SettingTools/Removeafterselect";
 import AddProject from "./SettingTools/AddProject";
 import ChangeProjectImg from "./SettingTools/ChangeProjectImg";
+import Addwith2Input from "./SettingTools/Addwith2Input";
 
 
 export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obcal , label}) => {
@@ -25,9 +26,10 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
 
 
     const renderSetting = () => {
+
         if(isAdd && label ==="مشاريع") return <AddProject  sendapi={Apiset} obsen={obcal} label={label} setSnakeData={setSnakeData} />
         if(label === "عدل صور خرائط") return <ChangeProjectImg  setSnakeData={setSnakeData} />
-
+        if(isAdd && label === "مجموعات نشاط") return <Addwith2Input sendapi={Apiset} obsen={obcal} label={label} setSnakeData={setSnakeData} />
 
         if(!isAdd) return textonly ? <Removefromselection getapi={Apiget} sendapi={Apiset} obsen={obcal} label={label} setSnakeData={setSnakeData} /> :
         <Removeafterselect key={resetKey} obsenget={obsenget} setk={setresetKey} getlabel={getlabel} getapi={Apiget} sendapi={Apiset} obsen={obcal} label={label} setSnakeData={setSnakeData} />
@@ -51,7 +53,7 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
             >
                 <Grid item container xs={2} >
                 <IconButton onClick={()=>setIsAdd(!isAdd)} >
-                    {isAdd ? <FcAddRow title="Add item" /> : <FcDeleteRow title="remove item" />}
+                    {isAdd || (label === "عدل صور خرائط") ? <FcAddRow title="Add item" /> : <FcDeleteRow title="remove item" />}
                 </IconButton>
                 </Grid>
                 <Grid item container xs={10} justifyContent="flex-end" >

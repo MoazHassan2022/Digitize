@@ -34,7 +34,7 @@ export const Resetpassword = () => {
     ;
     axios.patch(baseapi +`/users/resetPassword/${id}`, user)
     .then(res => { 
-        setSnakeData([true, "تم اعاده تعيين الباسورد الخاص بك بنجاح سيتم توجيهك لصفحه الدخول مره اخري" , "success"]);
+        setSnakeData([true, "تم اعادة تعيين الباسورد الخاص بك بنجاح سيتم توجيهك لصفحة الدخول مرة اخري" , "success"]);
         setTimeout(() =>{history("/")}, 5000);
     })
     .catch((err) =>{

@@ -39,7 +39,7 @@ export const MultiForm = () => {
     e.preventDefault();
 
     if(activeStep === 2 && formData["map"] === ""){
-      setSnakeData([true, " يجب علي اختيار منطقه العمل او ارفاق صوره", "error"]);
+      setSnakeData([true, " يجب عليك اختيار منطقة العمل او ارفاق صورة", "error"]);
       return;
     }
 
@@ -168,14 +168,14 @@ const maxSteps = attribute.length -1;
     switch (step){
         case 1: {
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
               <DropDownwithapi selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
           );}
         
         case 2: {
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}> 
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
              <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 
             </Grid>
              );}
@@ -185,7 +185,7 @@ const maxSteps = attribute.length -1;
         case 4:  {
         
           return (
-            <Grid item container xs={8} md={6} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}> 
+            <Grid item container xs={8} md={6} justifyContent="center"   sx={{  borderRadius: 2 , marginTop: 2 }}> 
             <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid>
             );} break;
@@ -193,7 +193,7 @@ const maxSteps = attribute.length -1;
         case 5: {
           
           return (
-          <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+          <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
             <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
           </Grid>
           );}
@@ -202,7 +202,7 @@ const maxSteps = attribute.length -1;
         case 6:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <DropDownwithselctions selection={formData[getformKey(step)]} selections={ formData[getformKey(step-1)]["activityTypes"] }   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );}
@@ -210,7 +210,7 @@ const maxSteps = attribute.length -1;
         
         case 7:  {
           return (
-          <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+          <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
             <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
           </Grid>
           );}
@@ -218,7 +218,7 @@ const maxSteps = attribute.length -1;
         case 8:  {
         
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid> ); } break;
           
@@ -226,7 +226,7 @@ const maxSteps = attribute.length -1;
         case 9:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
@@ -234,7 +234,7 @@ const maxSteps = attribute.length -1;
         case 10:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
@@ -243,7 +243,7 @@ const maxSteps = attribute.length -1;
         case 11:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <AutoCompleteFreesolo  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
@@ -252,14 +252,14 @@ const maxSteps = attribute.length -1;
         case 12:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         case 13:  {
           
           return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ bgcolor: theme.palette.primary.main , borderRadius: 2 , marginTop: 2 }}>
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
