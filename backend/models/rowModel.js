@@ -65,6 +65,7 @@ const rowSchema = mongoose.Schema({
     trim: true,
   },
   date: String, // Day-Month-Year
+  photo: String,
 });
 
 const Row = mongoose.model('Row', rowSchema);

@@ -6,6 +6,41 @@ const factory = require('./handlerFactory');
 var mongoXlsx = require('mongo-xlsx');
 const fs = require('fs');
 const path = require('path');
+const makeRandomString = require('./../utils/randomString');
+const multer = require('multer');
+const sharp = require('sharp');
+
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('هذه ليست صورة! من فضلك ارفع صور فقط', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+exports.uploadRowPhoto = upload.single('photo');
+
+exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+  req.file.filename = `photo-${makeRandomString()}-${
+    req.user._id
+  }-${Date.now()}.jpg`;
+  await sharp(req.file.buffer)
+    .resize(1000, 1000)
+    .toFormat('jpg')
+    .toFile(`public/img/rows/${req.file.filename}`);
+  req.body.photo = `${req.protocol}://${req.get('host')}/img/rows/${
+    req.file.filename
+  }`; // If no sol, put the link here
+  next();
+});
 
 exports.createDate = (req, res, next) => {
   req.body.date = new Date().toLocaleDateString();
@@ -89,6 +124,11 @@ exports.getAllRows = catchAsync(async (req, res, next) => {
     {
       displayName: 'Site Supervisor (Assistant)',
       access: 'siteSupervisorAssistant',
+      type: 'string',
+    },
+    {
+      displayName: 'Photo',
+      access: 'photo',
       type: 'string',
     },
   ];
