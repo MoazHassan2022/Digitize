@@ -7,6 +7,8 @@ const projectSchema = mongoose.Schema({
     unique: [true, 'هذا المشروع موجود من قبل'],
     trim: true, // Remove all the white space in the beginning or end of the field
   },
+  map: String,
+  squares: Array.of(Array.of(Number)),
   siteNames: [String],
 });
 
