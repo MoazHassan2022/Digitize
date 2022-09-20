@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+@keyframes background { 
+  0% {
+    background-position: 0% 20%;
+  }
+  
+  50% {
+    background-position: 70% 10%;
+  }
+  
+  100% {
+    background-position: 0% 10%;
+  }
+}
+
+body {
+
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  margin: 0;
+
+
+}
+
+code {
+  font-family: "Oxygen";
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0510A8
+
+  ;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #378BA4
+  ;
+}
+

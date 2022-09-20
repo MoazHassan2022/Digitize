@@ -26,7 +26,6 @@ exports.resizeProjectMap = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `map-${makeRandomString()}-${Date.now()}.jpg`;
   await sharp(req.file.buffer)
-    .resize(1000, 1000)
     .toFormat('jpg')
     .toFile(`public/img/projectMaps/${req.file.filename}`);
   req.body.map = req.file.filename;
