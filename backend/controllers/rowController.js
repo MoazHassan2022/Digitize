@@ -33,7 +33,6 @@ exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
     req.user._id
   }-${Date.now()}.jpg`;
   await sharp(req.file.buffer)
-    .resize(1000, 1000)
     .toFormat('jpg')
     .toFile(`public/img/rows/${req.file.filename}`);
   req.body.photo = `${req.protocol}://${req.get('host')}/img/rows/${
