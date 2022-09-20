@@ -18,7 +18,13 @@ router
 router
   .route('/:id')
   .get(projectController.getProject)
-  .patch(projectController.updateProject)
+
+  .patch(
+    authController.isAdmin,
+    projectController.uploadProjectMap,
+    projectController.resizeProjectMap,
+    projectController.updateProject
+  )
   .delete(authController.isAdmin, projectController.deleteProject);
 
 module.exports = router;
