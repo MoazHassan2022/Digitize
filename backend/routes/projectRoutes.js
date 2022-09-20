@@ -8,7 +8,12 @@ router.use(authController.protect);
 router
   .route('/')
   .get(projectController.getAllProjects)
-  .post(authController.isAdmin, projectController.createProject);
+  .post(
+    authController.isAdmin,
+    projectController.uploadProjectMap,
+    projectController.resizeProjectMap,
+    projectController.createProject
+  );
 
 router
   .route('/:id')

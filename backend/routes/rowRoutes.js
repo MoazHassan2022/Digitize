@@ -8,7 +8,12 @@ router.use(authController.protect);
 router
   .route('/')
   .get(authController.isAdmin, rowController.getAllRows)
-  .post(rowController.createDate, rowController.createRow);
+  .post(
+    rowController.uploadRowPhoto,
+    rowController.resizeRowPhoto,
+    rowController.createDate,
+    rowController.createRow
+  );
 
 router
   .route('/:id')
