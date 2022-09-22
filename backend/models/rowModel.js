@@ -36,8 +36,8 @@ const rowSchema = mongoose.Schema({
     },
   },
   dayProgress: {
-    type: String,
-    required: [true, 'يجب أن تدخل وصف تقدم اليوم'],
+    type: Number,
+    required: [true, 'يجب أن تدخل انجاز اليوم'],
     trim: true,
   },
   deliveryWay: {
