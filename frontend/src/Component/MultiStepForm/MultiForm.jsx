@@ -1,25 +1,20 @@
 import { Alert, Avatar, Button,  Grid,  Link,  MobileStepper,  Paper, Snackbar, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import {HiLogin } from "react-icons/hi";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStyle from "./MultiFormStyles";
 import {  useCookies } from "react-cookie";
 import { useTheme } from "@emotion/react";
 import { Box } from "@mui/system";
 import {AiFillFileText} from "react-icons/ai"
-import { Stack } from '@mui/material';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 import { DropDownwithapi } from './DropDownwithapi';
 import ManualInsert from './ManualInsert';
-import { Fragment } from "react";
 import axios from "axios";
 import AutoCompleteFreesolo from "./AutoCompleteFreesolo";
 import {translator , getSelectedone , baseapi} from "../../Utilities/utilitesFunction"
 import DropDownwithselctions from "./DropDownwithselctions";
 import Map from "../Map/Map";
 import { GiFinishLine } from "react-icons/gi";
+import ManualInsertNumber from "./ManualInsertNumber";
 
 
 
@@ -32,8 +27,7 @@ export const MultiForm = () => {
   const [cookies, setCookie] = useCookies(['user']);
   const [snakeData, setSnakeData] = useState([false,"",""]);
   
-  const [activeStep, setActiveStep] = useState(0);
-
+  const [activeStep, setActiveStep] = useState(8);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -53,8 +47,6 @@ export const MultiForm = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
-
 
   const attribute= [     
     "", 
@@ -219,7 +211,7 @@ const maxSteps = attribute.length -1;
         
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-               <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
+               <ManualInsertNumber  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid> ); } break;
           
         
@@ -227,7 +219,7 @@ const maxSteps = attribute.length -1;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         
@@ -235,7 +227,7 @@ const maxSteps = attribute.length -1;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         
@@ -244,7 +236,7 @@ const maxSteps = attribute.length -1;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <AutoCompleteFreesolo  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         
@@ -253,14 +245,14 @@ const maxSteps = attribute.length -1;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         case 13:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-               <AutoCompleteFreesolo selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+               <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} break;
         }

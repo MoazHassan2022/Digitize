@@ -31,7 +31,6 @@ export const AutoCompleteFreesolo = ({setselection, chose ,getapi , label, setSn
 
 useEffect(() => {
   requestAvailabeleSelection();   
-  setSnakeData([true,"اذا قررت اضافة خانة جديدة اكتبها في المربع ثم اضغط  علي اختيارك","info"]);
   return () => {}
 } , [])
 
@@ -53,9 +52,9 @@ useEffect(() => {
           setss(newValue);
         }
       }}
+
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
-
         const { inputValue } = params;
         // Suggest the creation of a new value
         const isExisting = options.some((option) => inputValue === option.title);
@@ -63,10 +62,8 @@ useEffect(() => {
           let ob ={inputValue}; ob[chose] =`${inputValue}`;
           filtered.push(ob);
         }
-
         return filtered;
       }}
-
       selectOnFocus
       clearOnBlur
       handleHomeEndKeys
@@ -82,7 +79,6 @@ useEffect(() => {
       }}
       renderOption={(props, option) => <li {...props}>{option[chose]}</li>}
       sx={{ width: 300 }}
-      freeSolo
       renderInput={(params) => (
         <TextField {...params} required sx={{bgcolor:"white"}} label={label} />
       )}
