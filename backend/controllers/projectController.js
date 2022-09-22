@@ -33,11 +33,11 @@ exports.resizeProjectMap = catchAsync(async (req, res, next) => {
 });
 
 exports.fillSquares = catchAsync(async (req, res, next) => {
-  req.body.squares = []
-  for(let i = 0; i < 24 ; i++){
-    req.body.squares.push(
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    )
+  req.body.squares = [];
+  for (let i = 0; i < 24; i++) {
+    req.body.squares.push([
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ]);
   }
   next();
 });
