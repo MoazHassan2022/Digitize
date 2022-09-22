@@ -14,11 +14,14 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
   const theme = useTheme();
   const [cookies] = useCookies();
   const [enterdtext , setEnterdtext] = useState("");
-  const [Imgs , setImgs] = useState([]);
+  const [Imgs , setImgs] = useState();
 
 
   const UploadImgs = (e) => {
-    if (e) setImgs([...Imgs, e]);
+    if (e) { 
+      setImgs(e);
+      setSnakeData([true, "تم رفع الخريطه بنجاح", "success"]);
+    }
   }
   
   const HandleSubmit = async (e) => {
@@ -29,12 +32,15 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
     }
     let formData = new FormData();
     formData.append(obsen, enterdtext);
-    formData.append('map', Imgs[0].target.files[0]);
-
+    if(Imgs !== undefined){
+      let x = Imgs.target.files[0];
+      formData.append('map', x);
+    }
     const auth = "Bearer " + cookies.token;
     await axios.post(sendapi, formData,{headers:{authorization: auth,}})
     .then(res => { 
         setSnakeData([true, ` تمت اضافة ${enterdtext} بنجاح` , "success"]);
+        console.log(res);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

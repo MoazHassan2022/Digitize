@@ -12,6 +12,7 @@ router
     authController.isAdmin,
     projectController.uploadProjectMap,
     projectController.resizeProjectMap,
+    projectController.fillSquares,
     projectController.createProject
   );
 

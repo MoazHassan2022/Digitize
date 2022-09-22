@@ -23,6 +23,7 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
 
     const [isAdd , setIsAdd] = useState(true);
     const [resetKey , setresetKey] = useState(Math.random() * 5000);
+    console.log(textonly, obsenget ,getlabel , getApi  , setApi, obcal , label);
 
 
     const renderSetting = () => {
@@ -52,12 +53,18 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
             sx={{ marginTop:2, marginBottom:4, marginX:2 , paddingX:1, width:"100%" }}
             >
                 <Grid item container xs={2} >
+                    {(label !== "عدل صور خرائط") && 
                 <IconButton onClick={()=>setIsAdd(!isAdd)} >
-                    {isAdd || (label === "عدل صور خرائط") ? <FcAddRow title="Add item" /> : <FcDeleteRow title="remove item" />}
+                    {isAdd ? <FcAddRow title="Add item" /> : <FcDeleteRow title="remove item" />}
                 </IconButton>
+                }
                 </Grid>
                 <Grid item container xs={10} justifyContent="flex-end" >
+                    {(label !== "عدل صور خرائط") ?
                 <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" > {isAdd ? " اضف الي "  :"احذف من   "} {label}ك</Typography>
+                :
+                <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" >عدل صور خرائطك</Typography>
+            }
                 </Grid>
             </Grid>
 

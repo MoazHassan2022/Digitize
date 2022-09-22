@@ -37,7 +37,10 @@ export const AddSuperVisorForm = () => {
         "password" : PassWord,
         "passwordConfirm" : ConfirmPassWord,
     };
-    axios.post(baseapi + "/users/signup", supervisor)
+    const auth = "Bearer " + cookies.token;
+    axios.post(baseapi + "/users/signup", supervisor,{headers:{
+      authorization: auth,
+    }})
     .then(res => { 
         setSnakeData([true, "تم اضافة مشرف جديد" , "success"]);
         setTimeout( () => window.location.reload() , 3000 );

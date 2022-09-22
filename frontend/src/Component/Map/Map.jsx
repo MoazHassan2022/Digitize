@@ -26,57 +26,72 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   const [pos , setpos] = useState([0,0]);
   const mapselections = ["لم اعمل بها" , "بدات العمل بها " , "انهيت العمل بها"];
   const [sel ,setsel]= useState("لم اعمل بها");
-  const [Imgs , setImgs] = useState([]);
+  const [Imgs , setImgs] = useState();
   const [choses , setChoses] = useState([]);
-  const [squares , setsquers] = useState(initsq);
+  const [moved , setmoved] = useState(false);
+
+  var init = initsq;
+  if(initsq.length === 0){
+      init = [
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+      ]
+  }
+
+  const [squares , setsquers] = useState(init);
   const [trival , settrival] = useState(true);
-  const [showloadimg, setshowloadimg] =useState(true);
+  const [showloadimg, setshowloadimg] = useState(true);
   const mapexist = imgurl.slice(imgurl.length-9) !== "undefined";
 
 
 
   const handlechose = () => {
       if(!mapexist){
-        if(Imgs.length === 0) {sd([true , "من فضلك ارفق صورة", "error"]); return;}
+        if(Imgs  === undefined) {sd([true , "من فضلك ارفق صورة", "error"]); return;}
         let x= Imgs.target.files[0];
         setselection({"img":x, "sq":squares});
         sd([true , "تم ارفاق الصورة بنجاح", "success"]); 
-        return;
-      }else{
-      if(Imgs.length === 0 && choses.length === 0) {sd([true , "من فضلك قم بالاختيار من الخريطة او ارفق صورة", "error"]); return;}
-        let ind = choses.findIndex( x => x[0] === pos[0] && x[1] === pos[1] );
-        if(ind !== -1 ){
-          if(choses[ind][2] === mapselections.indexOf(sel)){ 
-            sd([true , "لقد قمت باضافة هذا العمل من قبل ","info"])
-            return;
+      }
+      else{
+          if(Imgs  === undefined && !moved ) {sd([true , "من فضلك قم بالاختيار من الخريطة او ارفق صورة", "error"]); return;}
+          let img,squaressend = squares;
+          if(Imgs  !== undefined){
+            img = Imgs.target.files[0];
+            sd([true , "تم ارفاق الصورة بنجاح", "success"]); 
+          }
+          if(moved){
+          let ind = choses.findIndex( x => x[0] === pos[0] && x[1] === pos[1] );
+          if(ind != -1){
+            // مكرر 
+            if(choses[ind][2] === mapselections.indexOf(sel)){ 
+              sd([true , "لقد قمت باضافة هذا العمل من قبل ","info"])
+            }else{
+              // بيغير اختياره
+              setChoses(prev => {
+                let p= prev;
+                p[ind][2] = mapselections.indexOf(sel);
+                return p;
+              })
+              setsquers(prev => {
+                squaressend = prev;
+                squaressend[pos[0]][pos[1]] = mapselections.indexOf(sel);
+                return squaressend;});
+              sd([true , "تم تغيير اختيارك لتلك المنطقة ","info"])
+            }
           }else{
+            // جديد
             setChoses(prev => {
               let p= prev;
-              p[ind][2] = mapselections.indexOf(sel);
+              p.push([pos[0],pos[1],mapselections.indexOf(sel)]);
               return p;
              })
              setsquers(prev => {
-              let p = prev;
-              p[pos[0]][pos[1]] = mapselections.indexOf(sel);
-              return p;});
-            sd([true , "تم تغيير اختيارك لتلك المنطقة ","info"])
-            settrival(!trival);
-            return;
+              squaressend = prev;
+              squaressend[pos[0]][pos[1]] = mapselections.indexOf(sel);
+              return squaressend;});
           }
         }
-        setChoses(prev => {
-          let p= prev;
-          p.push([pos[0],pos[1],mapselections.indexOf(sel)]);
-          return p;
-         })
-         setsquers(prev => {
-          let p = prev;
-          p[pos[0]][pos[1]] = mapselections.indexOf(sel);
-          return p;});
-      let x= Imgs.target.files[0];
-      setselection({"img":x, "sq":squares});
-      sd([true , "تم ارفاق البيانات بنجاح", "success"]); 
-    }
+        setselection({"img":img, "sq":squaressend});
+        }
     settrival(!trival);
   }
 
@@ -91,6 +106,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
 
 
   const moveArrows = (val) => {
+    setmoved(true);
     let newpos = pos;
     switch (val) {
       case 0: newpos[1] = (newpos[1] > 0) ? newpos[1]-1 : 19;    break;
@@ -108,10 +124,9 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       setshowloadimg(false);
       settrival(!trival);
     }
-    
   }
       return(
-        <Grid container xs={12} md={12}  sx={{ minHeight:"30vh"}} >
+        <Grid container  sx={{ minHeight:"30vh"}} >
           <Mapshow existMap={mapexist} >
           <Grid item xs={12} md={12} sx={{maxHeight:"60vh", margin:1}} >
               <MapImg setp={setpos} imgurl={imgurl} squares={squares} curs={pos} trival={trival}/>

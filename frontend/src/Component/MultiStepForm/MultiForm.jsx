@@ -39,7 +39,7 @@ export const MultiForm = () => {
     e.preventDefault();
 
     if(activeStep === 2 && formData["map"] === ""){
-      setSnakeData([true, " يجب عليك اختيار منطقة العمل او ارفاق صورة", "error"]);
+      setSnakeData([true, " لا تنس الضغط عل زر الارفاق لتجيل بياناتك", "error"]);
       return;
     }
 
