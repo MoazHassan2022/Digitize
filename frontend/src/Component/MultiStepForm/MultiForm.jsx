@@ -180,7 +180,7 @@ const maxSteps = attribute.length;
              );}
         
         case 3: 
-        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={baseapi.slice(0,baseapi.length-3)+ "img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
+        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={"//public/img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
 
         case 4: 
           return (
