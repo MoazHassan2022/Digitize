@@ -1,5 +1,5 @@
 
-export const baseapi = "http://127.0.0.1:8000/api"
+export const baseapi = "/api"
 
 export function getSelectedone (sel , all , par) {
     return all.find( (pro) => { return pro[par] === sel; } );
