@@ -24,6 +24,7 @@ const app = express();
 // MIDDLEWARES
 
 app.use(cors());
+app.options('*', cors());
 
 
 
