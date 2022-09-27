@@ -1,11 +1,8 @@
-import { Alert, Avatar, Box, Button,  Grid,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Avatar, Box, Button,  Grid,  Paper, Snackbar ,Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import {HiLogin } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 import useStyle from "./RequestDataFormStyles";
 import {  useCookies } from "react-cookie";
-import { useTheme } from "@emotion/react";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import {getSelectedone , baseapi} from "../../Utilities/utilitesFunction"
 import {AiOutlineDownload} from "react-icons/ai"
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
@@ -14,9 +11,7 @@ import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
 export const RequestDataForm = () => {
 
   const classes = useStyle();
-  const history = useNavigate();
-  const [cookies, setCookie] = useCookies(['user']);
-  const theme = useTheme();
+  const [cookies] = useCookies(['user']);
 
 
 
@@ -38,7 +33,7 @@ export const RequestDataForm = () => {
         let codes = [], temp = [{"projectCode" : "all"}];
         temp = temp.concat(response.data.data.data)
         setprojectsData(temp);
-        temp.map(pro => { codes.push(pro.projectCode) })
+        temp.map(pro =>  codes.push(pro.projectCode) )
         setSitesNames(codes);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
@@ -77,7 +72,8 @@ export const RequestDataForm = () => {
   useEffect(() => {requestAvailabeleSites();   
     return () => {
     }
-} , [])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [])
   return (
     <Grid 
     container 
@@ -117,7 +113,7 @@ export const RequestDataForm = () => {
         </form>
       </Grid>
       <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-              <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+              <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                   {snakeData[1]}
               </Alert >
       </Snackbar>

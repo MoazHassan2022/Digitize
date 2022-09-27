@@ -30,17 +30,16 @@ export const DisplayMaps =()=> {
     }
     
 
-
-
     useEffect(() => {
         requestAvailabeleSelection();   
         return () => {}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       } , [])
       
     return(
         <Grid container xs={12} md={12} justifyContent="center" >
             {allselections.map( (pro, index) =>
-             (pro["map"] != undefined) &&
+             (pro["map"] !== undefined) &&
              <Grid key={index} item xs={12} md={10} margin={2} textAlign="center" > 
              <Typography sx={{bgcolor: theme.palette.primary.main , borderTopLeftRadius:30,borderTopRightRadius:30, }} color="white" fontSize={24} >{pro["projectCode"]}</Typography>
                 <MapImg key={index} keyy={index} squares={pro.squares}  curs={[-1,-1]}  imgurl={baseapi.slice(0,baseapi.length-3)+ "img/projectMaps/" + (pro["map"])} />
@@ -48,7 +47,7 @@ export const DisplayMaps =()=> {
             )}
             
             <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
             </Snackbar>

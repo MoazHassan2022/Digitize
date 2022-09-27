@@ -1,10 +1,8 @@
-import { useTheme } from "@emotion/react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 
 export const DropDownwithselctions = ({selection, setselection, chose, selections, label}) => {
-  const theme = useTheme();
-  let init = selection != undefined ? selection : "";
+  let init = selection !== undefined ? selection : "";
   const [ss , setss] = useState(init);
     return(
       <FormControl sx={{ m: 1, minWidth: 200 , backgroundColor:"white" , borderRadius:2, }} size="large">

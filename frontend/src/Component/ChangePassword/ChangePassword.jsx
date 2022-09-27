@@ -1,15 +1,10 @@
 import { Alert, Avatar, Button,  Grid,  Paper, Snackbar, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import {HiLogin } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 import useStyle from "./ChangePasswordStyles";
-import {  useCookies } from "react-cookie";
-//import axios from "axios";
 
 export const ChangePassword = () => {
   const classes = useStyle();
-  const history = useNavigate();
-  const [cookies, setCookie] = useCookies(['user']);
 
   const [OldPassword , setOldPassword] = useState("");
   const [NewPassWord , setNewPassWord] = useState("");
@@ -19,29 +14,8 @@ export const ChangePassword = () => {
 
   const HandleSubmit = (e) =>{
     e.preventDefault();
-    const user = {
-        "oldPassword": OldPassword,
-        "newPassword": NewPassWord,
-        "ConfirmnewPassword": ConfirmNewPassword,
-    };
-    // axios.post("/api/users/login", user)
-    // .then(res => { 
-    //     setCookie('token', res.data.token, { path: '/' });
-    //     setCookie('email', res.data.data.user.email, { path: '/' });
-    //     setCookie('name', res.data.data.user.name, { path: '/' });
-    //     setCookie('userType', res.data.data.user.isAdmin, { path: '/' });
-    //     setCookie('id', res.data.data.user._id, { path: '/' });
-
-    //     setSnakeData([true, "You Login successfully!" , "success"]);
-        setTimeout(history("/Setting") , 5000);
-        //  if(cookie.userType === 0){ setTimeout(history("/SubmitSurvy") , 5000 );}
-        //  else {setTimeout(history("/RequestData") , 5000 );}
-    // } )
-    // .catch((err) =>
-    //     setSnakeData([true, err.response.data.message , "error"])
-    // )
+    setTimeout(history("/Setting") , 5000);
   }
-
 
 return (
   <Grid 
@@ -109,7 +83,7 @@ return (
       </form>
     </Grid>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>

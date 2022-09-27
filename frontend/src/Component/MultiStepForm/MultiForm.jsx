@@ -1,6 +1,6 @@
-import { Alert, Avatar, Button,  Grid,  Link,  MobileStepper,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert,Button,  Grid,   MobileStepper,  Paper, Snackbar, Typography } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import useStyle from "./MultiFormStyles";
 import {  useCookies } from "react-cookie";
 import { useTheme } from "@emotion/react";
@@ -9,30 +9,27 @@ import {AiFillFileText} from "react-icons/ai"
 import { DropDownwithapi } from './DropDownwithapi';
 import ManualInsert from './ManualInsert';
 import axios from "axios";
-import AutoCompleteFreesolo from "./AutoCompleteFreesolo";
-import {translator , getSelectedone , baseapi} from "../../Utilities/utilitesFunction"
+import {translator , baseapi} from "../../Utilities/utilitesFunction"
 import DropDownwithselctions from "./DropDownwithselctions";
 import Map from "../Map/Map";
 import { GiFinishLine } from "react-icons/gi";
 import ManualInsertNumber from "./ManualInsertNumber";
-
-
-
+import Review from "./Review";
+import Hello from "./Hello";
 
 
 export const MultiForm = () => {
   const classes = useStyle();
-  const history = useNavigate();
   const theme = useTheme();
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
   const [snakeData, setSnakeData] = useState([false,"",""]);
   
-  const [activeStep, setActiveStep] = useState(8);
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = (e) => {
     e.preventDefault();
 
-    if(activeStep === 2 && formData["map"] === ""){
+    if(activeStep === 3 && formData["map"] === ""){
       setSnakeData([true, " لا تنس الضغط عل زر الارفاق لتجيل بياناتك", "error"]);
       return;
     }
@@ -44,9 +41,7 @@ export const MultiForm = () => {
     setActiveStep((prevActiveStep) => {    return prevActiveStep - 1;});
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+
 
   const attribute= [     
     "", 
@@ -63,9 +58,10 @@ export const MultiForm = () => {
   "name" , // freesolo
   "name" , // freesolo
   "name", // freesolo
+  "name", // freesolo
 ];
 
-const maxSteps = attribute.length -1;
+const maxSteps = attribute.length;
 
 
 
@@ -132,6 +128,7 @@ const maxSteps = attribute.length -1;
 
   const getformKey = (step) => {
     switch (step){
+      case 0: return "hello";
       case 1: return "project";
       case 2: return "siteName";
       case 3: return "map";
@@ -145,19 +142,28 @@ const maxSteps = attribute.length -1;
       case 11:  return "siteEngineer";
       case 12: return "siteSupervisorMain";
       case 13: return "siteSupervisorAssistant";
+      default: return "unknown";
     }
-  
   }
 
+  const [Trival , setTrival] = useState(true);
   const handleChangeForm = (valuee) => {
     setFormData( (prev) => {
       let p = prev;
-      prev[getformKey(activeStep+1)] = valuee;
+      prev[getformKey(activeStep)] = valuee;
       return p;});
+      setTrival(!Trival);
   }
 
   const renderStep = (step) => {
     switch (step){
+      case 0: {
+        return (
+          <Grid item container xs={12} md={12} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
+            <Hello  />
+          </Grid>
+        );}
+        
         case 1: {
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
@@ -166,21 +172,22 @@ const maxSteps = attribute.length -1;
           );}
         
         case 2: {
+          console.log(formData, getformKey(step-1))
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
              <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 
             </Grid>
              );}
         
-        case 3: {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={baseapi.slice(0,baseapi.length-3)+ "img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} break;
+        case 3: 
+        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={baseapi.slice(0,baseapi.length-3)+ "img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
 
-        case 4:  {
-        
+        case 4: 
           return (
             <Grid item container xs={8} md={6} justifyContent="center"   sx={{  borderRadius: 2 , marginTop: 2 }}> 
             <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid>
-            );} break;
+            );
         
         case 5: {
           
@@ -208,11 +215,10 @@ const maxSteps = attribute.length -1;
           );}
         
         case 8:  {
-        
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                <ManualInsertNumber  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
-            </Grid> ); } break;
+            </Grid> ); } 
           
         
         case 9:  {
@@ -221,7 +227,7 @@ const maxSteps = attribute.length -1;
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
-            );} break;
+            );} 
         
         case 10:  {
           
@@ -229,7 +235,7 @@ const maxSteps = attribute.length -1;
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
-            );} break;
+            );} 
         
         
         case 11:  {
@@ -238,7 +244,7 @@ const maxSteps = attribute.length -1;
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <DropDownwithapi  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
-            );} break;
+            );} 
         
         
         case 12:  {
@@ -247,14 +253,22 @@ const maxSteps = attribute.length -1;
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                 <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
-            );} break;
+            );} 
         case 13:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
-            );} break;
+            );} 
+
+            case 14:  {
+              return (
+                <Grid item container xs={12} md={12} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
+                   <Review data={formData} keys={getformKey}/>
+                </Grid>
+            );} 
+            default: return "unknown";
         }
 
   }
@@ -283,7 +297,7 @@ return (
         }}
         textAlign="center"
       >
-        <Typography alignSelf="center" sx={{color: "white"}} variant="h2">{translator(activeStep+1)}</Typography>
+        <Typography alignSelf="center" sx={{color: "white"}} variant="h2">{translator(activeStep)}</Typography>
       </Grid>
       <Grid
         item 
@@ -291,7 +305,7 @@ return (
         alignItems="center"
         justifyContent="center"
         >
-                {renderStep(activeStep+1)}
+                {renderStep(activeStep)}
         </Grid>
 
 
@@ -321,13 +335,11 @@ return (
         }
       />
     </Box>
-
-
         </Grid>
       </form>
     </Grid>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>

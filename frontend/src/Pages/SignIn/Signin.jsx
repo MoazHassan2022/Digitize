@@ -47,10 +47,11 @@ export const SignIn = () => {
   }
 
   useEffect(()=>{
-    if(cookies.token != undefined){
+    if(cookies.token !== "undefined"){
       if(cookies.userType === "0"){ setTimeout(history("/SubmitSurvy") , 5000 );}
       else {setTimeout(history("/RequestData") , 5000 );}
     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
 return (
@@ -124,7 +125,7 @@ return (
 
     </Grid>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>

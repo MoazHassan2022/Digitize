@@ -2,10 +2,10 @@ import { useCookies } from "react-cookie";
 import UnAuth from "../../Pages/UnAuth/UnAuth";
 
 const GeneralAuthWrapper = ({ children }) => {
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
 
 
-  if (cookies.token === undefined || cookies.token === "") {
+  if (cookies.token === "undefined" || cookies.token === "") {
     return <UnAuth />;
   }
 

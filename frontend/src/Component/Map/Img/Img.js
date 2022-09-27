@@ -4,12 +4,10 @@ import { useEffect } from "react";
   
 export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
 
-    var id=`canvas${keyy}`
+    var id=`canvas${keyy}`;
     var can,ctx;
-    var myImg;
         useEffect(()=>{ 
-            myImg = imgurl;
-            myImg = can = document.getElementById(id);
+            can = document.getElementById(id);
             ctx = can.getContext('2d');
             ctx.clearRect(0, 0, can.width, can.height);
             for(let i= 15; i < 360; i+=15){
@@ -18,7 +16,6 @@ export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
             for(let i= 15; i < 300; i+=15){
                 drawLine(0,i,can.width,i)  
             }
-
 
             squares.forEach((row,i) => {
                 row.forEach((cell,j) => {
@@ -37,8 +34,8 @@ export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
                 drawLine( i*15 , j*15, i*15+15, j*15+15 , "red", 2)
                 drawLine( i*15+15 , j*15, i*15, j*15+15 ,"red", 2)
             }
-
-        },)
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+        },[])
 
         function fillSquare(row, col , color){
             ctx.fillStyle =color;

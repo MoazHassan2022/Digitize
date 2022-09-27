@@ -1,7 +1,5 @@
 import { Alert, Avatar, Button,  Grid,  IconButton,  InputAdornment,  Paper, Snackbar, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import {HiLogin } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 import useStyle from "./AddSuperVisorFormStyles";
 import {  useCookies } from "react-cookie";
 import axios from "axios";
@@ -13,8 +11,7 @@ import {baseapi} from "../../Utilities/utilitesFunction"
 
 export const AddSuperVisorForm = () => {
   const classes = useStyle();
-  const history = useNavigate();
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
   const theme = useTheme();
 
 

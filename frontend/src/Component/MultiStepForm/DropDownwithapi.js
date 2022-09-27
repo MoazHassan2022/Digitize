@@ -2,14 +2,15 @@ import { useTheme } from "@emotion/react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import {baseapi} from "../../Utilities/utilitesFunction"
 
 export const DropDownwithapi = ({setselection, chose ,getapi , label, setSnakeData }) => {
-  const theme = useTheme();
   const [ss , setss] = useState("");
+  const [loading , setloading] = useState(true);
+  
   const [selections , setselections] = useState([]);
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
 
   const requestAvailabeleSelection =  () => {
     const auth = "Bearer " + cookies.token;
@@ -19,6 +20,7 @@ export const DropDownwithapi = ({setselection, chose ,getapi , label, setSnakeDa
       }}
       ).then(response =>{
         setselections(response.data.data.data);
+        setloading(false);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
       });
@@ -27,16 +29,18 @@ export const DropDownwithapi = ({setselection, chose ,getapi , label, setSnakeDa
 useEffect(() => {
   requestAvailabeleSelection();   
   return () => {}
-} , [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  } , [])
 
     return(
       <FormControl sx={{ m: 1, minWidth: "80%" , backgroundColor:"white" , borderRadius:2, }} size="large">
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <InputLabel id="demo-simple-select-label">{!loading ? label : "loading......"}</InputLabel>
         <Select
         value={ss}
         required
         onChange={(e) => {setselection(e.target.value); setss(e.target.value)}}
-        label={label}
+        label={ !loading ? label : "loading......"}
+        disabled={loading}
         >
                 {selections.map((item,index) => <MenuItem key={index} value={item}>{item[chose]}</MenuItem>) }
         </Select>

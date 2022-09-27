@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import {  Button , Grid, TextField, Autocomplete } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -7,7 +6,6 @@ import { IoRemoveCircle} from "react-icons/io5"
 
 
 export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [allselections , setallselections] = useState([]);
   const [selections , setselections] = useState([]); 
@@ -34,6 +32,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
     data.map(element =>{
       changedprojects.add(element[0][0]);
       newdata[element[0][0]][obsen].splice(element[0][1], 1);
+      return 0;
     })
     setallselections(newdata);
 
@@ -88,7 +87,10 @@ const handlefinshchose = () => {
       let indexm=allselections.indexOf(m);
       m[obsen].map((n,indexn) => {
         sites.push([[indexm,indexn] ,m[obsenget],n])
-      })    });
+        return 0;
+      })   
+      return 0;
+     });
 
     setallspecifcselections(sites);
 }
@@ -98,7 +100,8 @@ const handlefinshchose = () => {
 useEffect(() => {
     requestAvailabeleSelection();   
     return () => {}
-} , [])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [])
 
     return(
         <Grid item container  xs={10} md={10}>

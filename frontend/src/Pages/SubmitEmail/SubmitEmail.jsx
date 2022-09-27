@@ -1,21 +1,12 @@
-import { Alert, Avatar, Button,  Grid,  IconButton,  InputAdornment,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Avatar, Button,  Grid,  Paper, Snackbar, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import {BiLogInCircle, BiReset } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import {BiReset } from "react-icons/bi";
 import useStyle from "./SubmitEmailStyles";
-import {  useCookies } from "react-cookie";
 import axios from "axios";
-import {MdVisibility , MdVisibilityOff} from "react-icons/md"
-import { useTheme } from "@emotion/react";
-import { GrPowerReset } from "react-icons/gr";
 import { baseapi } from "../../Utilities/utilitesFunction";
 
 export const SubmitEmail = () => {
   const classes = useStyle();
-  const history = useNavigate();
-  const [cookies, setCookie] = useCookies(['user']);
-  const theme = useTheme();
-
   const [Email , setEmail] = useState("");
   const [snakeData, setSnakeData] = useState([false,"",""]);
   
@@ -75,7 +66,7 @@ return (
       </form>
     </Grid>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={15000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>

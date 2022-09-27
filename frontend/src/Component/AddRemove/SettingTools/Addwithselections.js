@@ -1,15 +1,12 @@
-import { useTheme } from "@emotion/react";
-import {  Autocomplete, Button, FormControl , Grid, IconButton, Stack, TextField } from "@mui/material";
+import {  Autocomplete, Button,  Grid, TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import {IoAddCircle} from "react-icons/io5"
 import Addwithtags from "../../Addwithtages/Addwithtags";
-import { VisibalePassword } from "../../VisibalePassword/VisibalePassword";
 
 
 export const Addwithselections = ({ getapi , getlabel , obsenget , sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [enterditems , setenterditems] = useState("");
   const [allselections , setallselections] = useState([]);
@@ -62,8 +59,9 @@ function handleSelecetedTags(items) {
 
   
 useEffect(() => {
-  requestAvailabeleSelection();   
+  requestAvailabeleSelection();  
   return () => {}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
 } , [])
 
     return(

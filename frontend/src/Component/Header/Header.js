@@ -13,12 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import {  useCookies } from "react-cookie";
-import useStyle from "./HeaderStyles";
 
 const Header = () => {
   const history = useNavigate();
-  const classes = useStyle();
-  const [cookies, setCookie , removeCookie] = useCookies(['user']);
+  const [cookies, removeCookie] = useCookies(['user']);
 
   const Logout =() =>{
     removeCookie("token");
@@ -176,7 +174,7 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={setting[1]}>
-                  <Typography component={'span'} textAlign="center">{setting} {" "}</Typography>
+                  <Typography component={'span'} textAlign="center">{setting[0]}</Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -1,5 +1,4 @@
-import { useTheme } from "@emotion/react";
-import {  Button, FormControl , Grid, IconButton, Stack, TextField } from "@mui/material";
+import {  Button,  Grid } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
@@ -8,7 +7,6 @@ import Addwithtags from "../../Addwithtages/Addwithtags";
 
 
 export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [enterdtext , setEnterdtext] = useState("");
 
@@ -40,6 +38,7 @@ export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) =
 
   useEffect(()=>{
     setSnakeData([true, `بعد كتابة كل مجموعة  Enter  اضغط` , "info"]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
     return(

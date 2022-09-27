@@ -1,8 +1,8 @@
-import { Avatar,  Grid, Paper,  Typography } from "@mui/material";
+import { Avatar,  Grid,  Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import useStyle from "./UnAuthStyles";
+import useStyle from "./ErrorStyles";
 
-export const UnAuth = () => {
+export const ErrorH = () => {
   const classes = useStyle();
   const history = useNavigate();
   setTimeout(()=>{history("/")}, 5000)
@@ -26,7 +26,7 @@ return (
                 variant="h1"
                 color="primary"
               >
-                انت لا تمتلك الاذن للدخول لتلك الصفحة سيتم تحويلك لصفحة الدخول مرة اخري
+                عذرا لقد حصل خطا في الموقع قم باعاده تحميل الصفحه
             </Typography>
           </Grid>
 
@@ -39,4 +39,4 @@ return (
 
 }
 
-export default UnAuth;
+export default ErrorH;

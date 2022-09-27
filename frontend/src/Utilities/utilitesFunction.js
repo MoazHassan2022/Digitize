@@ -7,6 +7,7 @@ export function getSelectedone (sel , all , par) {
 
 export function translator(en) {
     switch (en) {
+        case 0: return "اهلا بك";
         case 1: return "كود المشروع";
         case 2: return "اسم الموقع";
         case 3: return "الخريطـة";
@@ -20,5 +21,7 @@ export function translator(en) {
         case 11: return "مهندس الموقع";
         case 12: return "مشرف الموقع الرئيسي";
         case 13: return "مشرف الموقع المساعد";
+        case 14: return "راجع ما اخترتة قبل الارسال";
+        default: return "";
     }
 }

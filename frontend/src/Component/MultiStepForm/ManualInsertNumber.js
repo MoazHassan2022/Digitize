@@ -1,10 +1,8 @@
-import { useTheme } from "@emotion/react";
-import {  FormControl , IconButton, Stack, TextField } from "@mui/material";
+import {  FormControl ,  Stack, TextField } from "@mui/material";
 import { useState } from "react";
 
 
 export const ManualInsertNumber = ({ setselection, label }) => {
-  const theme = useTheme();
   const [enterdtext , setEnterdtext] = useState("");
 
     return(

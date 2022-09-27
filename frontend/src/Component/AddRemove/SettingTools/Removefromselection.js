@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import {  Button , Grid, TextField, Autocomplete } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -7,7 +6,6 @@ import { IoRemoveCircle} from "react-icons/io5"
 
 
 export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [allselections , setallselections] = useState([]);
   const [selections , setselections] = useState([]); 
@@ -24,7 +22,7 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
 
 
 
-    selections.map(m => {deletesel(m);});
+    selections.map(m => deletesel(m));
   }
 
   const deletesel = async(pro) => {
@@ -56,7 +54,8 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
 useEffect(() => {
     requestAvailabeleSites();   
     return () => {}
-} , [])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [])
 
     return(
         <Grid item container  xs={10} md={10}>

@@ -7,9 +7,6 @@ import Box from '@mui/material/Box';
 import useStyle from './SettingTabsStyles';
 import { Grid } from '@mui/material';
 import AddRemove from '../AddRemove/AddRemove';
-import { Cookies, useCookies } from 'react-cookie';
-import ChangePassword from '../ChangePassword/ChangePassword';
-import ChangeProjectImg from '../AddRemove/SettingTools/ChangeProjectImg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +43,6 @@ function a11yProps(index) {
 
 export default function SettingTabs() {
   const classes = useStyle();
-  const [cookies, setCookie] = useCookies(['user']);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -90,6 +86,7 @@ export default function SettingTabs() {
         case 8: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
       // غير صور المشاريع مش تبع الجداول
         case 9: return  <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value-1]}  getlabel={labels[value-1]} obcal={objectlabel[value-1]} getApi={getapi[value-1]} setApi={setapi[value-1]}  label={"عدل صور خرائط"} />
+        default: return <>not a chose</>;
       }
   }
 

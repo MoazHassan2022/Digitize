@@ -60,7 +60,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
           }
           if(moved){
           let ind = choses.findIndex( x => x[0] === pos[0] && x[1] === pos[1] );
-          if(ind != -1){
+          if(ind !== -1){
             // مكرر 
             if(choses[ind][2] === mapselections.indexOf(sel)){ 
               sd([true , "لقد قمت باضافة هذا العمل من قبل ","info"])
@@ -100,6 +100,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       case 0: return " لم ابدا في";
       case 1: return " بدات في ";
       case 2: return " انهيت ";
+      default: return "unknown";
     }
 
   }
@@ -113,6 +114,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       case 1: newpos[0] = (newpos[0] > 0) ? newpos[0]-1 : 23;    break;;
       case 2: newpos[1] = (newpos[1] < 19) ? newpos[1]+1 : 0;    break;
       case 3: newpos[0] = (newpos[0] < 23) ? newpos[0]+1 : 0;    break;
+      default: return "unknown";
     }
     setpos(newpos);
     settrival(!trival);
@@ -158,7 +160,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
                  :اختياراتك 
               </Typography>
               <Typography variant="caption" fontSize={14}>
-              {choses.map(c => <Chip label={`${mappingchose(c[2])} ${c[0]} ${c[1]}`} variant="outlined" /> )}
+              {choses.map((c,i) => <Chip key={i} label={`${mappingchose(c[2])} ${c[0]} ${c[1]}`} variant="outlined" /> )}
               </Typography>
               </Grid>
             </Grid>

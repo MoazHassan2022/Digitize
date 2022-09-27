@@ -32,7 +32,8 @@ export const AutoCompleteFreesolo = ({setselection, chose ,getapi , label, setSn
 useEffect(() => {
   requestAvailabeleSelection();   
   return () => {}
-} , [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , [])
 
 
     return(
