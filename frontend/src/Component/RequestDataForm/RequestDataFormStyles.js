@@ -28,6 +28,8 @@ const useStyle = makeStyles({
     }, 
     Form:{
       width: "100%",
+      display:"flex",
+      justifyContent: "center",
     },
     selectionBox:{
       backgroundColor: theme.palette.primary.main ,

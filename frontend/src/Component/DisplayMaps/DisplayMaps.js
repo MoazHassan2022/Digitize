@@ -41,11 +41,11 @@ export const DisplayMaps =()=> {
 
       if (isFetching) {
         return (
-          <Grid item container  sx={{ minHeight:"80vh"}}  
+          <Grid item container sx={{ minHeight:"80vh"}}  
           alignItems="center"
           justifyContent="center"
           >
-            <Grid item xs={12} md={12} direction="column" justifyContent="center" textAlign="center">
+            <Grid item xs={12} md={12}  justifyContent="center" textAlign="center">
               <Spinner />
             </Grid>
           </Grid>
@@ -53,7 +53,7 @@ export const DisplayMaps =()=> {
       }
       
     return(
-        <Grid container xs={12} md={12} justifyContent="center" >
+        <Grid container  justifyContent="center" >
             {allselections.map( (pro, index) =>
              (pro["map"] !== undefined) &&
              <Grid key={index} item xs={12} md={10} margin={2} textAlign="center" > 

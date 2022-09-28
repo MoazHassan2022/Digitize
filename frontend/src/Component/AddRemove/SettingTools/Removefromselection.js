@@ -10,7 +10,6 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
   const [allselections , setallselections] = useState([]);
   const [selections , setselections] = useState([]); 
 
-  console.log(getapi  , sendapi, obsen , label , setSnakeData)
 
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +40,6 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
       }}
       ).then(response =>{
         setallselections(response.data.data.data);
-        console.log(response.data.data.data);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
       });

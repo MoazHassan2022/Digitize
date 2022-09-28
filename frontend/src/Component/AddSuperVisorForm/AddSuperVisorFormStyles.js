@@ -3,7 +3,7 @@ import theme from "../../Utilities/Theme";
 
 const useStyle = makeStyles({
     SignPage: {
-      minHeight: "90vh",
+      marginTop: "10vh",
       padding: "2%",
     },
     logo: {
@@ -28,6 +28,8 @@ const useStyle = makeStyles({
     }, 
     Form:{
       width: "100%",
+      display:"flex",
+      justifyContent: "center",
     }
 
   });

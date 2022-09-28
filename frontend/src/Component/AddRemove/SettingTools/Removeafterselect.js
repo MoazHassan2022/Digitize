@@ -63,7 +63,6 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
       }}
       ).then(response =>{
         setallselections(response.data.data.data);
-        console.log(response.data.data.data);
       }).catch((err) => {
         setSnakeData([true, err.response.data.message , "error"]);
       });

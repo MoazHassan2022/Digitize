@@ -5,7 +5,7 @@ import {  useCookies } from "react-cookie";
 import axios from "axios";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useTheme } from "@emotion/react";
-import {GrUserAdd} from "react-icons/gr";
+import {HiUserAdd} from "react-icons/hi";
 import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 
 
@@ -55,10 +55,10 @@ return (
   justifyContent="center"
   className={classes.SignPage}
   > 
-    <Grid item container xs={12} md={6} direction="column"  alignItems="center">
-      <form className={classes.Form} onSubmit={HandleSubmit}>
-        <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
-          <Grid item className={classes.Logo} xs={12} >
+    <Grid item container direction="column" alignItems="center" justify="center">
+      <form className={classes.Form} onSubmit={HandleSubmit} >
+        <Grid item container xs={12} md={6}  component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
+          <Grid item className={classes.Logo}  >
                 <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
           </Grid>
 
@@ -141,7 +141,7 @@ return (
           </Grid>
 
           <Grid item xs={12} align="center">
-            <Button type="submit" variant="contained" endIcon={<GrUserAdd size={24}/> } >اضف المشرف الجديد</Button>
+            <Button type="submit" variant="contained" endIcon={<HiUserAdd size={24}/> } >اضف المشرف الجديد</Button>
           </Grid>
         </Grid>
       </form>

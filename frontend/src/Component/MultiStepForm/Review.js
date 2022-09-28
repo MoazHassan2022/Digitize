@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 
 const Review = ({data}) => {
-    console.log(data)
     const titles = ["كود المشروع" , "اسم الموقع", "اختيارات الخريطه " , "الرقم المسلسل للكابينة" , "اسم مجموعة النشاط", "نوع النشاط",
                     "وحدة القياس" , "التقدم اليومي" , "طريقة التسليم" , "ممثل فريق التوصيل" , "مهندس الموقع" , "مشرف الموقع الرئيسي" , "مشرف الموقع المساعد"];
     let datatoshow =[ data.project.projectCode , data.siteName , data.map.img !== undefined ?  "تم ارفاق صوره" : "تم تسجيل اختيارك" ,

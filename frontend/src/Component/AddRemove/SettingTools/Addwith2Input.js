@@ -10,7 +10,6 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
   const [selectedId , setSelectedId] = useState("");
   const [Name , setName] = useState("");
 
-  console.log(sendapi, obsen , label);
   const HandleSubmit = async (e) => {
     e.preventDefault();
     if(Name.length === 0){

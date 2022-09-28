@@ -80,9 +80,9 @@ export const RequestDataForm = () => {
     justifyContent="center"
     className={classes.SignPage}
     > 
-      <Grid item container xs={12} md={6} direction="column"  alignItems="center">
+      <Grid item container xs={12} md={8} direction="column" alignItems="center" justifyContent="center" >
         <form className={classes.Form} onSubmit={HandleSubmit}>
-          <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
+          <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center" justifyContent="center">
             <Grid item className={classes.Logo} xs={12} >
                   <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
             </Grid>

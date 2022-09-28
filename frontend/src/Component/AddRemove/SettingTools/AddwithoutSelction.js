@@ -10,7 +10,6 @@ export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) =
   const [cookies] = useCookies();
   const [enterdtext , setEnterdtext] = useState("");
 
-  console.log(sendapi, obsen , label);
   const HandleSubmit = async (e) => {
     e.preventDefault();
     if(enterdtext.length === 0){

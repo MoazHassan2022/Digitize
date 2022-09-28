@@ -21,7 +21,6 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
 
     const [isAdd , setIsAdd] = useState(true);
     const [resetKey , setresetKey] = useState(Math.random() * 5000);
-    console.log(textonly, obsenget ,getlabel , getApi  , setApi, obcal , label);
 
 
     const renderSetting = () => {

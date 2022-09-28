@@ -11,12 +11,12 @@ export const Hello =() =>{
     return <Grid item container xs={12} md={10} textAlign="end" spacing={3}>
             <Grid item textAlign="end" xs={12}> <Typography variant="h3" > {hellotext}</Typography></Grid>
             <Grid  sx={{marginTop:1 , fontSize:18}} item container xs={12} textAlign="end" >
-                <Grid item container xs={11.4} sx={{ bgcolor:"#adacab7e" ,borderRadius:4 }} >
-                   { instructions.map( (title) => <Grid item xs={11.6} sx={{marginTop:1}}>{title} </Grid>)}
+                <Grid item container xs={11} md={11.4} sx={{ bgcolor:"#adacab7e" ,borderRadius:4 }} >
+                   { instructions.map( (title,i) => <Grid key={i} item xs={11.6} sx={{marginTop:1}}>{title} </Grid>)}
                 </Grid>
                 <Grid item xs={.2} />
-                <Grid item container xs={.4} textAlign="center" sx={{bgcolor: theme.palette.primary.main , color:"white", borderRadius:4 }} >
-                   { instructions.map( (title,i) => <Grid item xs={11.6} sx={{marginTop:1}} > -{i+1} </Grid>)}
+                <Grid item container xs={.8} md={.4} textAlign="center" sx={{bgcolor: theme.palette.primary.main , color:"white", borderRadius:4 }} >
+                   { instructions.map( (title,i) => <Grid key={i} item xs={11.6} sx={{marginTop:1}} > -{i+1} </Grid>)}
                 </Grid>
             </Grid>
     </Grid>;

@@ -105,8 +105,6 @@ const maxSteps = attribute.length;
     row.append("siteSupervisorAssistant", formData["siteSupervisorAssistant"]["name"]);
     row.append("photo", formData["map"]["img"]);
     let seq = formData["map"]["sq"];
-    console.log(row)
-    console.log(formData)
 
 
 
@@ -173,7 +171,6 @@ const maxSteps = attribute.length;
           );}
         
         case 2: {
-          console.log(formData, getformKey(step-1))
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
              <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 

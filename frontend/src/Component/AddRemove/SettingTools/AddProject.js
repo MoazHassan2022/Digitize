@@ -35,7 +35,6 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
     await axios.post(sendapi, formData,{headers:{authorization: auth,}})
     .then(res => { 
         setSnakeData([true, ` تمت اضافة ${enterdtext} بنجاح` , "success"]);
-        console.log(res);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

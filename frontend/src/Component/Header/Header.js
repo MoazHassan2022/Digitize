@@ -33,7 +33,7 @@ const Header = () => {
   var settings = [['سجل الخروج' , Logout ]];
 
   if(userType === "0") {
-    pages = [['سجل استطلاع', () => {return history("/SubmitSurvy");}  ]];
+    pages = [['سجل استطلاع', () => {return history("/SubmitSurvey");}  ]];
   }
   else {
     settings = [['الاعدادات' , () =>  {return history("/Setting")}], ...settings];

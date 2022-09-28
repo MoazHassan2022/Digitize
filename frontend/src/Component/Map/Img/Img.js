@@ -4,7 +4,6 @@ import { useEffect } from "react";
   
 export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
 
-    console.log(curs);
 
     var id=`canvas${keyy}`;
     var can,ctx;
@@ -29,9 +28,7 @@ export const MapImg = ({keyy ,squares , curs,trival, imgurl}) =>{
                     }
                 })
             });
-            console.log(curs[0], curs[1]);
             if(curs[0] > 0 || curs[1]  > 0){
-                console.log(curs[0], curs[1]);
                 fillSquare(curs[0],curs[1],"#cb0d0d52");
                 let i = curs[0];let j = curs[1];
                 drawLine( i*15 , j*15, i*15+15, j*15+15 , "red", 2)
