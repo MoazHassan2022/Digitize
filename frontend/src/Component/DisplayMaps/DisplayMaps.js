@@ -1,10 +1,11 @@
 import { useTheme } from "@emotion/react";
-import { Alert, Grid, Snackbar, Typography } from "@mui/material";
+import { Alert,  Grid, Snackbar, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { baseapi } from "../../Utilities/utilitesFunction";
 import MapImg from "../Map/Img/Img";
+import Spinner from "../Spinner/Spinner";
 
 
 export const DisplayMaps =()=> {
@@ -13,8 +14,7 @@ export const DisplayMaps =()=> {
   const [cookies] = useCookies();
   const theme = useTheme();
   const [snakeData, setSnakeData] = useState([false,"",""]);
-
-
+  const [isFetching, setIsFetching] = useState(true); 
     
     const requestAvailabeleSelection =  () => {
         const auth = "Bearer " + cookies.token;
@@ -32,9 +32,25 @@ export const DisplayMaps =()=> {
 
     useEffect(() => {
         requestAvailabeleSelection();   
-        return () => {}
+        setTimeout(function () {
+          setIsFetching(false); 
+        }, 5000);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       } , [])
+
+
+      if (isFetching) {
+        return (
+          <Grid item container  sx={{ minHeight:"80vh"}}  
+          alignItems="center"
+          justifyContent="center"
+          >
+            <Grid item xs={12} md={12} direction="column" justifyContent="center" textAlign="center">
+              <Spinner />
+            </Grid>
+          </Grid>
+        );
+      }
       
     return(
         <Grid container xs={12} md={12} justifyContent="center" >

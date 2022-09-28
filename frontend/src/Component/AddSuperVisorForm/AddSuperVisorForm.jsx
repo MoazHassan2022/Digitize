@@ -6,7 +6,7 @@ import axios from "axios";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useTheme } from "@emotion/react";
 import {GrUserAdd} from "react-icons/gr";
-import {baseapi} from "../../Utilities/utilitesFunction"
+import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 
 
 export const AddSuperVisorForm = () => {
@@ -59,7 +59,7 @@ return (
       <form className={classes.Form} onSubmit={HandleSubmit}>
         <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
           <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src="/public/Assets/Digitize.png" alt="CO" />
+                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
           </Grid>
 
           <Grid item xs={12} textAlign="center">

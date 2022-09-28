@@ -1,5 +1,8 @@
 
-export const baseapi = "/api"
+export const baseapi = "http://127.0.0.1:8000/api"
+export const mediaApi = ""
+
+
 
 export function getSelectedone (sel , all , par) {
     return all.find( (pro) => { return pro[par] === sel; } );
@@ -7,7 +10,7 @@ export function getSelectedone (sel , all , par) {
 
 export function translator(en) {
     switch (en) {
-        case 0: return "اهلا بك";
+        case 0: return "أهلا بك";
         case 1: return "كود المشروع";
         case 2: return "اسم الموقع";
         case 3: return "الخريطـة";

@@ -16,7 +16,7 @@ function App() {
   return (
       <Routes>
         <Route exact path="/" element={ <SignIn /> } />
-        <Route path="/SubmitSurvy" element={<GeneralAuthWrapper> <SubmitSurvy /> </GeneralAuthWrapper>} />
+        <Route path="/SubmitSurvey" element={<GeneralAuthWrapper> <SubmitSurvy /> </GeneralAuthWrapper>} />
         <Route path="/RequestData" element={<AdminAuthWrapper> <RequestData /></AdminAuthWrapper> } />
         <Route path="/AddSupervisor" element={ <AdminAuthWrapper><AddSuperVisor /> </AdminAuthWrapper>} />
         <Route path="/Setting" element={<AdminAuthWrapper> <Setting/></AdminAuthWrapper> } />

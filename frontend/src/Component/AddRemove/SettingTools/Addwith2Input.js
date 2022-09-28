@@ -1,14 +1,11 @@
-import { useTheme } from "@emotion/react";
-import {  Button, FormControl , Grid, IconButton, Stack, TextField } from "@mui/material";
+import {  Button, Grid,  TextField } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useCookies } from "react-cookie";
 import {IoAddCircle} from "react-icons/io5"
-import Addwithtags from "../../Addwithtages/Addwithtags";
 
 
 export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [selectedId , setSelectedId] = useState("");
   const [Name , setName] = useState("");

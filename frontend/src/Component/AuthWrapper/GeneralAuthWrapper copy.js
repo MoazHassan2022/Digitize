@@ -5,7 +5,7 @@ const GeneralAuthWrapper = ({ children }) => {
   const [cookies] = useCookies(['user']);
 
 
-  if (cookies.token === "undefined" || cookies.token === "") {
+  if (!cookies.token || cookies.token === "undefined" || cookies.token === "") {
     return <UnAuth />;
   }
 

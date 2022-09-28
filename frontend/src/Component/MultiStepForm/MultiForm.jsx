@@ -1,22 +1,20 @@
-import { Alert,Button,  Grid,   MobileStepper,  Paper, Snackbar, Typography } from "@mui/material";
+import { Alert,Button,  Grid,   MobileStepper,  Paper, Snackbar, Typography ,Box } from "@mui/material";
 import { useState } from "react";
-
 import useStyle from "./MultiFormStyles";
 import {  useCookies } from "react-cookie";
 import { useTheme } from "@emotion/react";
-import { Box } from "@mui/system";
-import {AiFillFileText} from "react-icons/ai"
 import { DropDownwithapi } from './DropDownwithapi';
 import ManualInsert from './ManualInsert';
 import axios from "axios";
-import {translator , baseapi} from "../../Utilities/utilitesFunction"
+import {translator , baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import DropDownwithselctions from "./DropDownwithselctions";
 import Map from "../Map/Map";
 import { GiFinishLine } from "react-icons/gi";
 import ManualInsertNumber from "./ManualInsertNumber";
 import Review from "./Review";
 import Hello from "./Hello";
-
+import {MdArrowForwardIos , MdArrowBackIos} from "react-icons/md"
+import {AiOutlineCheck} from "react-icons/ai"
 
 export const MultiForm = () => {
   const classes = useStyle();
@@ -30,7 +28,7 @@ export const MultiForm = () => {
     e.preventDefault();
 
     if(activeStep === 3 && formData["map"] === ""){
-      setSnakeData([true, " لا تنس الضغط عل زر الارفاق لتجيل بياناتك", "error"]);
+      setSnakeData([true, " لا تنس الضغط عل زر الاضافه لتسجيل بياناتك", "error"]);
       return;
     }
 
@@ -100,13 +98,16 @@ const maxSteps = attribute.length;
     row.append("activityType", formData["activityTypes"]);
     row.append("measurmentUnit", formData["measurementUnit"]["unit"]);
     row.append("dayProgress", formData["dayProgress"]);
-    row.append("deliveryWay", formData["deliveryWay"]);
-    row.append("deliveryTeam", formData["deliveryTeam"]);
-    row.append("siteEngineer", formData["siteEngineer"]);
-    row.append("siteSupervisorMain", formData["siteSupervisorMain"]);
-    row.append("siteSupervisorAssistant", formData["siteSupervisorAssistant"]);
+    row.append("deliveryWay", formData["deliveryWay"]["way"]);
+    row.append("deliveryTeam", formData["deliveryTeam"]["name"]);
+    row.append("siteEngineer", formData["siteEngineer"]["name"]);
+    row.append("siteSupervisorMain", formData["siteSupervisorMain"]["name"]);
+    row.append("siteSupervisorAssistant", formData["siteSupervisorAssistant"]["name"]);
     row.append("photo", formData["map"]["img"]);
     let seq = formData["map"]["sq"];
+    console.log(row)
+    console.log(formData)
+
 
 
     const auth = "Bearer " + cookies.token;
@@ -116,7 +117,7 @@ const maxSteps = attribute.length;
     axios.post(baseapi+"/rows", row,{headers:{authorization: auth,}})
     .then(res => { 
       setSnakeData([true, "تم ارسال الاستطلاع بنجاح" , "success"]);
-      setTimeout(window.location.reload(), 5000);
+      //setTimeout(window.location.reload(), 5000);
     } )
     .catch((err) =>
         setSnakeData([true, err.response.data.message , "error"])
@@ -180,7 +181,7 @@ const maxSteps = attribute.length;
              );}
         
         case 3: 
-        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={"//public/img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
+        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={mediaApi + "/img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
 
         case 4: 
           return (
@@ -320,17 +321,12 @@ return (
             size="small"
             endIcon={ (activeStep === maxSteps - 1)  ? <GiFinishLine color="white" /> : ""}
           >
-            {(activeStep === maxSteps - 1) ? "Finsh" : "Next"}
+            {(activeStep === maxSteps - 1) ? <AiOutlineCheck size={24} /> : <MdArrowForwardIos size={24} />}
           </Button>
         }
         backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              < AiFillFileText />
-            ) : (
-              < AiFillFileText />
-            )}
-            Back
+            <MdArrowBackIos size={24} />
           </Button>
         }
       />

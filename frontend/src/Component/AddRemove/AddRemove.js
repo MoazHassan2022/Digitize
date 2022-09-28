@@ -1,6 +1,5 @@
 
-import { useTheme } from "@emotion/react";
-import { Alert, Avatar, Button, Grid, IconButton, Paper, Snackbar ,Box, Typography, Stack } from "@mui/material";
+import { Alert,  Grid, IconButton, Paper, Snackbar , Typography } from "@mui/material";
 import { useState } from "react";
 import useStyle from "./AddRemoveStyles";
 import { FcAddRow , FcDeleteRow } from "react-icons/fc";
@@ -17,7 +16,6 @@ import Addwith2Input from "./SettingTools/Addwith2Input";
 export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obcal , label}) => {
     const [snakeData, setSnakeData] = useState([false,"",""]);
     const classes = useStyle();
-    const theme = useTheme();
     const Apiget = baseapi + getApi;
     const Apiset = baseapi + setApi;
 
@@ -75,7 +73,7 @@ export const AddRemove = ({textonly, obsenget ,getlabel , getApi  , setApi, obca
         </Grid>
     </Grid>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] == "error" ?"error" :"info")} >
+            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={ snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>

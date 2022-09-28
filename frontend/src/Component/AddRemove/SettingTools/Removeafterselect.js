@@ -15,7 +15,6 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
     const [allspecifcselections , setallspecifcselections] = useState([]);
     const [specifcselections , setspecifcselections] = useState([]); 
 
-    console.log(getapi , getlabel , obsenget , sendapi, obsen , label);
 
   const HandleSubmit = (e) => {
     e.preventDefault();

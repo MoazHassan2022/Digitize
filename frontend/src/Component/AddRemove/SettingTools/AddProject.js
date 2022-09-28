@@ -1,17 +1,12 @@
-import { useTheme } from "@emotion/react";
-import {  Button, FormControl , Grid, IconButton, Stack, TextField } from "@mui/material";
+import {  Button,  Grid,  TextField } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { BsImageFill } from "react-icons/bs";
-import { GiConsoleController } from "react-icons/gi";
 import {IoAddCircle} from "react-icons/io5"
-import Addwithtags from "../../Addwithtages/Addwithtags";
-import { VisibalePassword } from "../../VisibalePassword/VisibalePassword";
 
 
 export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
-  const theme = useTheme();
   const [cookies] = useCookies();
   const [enterdtext , setEnterdtext] = useState("");
   const [Imgs , setImgs] = useState();

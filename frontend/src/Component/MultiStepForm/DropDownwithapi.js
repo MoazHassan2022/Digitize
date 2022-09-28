@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -27,7 +26,7 @@ export const DropDownwithapi = ({setselection, chose ,getapi , label, setSnakeDa
   }
 
 useEffect(() => {
-  requestAvailabeleSelection();   
+  requestAvailabeleSelection();
   return () => {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   } , [])

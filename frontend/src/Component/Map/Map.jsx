@@ -1,9 +1,9 @@
-import { Button, Chip, Grid, IconButton, Typography } from "@mui/material";
-import { useState } from "react";
+import { Button, Chip,  Grid, IconButton, Typography } from "@mui/material";
+import {  useState } from "react";
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
 import MapImg from "./Img/Img";
 import {BsFillArrowDownCircleFill, BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill, BsFillArrowUpCircleFill, BsImageFill} from "react-icons/bs"
-import {GiFinishLine} from "react-icons/gi"
+import {MdOutlineDone} from "react-icons/md"
 import { useTheme } from "@emotion/react";
 
 
@@ -29,19 +29,10 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   const [Imgs , setImgs] = useState();
   const [choses , setChoses] = useState([]);
   const [moved , setmoved] = useState(false);
-
-  var init = initsq;
-  if(initsq.length === 0){
-      init = [
-      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
-      ]
-  }
-
-  const [squares , setsquers] = useState(init);
+  const [squares , setsquers] = useState(initsq);
   const [trival , settrival] = useState(true);
   const [showloadimg, setshowloadimg] = useState(true);
   const mapexist = imgurl.slice(imgurl.length-9) !== "undefined";
-
 
 
   const handlechose = () => {
@@ -116,8 +107,8 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       case 3: newpos[0] = (newpos[0] < 23) ? newpos[0]+1 : 0;    break;
       default: return "unknown";
     }
-    setpos(newpos);
     settrival(!trival);
+    setpos(newpos);
   }
 
   const UploadImgs = (e) => {
@@ -127,11 +118,13 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       settrival(!trival);
     }
   }
+
+
       return(
         <Grid container  sx={{ minHeight:"30vh"}} >
           <Mapshow existMap={mapexist} >
           <Grid item xs={12} md={12} sx={{maxHeight:"60vh", margin:1}} >
-              <MapImg setp={setpos} imgurl={imgurl} squares={squares} curs={pos} trival={trival}/>
+              <MapImg keyy={Math.ceil(Math.random() * 8000)}  setp={setpos} imgurl={imgurl} squares={squares} curs={pos} trival={trival}/>
             </Grid>
             <Grid item container xs={12} md={12}  textAlign="center">
               <Grid item container xs={6} md={3} textAlign="center" >
@@ -182,7 +175,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
                   </Button>
                   }
 
-                  <Button variant="contained" onClick={handlechose} startIcon={<GiFinishLine color="white" />} sx={{marginLeft:1}} >اضف الاختيار او الصورة</Button>
+                  <Button variant="contained" onClick={handlechose} startIcon={<MdOutlineDone color="white" />} sx={{marginLeft:1}} >اضف الاختيار او الصورة</Button>
                 </Grid>
             </Grid>
 

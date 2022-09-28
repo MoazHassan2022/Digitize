@@ -7,7 +7,7 @@ import {  useCookies } from "react-cookie";
 import axios from "axios";
 import {MdVisibility , MdVisibilityOff} from "react-icons/md"
 import { useTheme } from "@emotion/react";
-import {baseapi} from "../../Utilities/utilitesFunction"
+import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 
 export const SignIn = () => {
   const classes = useStyle();
@@ -37,9 +37,8 @@ export const SignIn = () => {
         setCookie('name', res.data.data.user.name, { path: '/' });
         setCookie('userType', res.data.data.user.isAdmin ? "1" : "0", { path: '/' });
         setCookie('id', res.data.data.user._id, { path: '/' });
-        setSnakeData([true, "You Login successfully!" , "success"]);
-         if(!res.data.data.user.isAdmin){ setTimeout(history("/SubmitSurvy") , 5000 );}
-         else {setTimeout(history("/RequestData") , 5000 );}
+        setSnakeData([true, "تم تسجيل الدخول بنجاح!" , "success"]);
+        setTimeout( () =>  window.location.reload() , 2000 );
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -48,7 +47,7 @@ export const SignIn = () => {
 
   useEffect(()=>{
     if(cookies.token !== "undefined"){
-      if(cookies.userType === "0"){ setTimeout(history("/SubmitSurvy") , 5000 );}
+      if(cookies.userType === "0"){ setTimeout(history("/SubmitSurvey") , 5000 );}
       else {setTimeout(history("/RequestData") , 5000 );}
     }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,7 +65,7 @@ return (
       <form className={classes.Form} onSubmit={HandleSubmit}>
         <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
           <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src="/public/Assets/Digitize.png" alt="CO" />
+                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
           </Grid>
 
           <Grid item xs={12} textAlign="center">

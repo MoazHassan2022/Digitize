@@ -19,9 +19,6 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
       return;
     }
 
-
-
-
     selections.map(m => deletesel(m));
   }
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useStyle from "./RequestDataFormStyles";
 import {  useCookies } from "react-cookie";
 import axios from "axios";
-import {getSelectedone , baseapi} from "../../Utilities/utilitesFunction"
+import {getSelectedone , baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import {AiOutlineDownload} from "react-icons/ai"
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
 
@@ -13,13 +13,10 @@ export const RequestDataForm = () => {
   const classes = useStyle();
   const [cookies] = useCookies(['user']);
 
-
-
   const [projectsData , setprojectsData ] = useState("");
 
   const SiteNameTitle = "اختر المشروع";
   const [SiteNames, setSitesNames] = useState([]);
-  const [SiteName , setSiteName ] = useState("");
   const [snakeData, setSnakeData] = useState([false,"",""]);
   const [selectedproject, setselectedproject] = useState(null);
 
@@ -54,7 +51,10 @@ export const RequestDataForm = () => {
         anchor.download = 'data.xlsx';
         anchor.click();
         window.URL.revokeObjectURL(objectUrl);
-        setSnakeData([true, "تم تنزيل البيانات بنجاح" , "success"]);
+
+        setTimeout(() => {
+          setSnakeData([true, "تم تنزيل البيانات بنجاح" , "success"]);
+        }, 2000);
         setTimeout(() => {
           window.location.reload();
         }, 4000);
@@ -65,7 +65,6 @@ export const RequestDataForm = () => {
   
 
   const tempfunc = (valu) =>{
-    setSiteName(valu);
     setselectedproject(getSelectedone(valu ,projectsData , "projectCode" ));
   }
 
@@ -85,7 +84,7 @@ export const RequestDataForm = () => {
         <form className={classes.Form} onSubmit={HandleSubmit}>
           <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
             <Grid item className={classes.Logo} xs={12} >
-                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src="/public/Assets/Digitize.png" alt="CO" />
+                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
             </Grid>
   
             <Grid item xs={12} textAlign="center">
