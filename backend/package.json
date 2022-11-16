@@ -4,7 +4,11 @@
   "description": "IT solutions website Project",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install --force",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "dev": "nodemon server.js",
     "start:prod": "set NODE_ENV=production&&nodemon server.js",
     "debug": "ndb server.js"
   },

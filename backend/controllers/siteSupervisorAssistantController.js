@@ -1,5 +1,5 @@
-const SiteSupervisorAssistant = require('./../models/siteSupervisorAssistantModel');
-const factory = require('./handlerFactory');
+const SiteSupervisorAssistant = require("./../models/siteSupervisorAssistantModel");
+const factory = require("./handlerFactory");
 
 exports.getAllSiteSupervisorAssistants = factory.getAll(
   SiteSupervisorAssistant

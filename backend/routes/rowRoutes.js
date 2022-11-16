@@ -1,12 +1,12 @@
-const express = require('express');
-const rowController = require('../controllers/rowController');
-const authController = require('./../controllers/authController');
+const express = require("express");
+const rowController = require("../controllers/rowController");
+const authController = require("./../controllers/authController");
 const router = express.Router();
 
 router.use(authController.protect);
 
 router
-  .route('/')
+  .route("/")
   .get(authController.isAdmin, rowController.getAllRows)
   .post(
     rowController.uploadRowPhoto,
@@ -16,7 +16,7 @@ router
   );
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(authController.isAdmin, rowController.getRow)
   .patch(authController.isAdmin, rowController.updateRow)
   .delete(authController.isAdmin, rowController.deleteRow);

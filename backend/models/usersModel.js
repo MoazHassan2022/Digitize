@@ -1,50 +1,50 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'يجب أن يمتلك المستخدم اسم'],
+    required: [true, "يجب أن يمتلك المستخدم اسم"],
     trim: true, // Remove all the white space in the beginning or end of the field
-    maxLength: [40, 'يجب أن يحتوي اسم المستخدم على 40 حرفًا أو أقل'],
-    minLength: [4, 'يجب أن يحتوي اسم المستخدم على أكثر من أو يساوي 4 أحرف'],
+    maxLength: [40, "يجب أن يحتوي اسم المستخدم على 40 حرفًا أو أقل"],
+    minLength: [4, "يجب أن يحتوي اسم المستخدم على أكثر من أو يساوي 4 أحرف"],
   },
   email: {
     type: String,
-    required: [true, 'يجب أن يكون لدى المستخدم بريد إلكتروني'],
-    unique: [true, 'يجب أن يكون لدى المستخدم بريد إلكتروني فريد'],
+    required: [true, "يجب أن يكون لدى المستخدم بريد إلكتروني"],
+    unique: [true, "يجب أن يكون لدى المستخدم بريد إلكتروني فريد"],
     trim: true, // Remove all the white space in the beginning or end of the field
     lowercase: true,
-    validate: [validator.isEmail, 'يرجى تقديم عنوان بريد إلكتروني صالح'],
+    validate: [validator.isEmail, "يرجى تقديم عنوان بريد إلكتروني صالح"],
   },
   password: {
     type: String,
-    required: [true, 'يجب أن يكون لدى المستخدم كلمة مرور'],
-    maxLength: [40, 'يجب أن تحتوي كلمة مرور المستخدم على 40 حرفًا أو أقل'],
+    required: [true, "يجب أن يكون لدى المستخدم كلمة مرور"],
+    maxLength: [40, "يجب أن تحتوي كلمة مرور المستخدم على 40 حرفًا أو أقل"],
     minLength: [
       8,
-      'يجب أن تحتوي كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف',
+      "يجب أن تحتوي كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف",
     ],
     select: false,
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'يجب أن يكون لدى المستخدم كلمة مرور مؤكدة'],
+    required: [true, "يجب أن يكون لدى المستخدم كلمة مرور مؤكدة"],
     maxLength: [
       40,
-      'يجب أن يحتوي تأكيد كلمة مرور المستخدم على 40 حرفًا أو أقل',
+      "يجب أن يحتوي تأكيد كلمة مرور المستخدم على 40 حرفًا أو أقل",
     ],
     minLength: [
       8,
-      'يجب أن يحتوي تأكيد كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف',
+      "يجب أن يحتوي تأكيد كلمة مرور المستخدم على أكثر من أو يساوي 8 أحرف",
     ],
     validate: {
       validator: function (value) {
         return value === this.password;
       },
-      message: 'يجب أن يكون تأكيد كلمة المرور مساويًا لكلمة المرور الخاصة بك',
+      message: "يجب أن يكون تأكيد كلمة المرور مساويًا لكلمة المرور الخاصة بك",
     },
     select: false,
   },
@@ -66,14 +66,14 @@ const userSchema = mongoose.Schema({
   passwordResetExpires: Date,
 });
 
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
   this.passwordChangedAt = Date.now() - 1000; // subtract 1 second to be older than the date of giving the token
   next();
 });
 
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined; // We use passwordConfirm only to check that tge user didn't input different passwords then we don't need this
   next();
@@ -96,16 +96,16 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 
 userSchema.methods.createPasswordResetToken = async function () {
-  const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetToken = crypto.randomBytes(32).toString("hex");
   this.passwordResetToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(resetToken)
-    .digest('hex');
+    .digest("hex");
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 minutes with millis
   console.log(this.passwordResetToken);
   return resetToken;
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

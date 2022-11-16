@@ -1,5 +1,5 @@
-const SiteEngineer = require('./../models/siteEngineerModel');
-const factory = require('./handlerFactory');
+const SiteEngineer = require("./../models/siteEngineerModel");
+const factory = require("./handlerFactory");
 
 exports.getAllSiteEngineers = factory.getAll(SiteEngineer);
 exports.createSiteEngineer = factory.createOne(SiteEngineer);

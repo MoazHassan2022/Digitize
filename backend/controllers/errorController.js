@@ -1,25 +1,25 @@
-const AppError = require('./../utils/appError');
+const AppError = require("./../utils/appError");
 
-const handleCastErrorDB = (error) => {
-  const message = `لم يتم ايجاد البيانات المطلوبة`;
+const handleCastErrorDB = () => {
+  const message = "لم يتم ايجاد البيانات المطلوبة";
   return new AppError(message, 400);
 };
 
-const handleDuplicateFieldDB = (error) => {
-  const message = `هذه البيانات موجودة من قبل. من فضلك استخدم قيم أخرى`;
+const handleDuplicateFieldDB = () => {
+  const message = "هذه البيانات موجودة من قبل. من فضلك استخدم قيم أخرى";
   return new AppError(message, 400);
 };
 
 const handleValidatorErrorDB = (error) => {
   const errors = Object.values(error.errors).map((val) => val.message);
-  const message = `${errors.join('. ')} يوجد خطأ في البيانات التي أدخلتها`;
+  const message = `${errors.join(". ")} يوجد خطأ في البيانات التي أدخلتها`;
   return new AppError(message, 400);
 };
 
-const handleJWTError = () => new AppError('يرجى تسجيل الدخول مرة أخرى', 401);
+const handleJWTError = () => new AppError("يرجى تسجيل الدخول مرة أخرى", 401);
 
 const handleTokenExpiredError = () =>
-  new AppError('يرجى تسجيل الدخول مرة أخرى', 401);
+  new AppError("يرجى تسجيل الدخول مرة أخرى", 401);
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -35,24 +35,24 @@ const sendErrorProd = (err, res) => {
       message: err.message,
     });
   } else {
-    console.error('ERROR 💥', err);
+    console.error("ERROR 💥", err);
     res.status(500).json({
-      status: 'error',
-      message: 'حدث خطأ ما',
+      status: "error",
+      message: "حدث خطأ ما",
     });
   }
 };
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
-  if (process.env.NODE_ENV !== 'development') {
+  err.status = err.status || "error";
+  if (process.env.NODE_ENV !== "development") {
     let error = { ...err };
     error.message = err.message;
-    if (err.name === 'CastError') error = handleCastErrorDB(error);
+    if (err.name === "CastError") error = handleCastErrorDB(error);
     if (err.code === 11000) error = handleDuplicateFieldDB(error);
-    if (err.name === 'ValidationError') error = handleValidatorErrorDB(error);
-    if (err.name === 'JsonWebTokenError') error = handleJWTError();
-    if (err.name === 'TokenExpiredError') error = handleTokenExpiredError();
+    if (err.name === "ValidationError") error = handleValidatorErrorDB(error);
+    if (err.name === "JsonWebTokenError") error = handleJWTError();
+    if (err.name === "TokenExpiredError") error = handleTokenExpiredError();
     sendErrorProd(error, res);
   } else sendErrorDev(err, res);
 };

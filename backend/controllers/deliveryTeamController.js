@@ -1,5 +1,5 @@
-const DeliveryTeam = require('./../models/deliveryTeamModel');
-const factory = require('./handlerFactory');
+const DeliveryTeam = require("./../models/deliveryTeamModel");
+const factory = require("./handlerFactory");
 
 exports.getAllDeliveryTeams = factory.getAll(DeliveryTeam);
 exports.createDeliveryTeam = factory.createOne(DeliveryTeam);

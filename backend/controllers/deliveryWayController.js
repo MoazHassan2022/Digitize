@@ -1,5 +1,5 @@
-const DeliveryWay = require('./../models/deliveryWayModel');
-const factory = require('./handlerFactory');
+const DeliveryWay = require("./../models/deliveryWayModel");
+const factory = require("./handlerFactory");
 
 exports.getAllDeliveryWays = factory.getAll(DeliveryWay);
 exports.createDeliveryWay = factory.createOne(DeliveryWay);

@@ -1,5 +1,5 @@
-const Activity = require('./../models/activityModel');
-const factory = require('./handlerFactory');
+const Activity = require("./../models/activityModel");
+const factory = require("./handlerFactory");
 
 exports.getAllActivities = factory.getAll(Activity);
 exports.createActivity = factory.createOne(Activity);
