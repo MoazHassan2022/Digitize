@@ -14,7 +14,7 @@ export const VisibalePassword = ({p , setp}) => {
 
     return (
     <TextField
-            label="باسورد"
+            label="كلمة السر"
             required
             value={PassWord}
             onChange={(e) => {setPassWord(e.target.value); setp(e.target.value)}}

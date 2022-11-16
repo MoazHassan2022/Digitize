@@ -34,7 +34,7 @@ export const Resetpassword = () => {
     ;
     axios.patch(baseapi +`/users/resetPassword/${id}`, user)
     .then(res => { 
-        setSnakeData([true, "تم اعادة تعيين الباسورد الخاص بك بنجاح سيتم توجيهك لصفحة الدخول مرة اخري" , "success"]);
+        setSnakeData([true, "تم اعادة تعيين كلمة السر الخاص بك بنجاح سيتم توجيهك لصفحة الدخول مرة اخري" , "success"]);
         setTimeout(() =>{history("/")}, 5000);
     })
     .catch((err) =>{
@@ -62,13 +62,13 @@ return (
                 variant="h2"
                 color="primary"
               >
-                اعد تعيين الباسورد الخاص بك
+                اعد تعيين كلمة السر الخاص بك
             </Typography>
           </Grid>
 
           <Grid item xs={12} align="center">
               <TextField
-              label="باسورد"
+              label="كلمة السر"
               required
               autoFocus
               value={PassWord}
@@ -92,7 +92,7 @@ return (
 
           <Grid item xs={12} align="center">
             <TextField
-            label="قم بتاكيد الباسورد"
+            label="قم بتاكيد كلمة السر"
             required
             autoFocus
             value={PassWordConfirm}

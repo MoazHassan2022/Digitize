@@ -24,7 +24,7 @@ export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) =
     const auth = "Bearer " + cookies.token;
     await axios.post(sendapi, ob,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافة ${pp} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة البيانات بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

@@ -15,7 +15,7 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
   const UploadImgs = (e) => {
     if (e) { 
       setImgs(e);
-      setSnakeData([true, "تم رفع الخريطه بنجاح", "success"]);
+      setSnakeData([true, "تم رفع الخريطة بنجاح", "success"]);
     }
   }
   
@@ -34,7 +34,7 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
     const auth = "Bearer " + cookies.token;
     await axios.post(sendapi, formData,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافة ${enterdtext} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة البيانات بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

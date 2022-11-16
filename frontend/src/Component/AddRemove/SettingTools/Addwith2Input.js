@@ -13,11 +13,11 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     if(Name.length === 0){
-      setSnakeData([true, "قم بملي اسم المجموعه من فضلك " , "error"])
+      setSnakeData([true, "قم بملي اسم المجموعة من فضلك " , "error"])
       return ;
     }
     if(selectedId.length === 0){
-      setSnakeData([true, "الخاص المجموعه من فضلك Id  قم بملي ال " , "error"])
+      setSnakeData([true, "الخاص المجموعة من فضلك Id  قم بملي ال " , "error"])
       return ;
     }
 
@@ -28,7 +28,7 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
     ob["activityGroupID"] = selectedId;
     await axios.post(sendapi, ob,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافة ${Name} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة البيانات بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -43,8 +43,8 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
                 variant="outlined"
                 fullWidth
                 sx={{maxWidth: 530,}}
-                placeholder={`اضف اسم للمجموعه`}
-                label={`اضف اسم للمجموعه`}
+                placeholder={`اضف اسم للمجموعة`}
+                label={`اضف اسم للمجموعة`}
                 onChange={(e) => setName(e.target.value)}
               />
               </Grid>
@@ -53,8 +53,8 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
                 variant="outlined"
                 fullWidth
                 sx={{maxWidth: 530,}}
-                placeholder={`للمجموعه Id اضف `}
-                label={`للمجموعه Id اضف `}
+                placeholder={`للمجموعة Id اضف `}
+                label={`للمجموعة Id اضف `}
                 onChange={(e) => setSelectedId(e.target.value)}
               />
               </Grid>

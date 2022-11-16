@@ -4,10 +4,10 @@ import { Grid, Typography } from "@mui/material";
 export const Hello =() =>{
     const theme = useTheme();
 
-    const instructions = [".قم بملئ كل خطوة من الخطوات حيث لا يمكنك المرور من احداها الا بملئها" ,
-     ".في خطوة الخريطة عليك اختيار المربعات او رفع صورة توضيحية للعمل او كلاهما ثم الضغط على زر الاضافة", ".تحرى كتابتك فما تكتبه سيرسل كما هو بدون اي تعديل", ".راجع خطواتك بعناية قبل الارسال في خطوة المراجعة"];
+    const instructions = ["قم بملئ كل خطوة من الخطوات حيث لا يمكنك المرور من احداها الا بملئها" ,
+     "في خطوة الخريطة عليك اختيار المربعات او رفع صورة توضيحية للعمل او كلاهما ثم الضغط على زر الاضافة", "تحرى كتابتك فما تكتبه سيرسل كما هو بدون اي تعديل", "راجع خطواتك بعناية قبل الارسال في خطوة المراجعة"];
 
-    const hellotext = `!أهلا بك في استطلاع العمل من فضلك اقرأ التالي بحرص قبل البدء `
+    const hellotext = `أهلا بك في استطلاع العمل من فضلك اقرأ التالي بحرص قبل البدء`
     return <Grid item container xs={12} md={10} textAlign="end" spacing={3}>
             <Grid item textAlign="end" xs={12}> <Typography variant="h3" > {hellotext}</Typography></Grid>
             <Grid  sx={{marginTop:1 , fontSize:18}} item container xs={12} textAlign="end" >

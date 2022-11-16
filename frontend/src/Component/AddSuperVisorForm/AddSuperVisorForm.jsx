@@ -90,13 +90,13 @@ return (
               value={Email}
               onChange={(e) => {setEmail(e.target.value)}}
               className={classes.textField}
-              helperText="كن حذرا فهذا الايميل سيستخدم في حالة نسيان الباسورد"
+              helperText="كن حذرا فهذا الايميل سيستخدم في حالة نسيان كلمة السر"
               />
           </Grid>
 
           <Grid item xs={12} align="center">
             <TextField
-            label="الباسورد"
+            label="كلمة السر"
             required
             value={PassWord}
             onChange={(e) => {setPassWord(e.target.value)}}
@@ -119,7 +119,7 @@ return (
 
           <Grid item xs={12} align="center">
             <TextField
-            label="اكتب الباسورد مجددا"
+            label="اكتب كلمة السر مجددا"
             required
             value={ConfirmPassWord}
             onChange={(e) => {setConfirmPassWord(e.target.value)}}
