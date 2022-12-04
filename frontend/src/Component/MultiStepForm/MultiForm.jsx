@@ -313,7 +313,6 @@ return (
             type="submit"
             disabled={stopsubmit}
             size="small"
-            disabled={stopsubmit}
             endIcon={ (activeStep === maxSteps - 1)  ? <GiFinishLine color="white" /> : ""}
           >
             {(activeStep === maxSteps - 1) ? <AiOutlineCheck size={24} /> : <MdArrowForwardIos size={24} />}
