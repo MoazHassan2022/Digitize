@@ -25,7 +25,7 @@ export const Removefromselection = ({getapi  , sendapi, obsen , label , setSnake
     const auth = "Bearer " + cookies.token;
     await axios.delete(sendapi+`/${pro["_id"]}`,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, `بنجاح ${pro[obsen]} ${label} تمت الغاء ` , "success"]);
+        setSnakeData([true, `تم الالغاء بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

@@ -1,5 +1,5 @@
-const SiteSupervisorMain = require('./../models/siteSupervisorMainModel');
-const factory = require('./handlerFactory');
+const SiteSupervisorMain = require("./../models/siteSupervisorMainModel");
+const factory = require("./handlerFactory");
 
 exports.getAllSiteSupervisorMains = factory.getAll(SiteSupervisorMain);
 exports.createSiteSupervisorMain = factory.createOne(SiteSupervisorMain);

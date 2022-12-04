@@ -17,7 +17,8 @@ export const SubmitEmail = () => {
     };
     await axios.post(baseapi + "/users/forgotPassword", user)
     .then(res => { 
-        setSnakeData([true, " تم ارسال رسالة الي الايميل تتضمن رابط انقر علية لتعيد كلمه السر افحص الايميل الخاص بك . اذا لم تصلك رسالة في خلال دقيقة اعد الضغط مرة اخري" , "info"]);
+
+        setSnakeData([true, " تم ارسال رسالة الي الايميل تتضمن رابط انقر علية لتعيد كلمة السر افحص الايميل الخاص بك . اذا لم تصلك رسالة في خلال دقيقة اعد الضغط مرة اخري" , "info"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -43,7 +44,7 @@ return (
                 variant="h2"
                 color="primary"
               >
-                اكتب الايميل الخاص بك لاعادة تعيين كلمه السر
+                اكتب الايميل الخاص بك لاعادة تعيين كلمة السر
             </Typography>
           </Grid>
 
@@ -60,7 +61,8 @@ return (
           </Grid>
 
           <Grid item xs={12} align="center">
-            <Button type="submit" variant="contained" endIcon={<BiReset color="white" /> } >اعد تعيين كلمه السر</Button>
+
+            <Button type="submit" variant="contained" endIcon={<BiReset color="white" /> } >اعد تعيين كلمة السر</Button>
           </Grid>
         </Grid>
       </form>

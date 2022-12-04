@@ -1,17 +1,18 @@
-const Project = require('./../models/projectModel');
-const factory = require('./handlerFactory');
-const catchAsync = require('./../utils/catchAsync');
-const makeRandomString = require('./../utils/randomString');
-const multer = require('multer');
-const sharp = require('sharp');
+const Project = require("./../models/projectModel");
+const factory = require("./handlerFactory");
+const catchAsync = require("./../utils/catchAsync");
+const makeRandomString = require("./../utils/randomString");
+const AppError = require("./../utils/appError");
+const multer = require("multer");
+const sharp = require("sharp");
 
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image')) {
+  if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
-    cb(new AppError('هذه ليست صورة! من فضلك ارفع صور فقط', 400), false);
+    cb(new AppError("هذه ليست صورة! من فضلك ارفع صور فقط", 400), false);
   }
 };
 
@@ -20,13 +21,13 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadProjectMap = upload.single('map');
+exports.uploadProjectMap = upload.single("map");
 
 exports.resizeProjectMap = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `map-${makeRandomString()}-${Date.now()}.jpg`;
   await sharp(req.file.buffer)
-    .toFormat('jpg')
+    .toFormat("jpg")
     .toFile(`public/img/projectMaps/${req.file.filename}`);
   req.body.map = req.file.filename;
   next();

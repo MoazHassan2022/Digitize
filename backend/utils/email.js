@@ -1,24 +1,26 @@
-const nodemailer = require('nodemailer');
-const pug = require('pug');
+const nodemailer = require("nodemailer");
+const pug = require("pug");
 
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.name.split(' ')[0];
+    this.firstName = user.name.split(" ")[0];
     this.url = url;
     this.from = `Admin 1 <${process.env.EMAIL_USERNAME}>`;
   }
   newTransport() {
-    try{
-    return nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD, // App password in gmail
-      },
-      tls: { rejectUnauthorized: false },
-    });
-  }catch(err){console.log(err)}
+    try {
+      return nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD, // App password in gmail
+        },
+        tls: { rejectUnauthorized: false },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
   send(template, subject) {
     const html = pug.renderFile(
@@ -43,8 +45,8 @@ module.exports = class Email {
 
   async sendPasswordReset() {
     await this.send(
-      'passwordReset',
-      'رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)'
+      "passwordReset",
+      "رابط اعادة ادخال كلمة المرور (صالح لمدة 10 دقائق فقط)"
     );
   }
 };

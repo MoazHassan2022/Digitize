@@ -1,12 +1,12 @@
-const express = require('express');
-const siteSupervisorAssistantController = require('../controllers/siteSupervisorAssistantController');
-const authController = require('../controllers/authController');
+const express = require("express");
+const siteSupervisorAssistantController = require("../controllers/siteSupervisorAssistantController");
+const authController = require("../controllers/authController");
 const router = express.Router();
 
 router.use(authController.protect);
 
 router
-  .route('/')
+  .route("/")
   .get(siteSupervisorAssistantController.getAllSiteSupervisorAssistants)
   .post(
     authController.isAdmin,
@@ -14,7 +14,7 @@ router
   );
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(siteSupervisorAssistantController.getSiteSupervisorAssistant)
   .patch(
     authController.isAdmin,

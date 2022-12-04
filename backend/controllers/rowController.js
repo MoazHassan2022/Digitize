@@ -1,22 +1,22 @@
-const Row = require('./../models/rowModel');
-const APIFeatures = require('./../utils/apiFeatures');
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
-const factory = require('./handlerFactory');
-var mongoXlsx = require('mongo-xlsx');
-const fs = require('fs');
-const path = require('path');
-const makeRandomString = require('./../utils/randomString');
-const multer = require('multer');
-const sharp = require('sharp');
+const Row = require("./../models/rowModel");
+const APIFeatures = require("./../utils/apiFeatures");
+const catchAsync = require("./../utils/catchAsync");
+const AppError = require("./../utils/appError");
+const factory = require("./handlerFactory");
+var mongoXlsx = require("mongo-xlsx");
+const fs = require("fs");
+const path = require("path");
+const makeRandomString = require("./../utils/randomString");
+const multer = require("multer");
+const sharp = require("sharp");
 
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image')) {
+  if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
-    cb(new AppError('هذه ليست صورة! من فضلك ارفع صور فقط', 400), false);
+    cb(new AppError("هذه ليست صورة! من فضلك ارفع صور فقط", 400), false);
   }
 };
 
@@ -25,7 +25,7 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadRowPhoto = upload.single('photo');
+exports.uploadRowPhoto = upload.single("photo");
 
 exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
@@ -33,9 +33,9 @@ exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
     req.user._id
   }-${Date.now()}.jpg`;
   await sharp(req.file.buffer)
-    .toFormat('jpg')
+    .toFormat("jpg")
     .toFile(`public/img/rows/${req.file.filename}`);
-  req.body.photo = `${req.protocol}://${req.get('host')}/img/rows/${
+  req.body.photo = `${req.protocol}://${req.get("host")}/public/img/rows/${
     req.file.filename
   }`; // If no sol, put the link here
   next();
@@ -56,83 +56,83 @@ exports.getAllRows = catchAsync(async (req, res, next) => {
 
   let model = [
     {
-      displayName: 'Date',
-      access: 'date',
-      type: 'string',
+      displayName: "Date",
+      access: "date",
+      type: "string",
     },
     {
-      displayName: 'Project Code',
-      access: 'projectCode',
-      type: 'string',
+      displayName: "Project Code",
+      access: "projectCode",
+      type: "string",
     },
     {
-      displayName: 'Site Name',
-      access: 'siteName',
-      type: 'string',
+      displayName: "Site Name",
+      access: "siteName",
+      type: "string",
     },
     {
-      displayName: 'Cabinet Serial',
-      access: 'cabinetSerial',
-      type: 'string',
+      displayName: "Cabinet Serial",
+      access: "cabinetSerial",
+      type: "string",
     },
     {
-      displayName: 'Activity ID',
-      access: 'activityID',
-      type: 'number',
+      displayName: "Activity ID",
+      access: "activityID",
+      type: "number",
     },
     {
-      displayName: 'Activity Group',
-      access: 'activityGroup',
-      type: 'string',
+      displayName: "Activity Group",
+      access: "activityGroup",
+      type: "string",
     },
     {
-      displayName: 'Activity Type',
-      access: 'activityType',
-      type: 'string',
+      displayName: "Activity Type",
+      access: "activityType",
+      type: "string",
     },
     {
-      displayName: 'Measurment Unit',
-      access: 'measurmentUnit',
-      type: 'string',
+      displayName: "Measurment Unit",
+      access: "measurmentUnit",
+      type: "string",
     },
     {
-      displayName: 'Day Progress',
-      access: 'dayProgress',
-      type: 'string',
+      displayName: "Day Progress",
+      access: "dayProgress",
+      type: "string",
     },
     {
-      displayName: 'Delivery Way',
-      access: 'deliveryWay',
-      type: 'string',
+      displayName: "Delivery Way",
+      access: "deliveryWay",
+      type: "string",
     },
     {
-      displayName: 'Delivery Team',
-      access: 'deliveryTeam',
-      type: 'string',
+      displayName: "Delivery Team",
+      access: "deliveryTeam",
+      type: "string",
     },
     {
-      displayName: 'Site Engineer',
-      access: 'siteEngineer',
-      type: 'string',
+      displayName: "Site Engineer",
+      access: "siteEngineer",
+      type: "string",
     },
     {
-      displayName: 'Site Supervisor (Main)',
-      access: 'siteSupervisorMain',
-      type: 'string',
+      displayName: "Site Supervisor (Main)",
+      access: "siteSupervisorMain",
+      type: "string",
     },
     {
-      displayName: 'Site Supervisor (Assistant)',
-      access: 'siteSupervisorAssistant',
-      type: 'string',
+      displayName: "Site Supervisor (Assistant)",
+      access: "siteSupervisorAssistant",
+      type: "string",
     },
     {
-      displayName: 'Photo',
-      access: 'photo',
-      type: 'string',
+      displayName: "Photo",
+      access: "photo",
+      type: "string",
     },
   ];
   mongoXlsx.mongoData2Xlsx(rows, model, function (err, data) {
-    const excelFilePath = path.resolve(__dirname + '/../' + data.fullPath);
+    const excelFilePath = path.resolve(__dirname + "/../" + data.fullPath);
     res.sendFile(excelFilePath, (err) => {
       if (err) return next(new AppError(err.message, 500));
       fs.unlink(excelFilePath, (err) => {

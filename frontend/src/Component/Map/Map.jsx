@@ -56,7 +56,7 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
             if(choses[ind][2] === mapselections.indexOf(sel)){ 
               sd([true , "لقد قمت باضافة هذا العمل من قبل ","info"])
             }else{
-              // بيغير اختياره
+              // بيغير اختيارة
               setChoses(prev => {
                 let p= prev;
                 p[ind][2] = mapselections.indexOf(sel);

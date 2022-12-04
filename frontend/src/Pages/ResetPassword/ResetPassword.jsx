@@ -62,13 +62,13 @@ return (
                 variant="h2"
                 color="primary"
               >
-                اعد تعيين كلمه السر الخاص بك
+                اعد تعيين كلمة السر الخاص بك
             </Typography>
           </Grid>
 
           <Grid item xs={12} align="center">
               <TextField
-              label="باسورد"
+              label="كلمة السر"
               required
               autoFocus
               value={PassWord}
@@ -92,7 +92,8 @@ return (
 
           <Grid item xs={12} align="center">
             <TextField
-            label="قم بتاكيد كلمه السر"
+
+            label="قم بتاكيد كلمة السر"
             required
             autoFocus
             value={PassWordConfirm}

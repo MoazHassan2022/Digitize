@@ -47,8 +47,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
     let ob={}; ob[obsen] = allselections[el][obsen];
     await axios.patch(sendapi+`/${allselections[el]["_id"]}`,ob ,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, `تم تحديث ${allselections[el][obsenget]} ${label} بنجاح` , "success"]);
-        setTimeout(() => window.location.reload(), 3000);
+        setSnakeData([true, `تم التحديث بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

@@ -1,6 +1,6 @@
 
-export const baseapi = "http://127.0.0.1:8000/api"
-export const mediaApi = ""
+export const baseapi = "/api"
+export const mediaApi = "/public"
 
 
 
@@ -24,6 +24,7 @@ export function translator(en) {
         case 11: return "مشرف الموقع الرئيسي";
         case 12: return "مشرف الموقع المساعد";
         case 13: return "راجع ما اخترته قبل الارسال";
+
         default: return "";
     }
 }

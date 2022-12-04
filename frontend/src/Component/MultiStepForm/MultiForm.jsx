@@ -27,7 +27,6 @@ export const MultiForm = () => {
 
   const handleNext = (e) => {
     e.preventDefault();
-
     setActiveStep((prevActiveStep) => {  return prevActiveStep + 1;   });
   };
 
@@ -80,8 +79,6 @@ const maxSteps = attribute.length;
       return ;
     }
     setstopsubmit(true);
-    console.log(formData);
-
     let row = new FormData();
     row.append("projectCode", formData["project"]["projectCode"]);
     row.append("siteName", formData["project"]["siteName"]);
@@ -110,6 +107,7 @@ const maxSteps = attribute.length;
     .catch((err) =>
         setSnakeData([true, err.response.data.message , "error"])
     )
+
     setstopsubmit(false);
   }
 
@@ -254,7 +252,7 @@ const maxSteps = attribute.length;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-               <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+              <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} 
 
@@ -315,6 +313,7 @@ return (
             type="submit"
             disabled={stopsubmit}
             size="small"
+            disabled={stopsubmit}
             endIcon={ (activeStep === maxSteps - 1)  ? <GiFinishLine color="white" /> : ""}
           >
             {(activeStep === maxSteps - 1) ? <AiOutlineCheck size={24} /> : <MdArrowForwardIos size={24} />}
@@ -324,7 +323,7 @@ return (
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             <MdArrowBackIos size={24} />
           </Button>
-        }
+        } 
       />
     </Box>
         </Grid>

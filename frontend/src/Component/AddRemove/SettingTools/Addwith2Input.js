@@ -25,7 +25,7 @@ export const Addwith2Input = ({ sendapi, obsen , label , setSnakeData  }) => {
     ob["activityGroupID"] = selectedId;
     await axios.post(sendapi, ob,{headers:{authorization: auth,}})
     .then(res => { 
-        setSnakeData([true, ` تمت اضافة ${Name} بنجاح` , "success"]);
+        setSnakeData([true, ` تمت اضافة البيانات بنجاح` , "success"]);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])

@@ -13,8 +13,6 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
   const [Imgs , setImgs] = useState([]);
   const [selection , setselection] = useState(""); 
   const [stopsubmit , setstopsubmit] = useState(false);
-
-
   const UploadImgs = (e) => {
     if (e) setImgs([...Imgs, e]);
   }
@@ -34,6 +32,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
     const auth = "Bearer " + cookies.token;
     await axios.patch(baseapi +"/projects/"+selection["_id"] , formData,{headers:{authorization: auth,}})
     .then(res => { 
+        setstopsubmit(false);
         setSnakeData([true, ` تم تغيير الصورة بنجاح ` , "success"]);
         setstopsubmit(false);
     } )
@@ -62,7 +61,8 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
                      ارفق الخريطة الجديدة
                     <input hidden accept="image/*" type="file" />
                 </Button>
-                <Button disabled={stopsubmit} onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
+
+                <Button onClick={HandleSubmit} variant="contained" disabled={stopsubmit} startIcon={<IoAddCircle />}>اضف</Button>
               </Grid>
             </Grid>
         </Grid>
