@@ -12,6 +12,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
   const [cookies] = useCookies();
   const [Imgs , setImgs] = useState([]);
   const [selection , setselection] = useState(""); 
+  const [stopsubmit , setstopsubmit] = useState(false);
 
 
   const UploadImgs = (e) => {
@@ -34,6 +35,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
     await axios.patch(baseapi +"/projects/"+selection["_id"] , formData,{headers:{authorization: auth,}})
     .then(res => { 
         setSnakeData([true, ` تم تغيير الصورة بنجاح ` , "success"]);
+        setstopsubmit(false);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -46,6 +48,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
             <Grid item container  xs={12} md={12} spacing={3} justifyContent="center" >
               <Grid item xs={12} md={12} textAlign="center" >
                 <DropDownwithapi
+                disNext={setstopsubmit}
                 setselection={setselection}
                 chose="projectCode"
                 getapi="/projects"
@@ -59,7 +62,7 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
                      ارفق الخريطة الجديدة
                     <input hidden accept="image/*" type="file" />
                 </Button>
-                <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
+                <Button disabled={stopsubmit} onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
               </Grid>
             </Grid>
         </Grid>

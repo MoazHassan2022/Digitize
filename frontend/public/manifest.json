@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Digitize",
+  "name": "website to reacond and retrive data enterd by supervisor",
   "icons": [
     {
       "src": "/Assets/logoicon.ico",

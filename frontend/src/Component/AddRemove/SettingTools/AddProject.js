@@ -15,7 +15,7 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
   const UploadImgs = (e) => {
     if (e) { 
       setImgs(e);
-      setSnakeData([true, "تم رفع الخريطه بنجاح", "success"]);
+      setSnakeData([true, "تم رفع الخريطة بنجاح", "success"]);
     }
   }
   

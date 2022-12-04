@@ -61,14 +61,13 @@ export const RequestDataForm = () => {
     });
 
   }
-
   
-
   const tempfunc = (valu) =>{
     setselectedproject(getSelectedone(valu ,projectsData , "projectCode" ));
   }
 
-  useEffect(() => {requestAvailabeleSites();   
+  useEffect(() => {
+    requestAvailabeleSites();   
     return () => {
     }
       // eslint-disable-next-line react-hooks/exhaustive-deps

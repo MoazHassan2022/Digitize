@@ -3,7 +3,7 @@ import { Alert,  Grid, Snackbar, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { baseapi } from "../../Utilities/utilitesFunction";
+import { baseapi, mediaApi } from "../../Utilities/utilitesFunction";
 import MapImg from "../Map/Img/Img";
 import Spinner from "../Spinner/Spinner";
 
@@ -58,7 +58,7 @@ export const DisplayMaps =()=> {
              (pro["map"] !== undefined) &&
              <Grid key={index} item xs={12} md={10} margin={2} textAlign="center" > 
              <Typography sx={{bgcolor: theme.palette.primary.main , borderTopLeftRadius:30,borderTopRightRadius:30, }} color="white" fontSize={24} >{pro["projectCode"]}</Typography>
-                <MapImg key={index} keyy={index} squares={pro.squares}  curs={[-1,-1]}  imgurl={baseapi.slice(0,baseapi.length-3)+ "img/projectMaps/" + (pro["map"])} />
+                <MapImg key={index} keyy={index} squares={pro.squares}  curs={[-1,-1]}  imgurl={mediaApi + "/img/projectMaps/" + (pro["map"])} />
             </Grid>
             )}
             

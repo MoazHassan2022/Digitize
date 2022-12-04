@@ -39,7 +39,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
       deletesel(element)
     })
 
-    //specifcselections.map(m => {deletesel(m);});
+
   }
 
   const deletesel = async(el) => {
@@ -152,8 +152,7 @@ useEffect(() => {
                 sx={{width: '100%', overflow: 'hidden'}}
                 />
               </Grid>
-             
-            
+
               <Grid item xs={12} style={{textAlign: "end"}}>
                 <Button type="submit" variant="contained" startIcon={<IoRemoveCircle />}>احذف </Button>
               </Grid>
@@ -164,11 +163,3 @@ useEffect(() => {
 }
 
 export default Removeafterselect;
-
-
-/*
-
-
-
-
-*/

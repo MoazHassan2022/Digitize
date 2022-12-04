@@ -13,7 +13,7 @@ const Mapshow =({existMap , children})=>{
 
   if(!existMap){
     return <Grid item xs={12} md={12} sx={{maxHeight:"30vh", marginTop:5}} textAlign="center"   >
-      <Typography variant="h2" >  هذا المشروع لا يمتلك خريطة بعد. يجب عليك ارفاق صورة</Typography>
+      <Typography variant="h2" >  هذا المشروع لا يمتلك خريطة بعد. يمكنك ارفاق صورة</Typography>
     </Grid>
   }
   return children;
@@ -118,7 +118,6 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
       settrival(!trival);
     }
   }
-
 
       return(
         <Grid container  sx={{ minHeight:"30vh"}} >

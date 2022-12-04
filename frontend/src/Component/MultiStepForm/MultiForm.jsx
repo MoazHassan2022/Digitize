@@ -15,6 +15,7 @@ import Review from "./Review";
 import Hello from "./Hello";
 import {MdArrowForwardIos , MdArrowBackIos} from "react-icons/md"
 import {AiOutlineCheck} from "react-icons/ai"
+import { ChoseSite } from "./ChoseSite";
 
 export const MultiForm = () => {
   const classes = useStyle();
@@ -27,11 +28,6 @@ export const MultiForm = () => {
   const handleNext = (e) => {
     e.preventDefault();
 
-    if(activeStep === 3 && formData["map"] === ""){
-      setSnakeData([true, " لا تنس الضغط عل زر الاضافه لتسجيل بياناتك", "error"]);
-      return;
-    }
-
     setActiveStep((prevActiveStep) => {  return prevActiveStep + 1;   });
   };
 
@@ -39,14 +35,11 @@ export const MultiForm = () => {
     setActiveStep((prevActiveStep) => {    return prevActiveStep - 1;});
   };
 
-
-
   const attribute= [     
     "", 
   "projectCode", // selectwithapi
   "non", // select
     "non" , // jdshjdhsj
-  "non" , // text
   "activityGroupName" , // select
   "non" , // select
   "unit" , // select
@@ -62,13 +55,9 @@ export const MultiForm = () => {
 const maxSteps = attribute.length;
 
 
-
-
-
   const [ formData , setFormData ] = useState(
     {
       "project":"",
-      "siteName":"",
       "map" :"",
       "cabinetSerial":"" ,
       "activityGroupName":"" ,
@@ -83,15 +72,19 @@ const maxSteps = attribute.length;
     }
   );
 
+  const [stopsubmit , setstopsubmit] = useState(false);
   const HandleSubmit = (e) =>{
     e.preventDefault();
     if(activeStep < maxSteps - 1){
       handleNext(e);
       return ;
     }
+    setstopsubmit(true);
+    console.log(formData);
+
     let row = new FormData();
     row.append("projectCode", formData["project"]["projectCode"]);
-    row.append("siteName", formData["siteName"]);
+    row.append("siteName", formData["project"]["siteName"]);
     row.append("cabinetSerial", formData["cabinetSerial"]);
     row.append("activityID", formData["activityGroupName"]["activityGroupID"]);
     row.append("activityGroup", formData["activityGroupName"]["activityGroupName"]);
@@ -106,41 +99,37 @@ const maxSteps = attribute.length;
     row.append("photo", formData["map"]["img"]);
     let seq = formData["map"]["sq"];
 
-
-
     const auth = "Bearer " + cookies.token;
     axios.patch(baseapi+`/projects/${formData["project"]["_id"]}`, { "squares":seq } ,{headers:{authorization: auth,}}).catch((err) =>
     setSnakeData([true, err.response.data.message , "error"]))
-    
     axios.post(baseapi+"/rows", row,{headers:{authorization: auth,}})
     .then(res => { 
       setSnakeData([true, "تم ارسال الاستطلاع بنجاح" , "success"]);
-      //setTimeout(window.location.reload(), 5000);
+      setTimeout(() => window.location.reload(), 5000);
     } )
     .catch((err) =>
         setSnakeData([true, err.response.data.message , "error"])
     )
-
+    setstopsubmit(false);
   }
 
-  const getapi =["non","/projects","non", "non" ,"non","/activities" ,"non","/measurementUnits","non" ,"/deliveryWays","/deliveryTeams","/siteEngineers","/siteSupervisorMain","/siteSupervisorAssistant"];
+  const getapi =["non","/projects","non", "non" ,"/activities" ,"non","/measurementUnits","non" ,"/deliveryWays","/deliveryTeams","/siteEngineers","/siteSupervisorMain","/siteSupervisorAssistant"];
 
   const getformKey = (step) => {
     switch (step){
       case 0: return "hello";
       case 1: return "project";
-      case 2: return "siteName";
-      case 3: return "map";
-      case 4:  return "cabinetSerial";
-      case 5: return "activityGroupName";
-      case 6:  return "activityTypes";
-      case 7: return "measurementUnit";
-      case 8: return "dayProgress";
-      case 9: return "deliveryWay";
-      case 10:  return "deliveryTeam";
-      case 11:  return "siteEngineer";
-      case 12: return "siteSupervisorMain";
-      case 13: return "siteSupervisorAssistant";
+      case 2: return "map";
+      case 3:  return "cabinetSerial";
+      case 4: return "activityGroupName";
+      case 5:  return "activityTypes";
+      case 6: return "measurementUnit";
+      case 7: return "dayProgress";
+      case 8: return "deliveryWay";
+      case 9:  return "deliveryTeam";
+      case 10:  return "siteEngineer";
+      case 11: return "siteSupervisorMain";
+      case 12: return "siteSupervisorAssistant";
       default: return "unknown";
     }
   }
@@ -159,44 +148,53 @@ const maxSteps = attribute.length;
       case 0: {
         return (
           <Grid item container xs={12} md={12} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-            <Hello  />
+            <Hello />
           </Grid>
         );}
-        
+
         case 1: {
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-              <DropDownwithapi selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+              <ChoseSite disNext={setstopsubmit} selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
           );}
         
-        case 2: {
-          return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
-             <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 
-            </Grid>
-             );}
+        // case 1: {
+        //   return (
+        //     <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
+        //       <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+        //     </Grid>
+        //   );}
         
-        case 3: 
-        {return <Map initsq={formData[getformKey(step-2)]["squares"]} setselection={handleChangeForm} imgurl={mediaApi + "/img/projectMaps/" + formData[getformKey(step-2)]["map"]} sd={setSnakeData} />} 
+        // case 2: {
+        //   return (
+        //     <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
+        //      <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 
+        //     </Grid>
+        //      );}
+        
+        case 2: 
+        {
+          return <Map initsq={formData[getformKey(step)]["squares"]} setselection={handleChangeForm} imgurl={mediaApi + "/img/projectMaps/" + formData[getformKey(step-1)]["map"]} sd={setSnakeData} />
+        } 
 
-        case 4: 
+        case 3: 
           return (
             <Grid item container xs={8} md={6} justifyContent="center"   sx={{  borderRadius: 2 , marginTop: 2 }}> 
             <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid>
             );
         
-        case 5: {
+        case 4: {
           
           return (
           <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-            <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+            <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
           </Grid>
           );}
         
         
-        case 6:  {
+        case 5:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
@@ -205,33 +203,42 @@ const maxSteps = attribute.length;
             );}
         
         
-        case 7:  {
+        case 6:  {
           return (
           <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-            <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+            <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
           </Grid>
           );}
         
-        case 8:  {
+        case 7:  {
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
                <ManualInsertNumber  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
             </Grid> ); } 
           
         
+        case 8:  {
+          
+          return (
+            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
+                <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+            </Grid>
+            );} 
+        
         case 9:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} 
+        
         
         case 10:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi disNext={setstopsubmit}  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} 
         
@@ -240,33 +247,24 @@ const maxSteps = attribute.length;
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <DropDownwithapi  selection={formData[getformKey(step)]} getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+                <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} 
-        
-        
         case 12:  {
           
           return (
             <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
-            </Grid>
-            );} 
-        case 13:  {
-          
-          return (
-            <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-               <DropDownwithapi selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
+               <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]}  getapi={getapi[step]} chose={attribute[step]} setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );} 
 
-            case 14:  {
-              return (
-                <Grid item container xs={12} md={12} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-                   <Review data={formData} keys={getformKey}/>
-                </Grid>
-            );} 
-            default: return "unknown";
+        case 13:  {
+          return (
+            <Grid item container xs={12} md={12} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
+                <Review data={formData} keys={getformKey}/>
+            </Grid>
+        );} 
+        default: return "unknown";
         }
 
   }
@@ -315,6 +313,7 @@ return (
         nextButton={
           <Button
             type="submit"
+            disabled={stopsubmit}
             size="small"
             endIcon={ (activeStep === maxSteps - 1)  ? <GiFinishLine color="white" /> : ""}
           >

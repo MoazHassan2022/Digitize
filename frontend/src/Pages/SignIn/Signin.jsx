@@ -46,7 +46,7 @@ export const SignIn = () => {
   }
 
   useEffect(()=>{
-    if(cookies.token !== "undefined"){
+    if(cookies.token && cookies.token !== "undefined"){
       if(cookies.userType === "0"){ setTimeout(history("/SubmitSurvey") , 5000 );}
       else {setTimeout(history("/RequestData") , 5000 );}
     }
@@ -113,7 +113,7 @@ return (
             />
           </Grid>
           <Grid item xs={12} md={12} align="center">
-            <Link onClick={() => history("/SubmitEmail")} sx={{ textDecoration:"none" , cursor:"pointer" }}>هل نسيت الباسورد الخاص بك ؟اضغط لاعادة التعيين</Link>
+            <Link onClick={() => history("/SubmitEmail")} sx={{ textDecoration:"none" , cursor:"pointer" }}>هل نسيت كلمه السر الخاص بك ؟اضغط لاعادة التعيين</Link>
           </Grid>
           <Grid item xs={12} align="center">
             <Button type="submit" variant="contained" endIcon={<BiLogInCircle /> } >سجل الدخول</Button>

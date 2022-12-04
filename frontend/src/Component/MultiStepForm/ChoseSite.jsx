@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import {baseapi} from "../../Utilities/utilitesFunction"
 
-export const DropDownwithapi = ({disNext ,setselection, chose ,getapi , label, setSnakeData }) => {
+export const ChoseSite = ({disNext ,setselection, chose ,getapi , label, setSnakeData }) => {
   const [ss , setss] = useState("");
   const [loading , setloading] = useState(true);
   
@@ -37,16 +37,23 @@ useEffect(() => {
       <FormControl sx={{ m: 1, minWidth: "80%" , backgroundColor:"white" , borderRadius:2, }} size="large">
         <InputLabel id="demo-simple-select-label">{!loading ? label : "loading......"}</InputLabel>
         <Select
-        value={ss}
+        value={ss ?? ""}
         required
-        onChange={(e) => {setselection(e.target.value); setss(e.target.value)}}
+        onChange={(e) => {
+          let vals=e.target.value.split(" ");
+          setselection({ "projectCode" : selections[parseInt(vals[0])]["projectCode"] ,
+                          "siteName" : selections[parseInt(vals[0])]["siteNames"][parseInt(vals[1])],
+                          "squares" : selections[parseInt(vals[0])]["squares"] ,
+                          "_id": selections[parseInt(vals[0])]["_id"]
+                        } );
+          setss(e.target.value)}}
         label={ !loading ? label : "loading......"}
         disabled={loading}
         >
-                {selections.map((item,index) => <MenuItem key={index} value={item}>{item[chose]}</MenuItem>) }
+                {selections.map((item,index) => item["siteNames"].map((siteName,jndex) => <MenuItem key={Math.random()*500} value={index+ " " + jndex}>{siteName}</MenuItem>))}
         </Select>
       </FormControl> 
     );
 }
-export default DropDownwithapi;
+export default ChoseSite;
 
