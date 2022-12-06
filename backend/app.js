@@ -17,6 +17,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
+const AppError = require("./utils/appError");
 
 const app = express();
 
@@ -89,6 +90,11 @@ if (process.env.NODE_ENV === "production") {
   // Serving static files
   app.use("/public", express.static(`${__dirname}/public`));
   app.use(express.static(`${__dirname}/client/build`));
+}else{
+  app.use("/public", express.static(`${__dirname}/public`));
+  app.all("*", (req, res, next) => {
+    next(new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404));
+  });
 }
 
 /*app.all('*', (req, res, next) => {

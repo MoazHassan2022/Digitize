@@ -1,7 +1,6 @@
 
-export const baseapi = "/api"
-export const mediaApi = "/public"
-
+export const baseapi = "/api" // for deployment just let /api
+export const mediaApi = "/public" // for deployment just let /public
 
 
 export function getSelectedone (sel , all , par) {
