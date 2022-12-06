@@ -31,15 +31,18 @@ app.use(
   helmet({
     crossOriginEmbedderPolicy: false,
     crossOriginResourcePolicy: false,
-    contentSecurityPolicy: {
+    contentSecurityPolicy: false,
+  })
+);
+
+/* 
+contentSecurityPolicy: {
       directives: {
         defaultSrc: ["*"],
         scriptSrc: ["* data: 'unsafe-eval' 'unsafe-inline' blob:"],
       },
     },
-  })
-);
-
+    */
 // Development logging
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
@@ -90,10 +93,12 @@ if (process.env.NODE_ENV === "production") {
   // Serving static files
   app.use("/public", express.static(`${__dirname}/public`));
   app.use(express.static(`${__dirname}/client/build`));
-}else{
+} else {
   app.use("/public", express.static(`${__dirname}/public`));
   app.all("*", (req, res, next) => {
-    next(new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404));
+    next(
+      new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404)
+    );
   });
 }
 
