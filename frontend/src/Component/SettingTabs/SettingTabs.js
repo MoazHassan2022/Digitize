@@ -50,18 +50,16 @@ export default function SettingTabs() {
 
   var tabschose = ["اضف / احذف ممثل فريق توصيل" , "اضف / احذف طريقة توصيل" ,
     "اضف / احذف مشرف ثانوي" , "اضف / احذف مشرف اساسي" , "اضف / احذف مهندس موقع"  ,
-     "اضف / احذف نوع نشاط" ,  "اضف / احذف مجموعة انشطة" , " اضف / احذف موقع " , "اضف / احذف مشروع", "غير صورة لمشروع" ];
+     "اضف / احذف نوع نشاط" ,  "اضف / احذف مجموعة انشطة" , " اضف / احذف موقع " , "اضف / احذف مشروع",  "اضف / احذف رقم مسلسل كابينة", "غير صورة لمشروع" ];
 
 
   const [value, setValue] = React.useState(tabschose.length - 1);
 
-  const getapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities ","/projects","/projects"];
-  const setapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities","/projects","/projects"];
-  const labels = ["ممثل فريق توصيل","طريقة توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع نشاط","مجموعات نشاط","مواقع","مشاريع"];
-  const objectlabel = ["name","way","name",
-  "name","name","activityTypes","activityGroupName"
-  ,"siteNames","projectCode"];
-  const objectgetlabel = ["","","","","","activityGroupName","","projectCode",""];
+  const getapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities ","/projects","/projects","/cabines"];
+  const setapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities","/projects","/projects","/cabines"];
+  const labels = ["ممثل فريق توصيل","طريقة توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع نشاط","مجموعات نشاط","مواقع","مشاريع", "ارقام كبائن" , "صور المشاريع" ];
+  const objectlabel = ["name","way","name","name","name","activityTypes","activityGroupName","siteNames","projectCode", "cabineCode"];
+  const objectgetlabel = ["","","","","","activityGroupName","","projectCode","","cabineCode"];
 
 
   const renderChose = () => {
@@ -84,8 +82,11 @@ export default function SettingTabs() {
         case 7: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
       //مشاريع
         case 8: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
+      // الرقم المسلسل للكابينه
+        case 9: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // cabineCode
       // غير صور المشاريع مش تبع الجداول
-        case 9: return  <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value-1]}  getlabel={labels[value-1]} obcal={objectlabel[value-1]} getApi={getapi[value-1]} setApi={setapi[value-1]}  label={"عدل صور خرائط"} />
+      case 10: return  <AddRemove key={value} label={"عدل صور خرائط"} />
+            
         default: return <>not a chose</>;
       }
   }

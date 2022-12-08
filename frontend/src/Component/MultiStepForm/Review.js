@@ -1,11 +1,16 @@
 import { Grid, Typography } from "@mui/material";
 
 const Review = ({data}) => {
-    console.log(data)
-    const titles = ["كود المشروع" , "اسم الموقع", "اختيارات الخريطه " , "الرقم المسلسل للكابينة" , "اسم مجموعة النشاط", "نوع النشاط",
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; 
+    var yyyy =today.getFullYear();
+    today = mm+'-'+dd+'-'+yyyy;
+    const titles = ["تاريخ الارسال","كود المشروع" , "اسم الموقع", "اختيارات الخريطه " , "الرقم المسلسل للكابينة" , "اسم مجموعة النشاط", "نوع النشاط",
                     "وحدة القياس" , "التقدم اليومي" , "طريقة التسليم" , "ممثل فريق التوصيل" , "مهندس الموقع" , "مشرف الموقع الرئيسي" , "مشرف الموقع المساعد"];
-    let datatoshow =[ data.project.projectCode , data["project"].siteName , data.map.img !== undefined ?  "تم ارفاق صوره" : "تم تسجيل اختيارك" ,
-                    data.cabinetSerial , data.activityGroupName.activityGroupName , data.activityTypes , data.measurementUnit.unit ,
+    let datatoshow =[ today , data.project.projectCode , data["project"].siteName , data.map.img !== undefined ?  "تم ارفاق صوره" : "تم تسجيل اختيارك" ,
+                    data.cabinetSerial["cabineCode"] , data.activityGroupName.activityGroupName , data.activityTypes , data.measurementUnit.unit ,
                     data.dayProgress , data.deliveryWay.way , data.deliveryTeam.name , data.siteEngineer.name , data.siteSupervisorMain.name,
                     data.siteSupervisorAssistant.name];
     return(

@@ -4,7 +4,7 @@ import useStyle from "./MultiFormStyles";
 import {  useCookies } from "react-cookie";
 import { useTheme } from "@emotion/react";
 import { DropDownwithapi } from './DropDownwithapi';
-import ManualInsert from './ManualInsert';
+// import ManualInsert from './ManualInsert';
 import axios from "axios";
 import {translator , baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import DropDownwithselctions from "./DropDownwithselctions";
@@ -38,7 +38,7 @@ export const MultiForm = () => {
     "", 
   "projectCode", // selectwithapi
   "non", // select
-    "non" , // jdshjdhsj
+  "cabineCode" , // Cabina Serial
   "activityGroupName" , // select
   "non" , // select
   "unit" , // select
@@ -111,7 +111,7 @@ const maxSteps = attribute.length;
     setstopsubmit(false);
   }
 
-  const getapi =["non","/projects","non", "non" ,"/activities" ,"non","/measurementUnits","non" ,"/deliveryWays","/deliveryTeams","/siteEngineers","/siteSupervisorMain","/siteSupervisorAssistant"];
+  const getapi =["non","/projects","non", "/cabines" ,"/activities" ,"non","/measurementUnits","non" ,"/deliveryWays","/deliveryTeams","/siteEngineers","/siteSupervisorMain","/siteSupervisorAssistant"];
 
   const getformKey = (step) => {
     switch (step){
@@ -179,7 +179,8 @@ const maxSteps = attribute.length;
         case 3: 
           return (
             <Grid item container xs={8} md={6} justifyContent="center"   sx={{  borderRadius: 2 , marginTop: 2 }}> 
-            <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} />
+            {/* <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} /> */}
+            <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
             </Grid>
             );
         
