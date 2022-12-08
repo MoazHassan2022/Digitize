@@ -1,5 +1,5 @@
 
-export const baseapi = "http://localhost:8000/api" // for deployment just let /api
+export const baseapi = "/api" // for deployment just let /api
 export const mediaApi = "/public" // for deployment just let /public
 
 
