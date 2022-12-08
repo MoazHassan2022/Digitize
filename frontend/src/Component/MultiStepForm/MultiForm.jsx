@@ -82,7 +82,7 @@ const maxSteps = attribute.length;
     let row = new FormData();
     row.append("projectCode", formData["project"]["projectCode"]);
     row.append("siteName", formData["project"]["siteName"]);
-    row.append("cabinetSerial", formData["cabinetSerial"]);
+    row.append("cabinetSerial", formData["cabinetSerial"]["cabineCode"]);
     row.append("activityID", formData["activityGroupName"]["activityGroupID"]);
     row.append("activityGroup", formData["activityGroupName"]["activityGroupName"]);
     row.append("activityType", formData["activityTypes"]);
@@ -94,6 +94,8 @@ const maxSteps = attribute.length;
     row.append("siteSupervisorMain", formData["siteSupervisorMain"]["name"]);
     row.append("siteSupervisorAssistant", formData["siteSupervisorAssistant"]["name"]);
     row.append("photo", formData["map"]["img"]);
+    row.append("username", cookies["name"]);
+
     let seq = formData["map"]["sq"];
 
     const auth = "Bearer " + cookies.token;
