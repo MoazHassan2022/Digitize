@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const rowSchema = mongoose.Schema({
+  sender: {
+    type: String,
+  },
   projectCode: {
     type: String,
     required: [true, "يجب أن تدخل كود المشروع"],

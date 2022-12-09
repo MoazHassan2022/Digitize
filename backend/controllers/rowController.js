@@ -41,8 +41,10 @@ exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.createDate = (req, res, next) => {
+exports.createDateAndSenderAndPutPhotoDefault = (req, res, next) => {
   req.body.date = new Date().toLocaleDateString();
+  req.body.sender = req.user.name;
+  if (req.body.photo === "undefined") req.body.photo = "No photo";
   next();
 };
 
@@ -128,6 +130,11 @@ exports.getAllRows = catchAsync(async (req, res, next) => {
     {
       displayName: "Photo",
       access: "photo",
+      type: "string",
+    },
+    {
+      displayName: "Sender",
+      access: "sender",
       type: "string",
     },
   ];

@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     required: [true, "يجب أن يمتلك المستخدم اسم"],
     trim: true, // Remove all the white space in the beginning or end of the field
     maxLength: [40, "يجب أن يحتوي اسم المستخدم على 40 حرفًا أو أقل"],
-    minLength: [4, "يجب أن يحتوي اسم المستخدم على أكثر من أو يساوي 4 أحرف"],
+    minLength: [2, "يجب أن يحتوي اسم المستخدم على أكثر من أو يساوي 2 أحرف"],
   },
   email: {
     type: String,

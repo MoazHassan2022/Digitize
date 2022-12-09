@@ -11,7 +11,7 @@ router
   .post(
     rowController.uploadRowPhoto,
     rowController.resizeRowPhoto,
-    rowController.createDate,
+    rowController.createDateAndSenderAndPutPhotoDefault,
     rowController.createRow
   );
 
