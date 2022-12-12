@@ -11,6 +11,7 @@ const siteEngineerRouter = require("./routes/siteEngineerRoutes");
 const cabineRouter = require("./routes/cabineRoutes");
 const siteSupervisorMainRouter = require("./routes/siteSupervisorMainRoutes");
 const siteSupervisorAssistantRouter = require("./routes/siteSupervisorAssistantRoutes");
+const labelRouter = require("./routes/labelRoutes");
 const globalErrorHandler = require("./controllers/errorController");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
@@ -90,25 +91,12 @@ app.use("/api/cabines", cabineRouter);
 app.use("/api/siteSupervisorMain", siteSupervisorMainRouter);
 app.use("/api/siteSupervisorAssistant", siteSupervisorAssistantRouter);
 app.use("/api/users", userRouter);
+app.use("/api/labels", labelRouter);
 
-if (process.env.NODE_ENV === "production") {
-  // Serving static files
-  app.use("/public", express.static(`${__dirname}/public`));
-  app.use(express.static(`${__dirname}/client/build`));
-} else {
-  app.use("/public", express.static(`${__dirname}/public`));
-  app.all("*", (req, res, next) => {
-    next(
-      new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404)
-    );
-  });
-}
-
-/*app.all('*', (req, res, next) => {
+app.use("/public", express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/client/build`));
+app.all("*", (req, res, next) => {
   next(new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404));
-});*/
-app.get("*", (req, res) => {
-  res.sendFile(`${__dirname}/client/build/index.html`);
 });
 
 // Error handler middleware

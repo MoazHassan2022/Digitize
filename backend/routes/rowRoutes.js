@@ -16,6 +16,10 @@ router
   );
 
 router
+  .route("/excel")
+  .get(authController.isAdmin, rowController.getAllRowsInExcel);
+
+router
   .route("/:id")
   .get(authController.isAdmin, rowController.getRow)
   .patch(authController.isAdmin, rowController.updateRow)

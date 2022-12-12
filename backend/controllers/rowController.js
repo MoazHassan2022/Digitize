@@ -48,7 +48,7 @@ exports.createDateAndSenderAndPutPhotoDefault = (req, res, next) => {
   next();
 };
 
-exports.getAllRows = catchAsync(async (req, res, next) => {
+exports.getAllRowsInExcel = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Row.find(), req.query)
     .filter()
     .sort()
@@ -148,6 +148,7 @@ exports.getAllRows = catchAsync(async (req, res, next) => {
     });
   });
 });
+exports.getAllRows = factory.getAll(Row);
 exports.createRow = factory.createOne(Row);
 exports.getRow = factory.getOne(Row);
 exports.updateRow = factory.updateOne(Row);
