@@ -44,7 +44,7 @@ exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
 exports.createDateAndSenderAndPutPhotoDefault = (req, res, next) => {
   req.body.date = new Date().toLocaleDateString();
   req.body.sender = req.user.name;
-  if (req.body.photo === "undefined") req.body.photo = "No photo";
+  if (req.body.photo === "undefined") req.body.photo = "No photo"; // Photo is sent with "undefined", not undefined
   next();
 };
 
