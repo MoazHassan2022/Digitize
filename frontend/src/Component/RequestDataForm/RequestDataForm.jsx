@@ -5,11 +5,11 @@ import {  useCookies } from "react-cookie";
 import axios from "axios";
 import {getSelectedone , baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import {AiOutlineDownload} from "react-icons/ai"
+import {FiEdit} from "react-icons/fi"
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
 
 
-export const RequestDataForm = () => {
-
+export const RequestDataForm = ({setEdit, selecteddata}) => {
   const classes = useStyle();
   const [cookies] = useCookies(['user']);
 
@@ -39,7 +39,7 @@ export const RequestDataForm = () => {
 
   const HandleSubmit = async (e) =>{
     e.preventDefault();
-    const reqcomplete = selectedproject["projectCode"] === "all" ? "/rows" :`/rows?projectCode=${selectedproject['projectCode']}` ;
+    const reqcomplete = selectedproject["projectCode"] === "all" ? "/rows/excel" :`/rows/excel?projectCode=${selectedproject['projectCode']}` ;
     const auth = "Bearer " + cookies.token;
     let anchor = document.createElement("a");
 
@@ -64,6 +64,16 @@ export const RequestDataForm = () => {
   
   const tempfunc = (valu) =>{
     setselectedproject(getSelectedone(valu ,projectsData , "projectCode" ));
+  }
+
+  const editdataButton = () =>{
+    if(!selectedproject)
+    {
+      setSnakeData([true, "من فضلك قم باختيار البيانات المطلوب تعديلها" , "success"]);
+      return;
+    }
+    setEdit(false);
+    selecteddata(selectedproject["projectCode"]);
   }
 
   useEffect(() => {
@@ -101,16 +111,24 @@ export const RequestDataForm = () => {
                 </Box>
             </Grid>
   
-  
-            <Grid item xs={12} align="center">
-              <Button type="submit" variant="contained" endIcon={<AiOutlineDownload /> }  >تنزيل البيانات</Button>
+
+            <Grid item container xs={12} md={6} align="center">
+              <Grid item xs={6} align="center">
+                <Button type="submit" variant="contained" endIcon={<AiOutlineDownload /> }  >تنزيل البيانات</Button>
+              </Grid>
+              <Grid item xs={6} align="center">
+                <Button type="button" variant="contained" onClick={editdataButton} endIcon={<FiEdit /> }  >تعديل البيانات</Button>
+              </Grid>
             </Grid>
+
+
+
 
             
           </Grid>
         </form>
       </Grid>
-      <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
+      <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() =>  setSnakeData([false , "" , ""]) }>
               <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                   {snakeData[1]}
               </Alert >
