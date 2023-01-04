@@ -106,7 +106,7 @@ app.use("/api/siteSupervisorAssistant", siteSupervisorAssistantRouter);
 app.use("/api/users", userRouter);
 app.use("/api/labels", labelRouter);
 
-app.use("/public", express.static(`${__dirname}/public`));
+app.use("/api/public", express.static(`${__dirname}/public`));
 app.use(express.static(`${__dirname}/client/build`));
 app.all("*", (req, res, next) => {
   next(new AppError(`هذا الرابط ${req.originalUrl} غير موجود على الخادم`, 404));
