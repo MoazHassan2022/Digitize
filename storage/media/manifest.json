@@ -3,17 +3,17 @@
   "name": "website to reacond and retrive data enterd by supervisor",
   "icons": [
     {
-      "src": "/api/public/Assets/logoicon.ico",
+      "src": "/public/Assets/logoicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "/api/public/Assets/logoicon.png",
+      "src": "/public/Assets/logoicon.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/api/public/Assets/logoicon.png",
+      "src": "/public/Assets/logoicon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
