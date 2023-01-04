@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
+
 
 const userSchema = mongoose.Schema({
   name: {
@@ -74,7 +77,8 @@ userSchema.pre("save", async function (next) {
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 12);
+  if(process.env.SEEDS != "YES")
+    this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined; // We use passwordConfirm only to check that tge user didn't input different passwords then we don't need this
   next();
 });

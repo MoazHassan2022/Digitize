@@ -47,6 +47,19 @@ contentSecurityPolicy: {
     */
 // Development logging
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
+/* else {
+  const accessLogStream = fs.createWriteStream(
+    `${__dirname}/logs/errors.log`,
+    {
+      flags: "a",
+    }
+  );
+  app.use(
+    morgan("combined", {
+      stream: accessLogStream,
+    })
+  );
+} */
 
 // Body parser, reading date from body into req.body
 app.use(express.json({ limit: "10kb" }));

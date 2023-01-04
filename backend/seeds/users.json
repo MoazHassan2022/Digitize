@@ -1,0 +1,27 @@
+[{
+  "_id": "63289be20a5933d54be51672",
+  "name": "Moaz Mohamed",
+  "email": "moaz25jan2015@gmail.com",
+  "password": "$2a$12$ISze2OoYqiRRZ/rFCXyndu9VsP9VmFeSmGNzo8trDj8SzrXiDoNAy",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1672868832071"
+    }
+  },
+  "isActive": true,
+  "isAdmin": true,
+  "__v": 0
+},{
+  "_id": "63b5f459bf01b276c2e4d7cd",
+  "name": "يوسف واعر",
+  "email": "elwaeryousef@gmail.com",
+  "password": "$2a$12$utuVsvZv08FCOYO9lIkzpuo57QNH5ImUKaPQeHWyREkmoTlST3xvS",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1672868859083"
+    }
+  },
+  "isActive": true,
+  "isAdmin": false,
+  "__v": 0
+}]

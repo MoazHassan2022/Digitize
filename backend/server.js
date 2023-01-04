@@ -1,27 +1,11 @@
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const dbConnect = require("./db-connection/connection");
 dotenv.config({ path: "./config.env" });
+
+dbConnect();
 
 const app = require("./app");
 
-// Connect to the database
-const dbConnectionString = process.env.DATABASE.trim();
-
-// REMOTE DATABASE
-mongoose
-  .connect(dbConnectionString, {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("Successfully connected to digitize database");
-  });
-
-// LOCAL DATABASE
-/*mongoose.connect(process.env.DATABASE_LOCAL, {
-    useNewUrlParser: true
-}).then((con) => {
-    console.log(`Successfully connected to natours database`);
-});*/
 
 // START SERVER
 const port = process.env.PORT || 3000;
