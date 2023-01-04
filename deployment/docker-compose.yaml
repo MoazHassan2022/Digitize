@@ -1,0 +1,77 @@
+version: "3"
+services:
+
+  web_server:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - Digitize
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../storage/certbot/www/:/var/www/certbot/:ro
+      - ../storage/certbot/conf/:/etc/nginx/ssl/:ro
+
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ../storage/certbot/conf/:/etc/letsencrypt/
+  #     - ../storage/certbot/www/:/var/www/certbot/
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef1@gmail.com -d www.Digitize.com --agree-tos
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    command: mongod --auth
+    restart: unless-stopped
+    env_file: ./envfiles/DB.env
+    networks:
+      - private
+    volumes:
+      - /Read-it/mongoData:../storage/database
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    
+
+  backend:
+    build: ../backend
+    restart: unless-stopped
+    env_file: ./envfiles/backend.env
+    networks:
+      - frontend_net
+      - private
+      - flutter_net
+      - Digitize
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    volumes:
+      - ./backend/public:../storage/media
+    # deploy:
+    #   mode: replicated
+    #   replicas: 1
+
+    
+  frontend:
+    build: ../frontend
+    env_file: ./envfiles/frontend.env
+    networks:
+      - frontend_net
+      - Digitize
+    depends_on:
+      - backend
+    restart: always
+    # deploy:
+    #   mode: replicated
+    #   replicas: 4
+
+networks:
+  private:
+  frontend_net:
+  flutter_net:
+  Digitize:

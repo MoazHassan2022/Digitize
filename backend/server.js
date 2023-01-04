@@ -5,10 +5,7 @@ dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
 // Connect to the database
-const dbConnectionString = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+const dbConnectionString = process.env.DATABASE.trim();
 
 // REMOTE DATABASE
 mongoose
