@@ -30,17 +30,19 @@ services:
     command: mongod --auth
     restart: unless-stopped
     env_file: ./envfiles/DB.env
+    ports:
+    - 27017:27017
     networks:
       - private
     volumes:
-      - ~/Digitize/storage/database:/data/db
+      - /home/ubuntu/Digitize/storage/database:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     
-
   backend:
     build: ../backend
     restart: unless-stopped
     env_file: ./envfiles/backend.env
+    # command: npm run runSeeds
     networks:
       - frontend_net
       - private
