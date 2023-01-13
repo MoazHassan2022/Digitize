@@ -11,7 +11,22 @@
   "isActive": true,
   "isAdmin": true,
   "__v": 0
-},{
+},
+{
+  "_id": "63c051a1b3d112dd703d0034",
+  "name": "Admin",
+  "email": "admin@digitize.org",
+  "password": "$2a$12$CUZQEAHJ.N2UEfaQdxhkbuVxTthI8VrlzCcA2Cxk4Oe4JMDEzMcIm",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1673547850011"
+    }
+  },
+  "isActive": true,
+  "isAdmin": true,
+  "__v": 0
+},
+{
   "_id": "63b5f459bf01b276c2e4d7cd",
   "name": "يوسف واعر",
   "email": "elwaeryousef@gmail.com",
