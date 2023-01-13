@@ -1,6 +1,5 @@
 version: "3"
 services:
-
   web_server:
     image: nginx
     ports:
@@ -35,7 +34,7 @@ services:
     networks:
       - private
     volumes:
-      - /home/ubuntu/Digitize/storage/database:/data/db
+      - ~/Digitize/storage/database:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     
   backend:
@@ -53,7 +52,7 @@ services:
     links:
       - mongodb
     volumes:
-      - /home/ubuntu/Digitize/storage/media:/usr/src/app/public
+      - ~/Digitize/storage/media:/usr/src/app/public
     # deploy:
     #   mode: replicated
     #   replicas: 1
