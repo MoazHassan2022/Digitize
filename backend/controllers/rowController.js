@@ -35,7 +35,7 @@ exports.resizeRowPhoto = catchAsync(async (req, res, next) => {
   await sharp(req.file.buffer)
     .toFormat("jpg")
     .toFile(`public/img/rows/${req.file.filename}`);
-  req.body.photo = `${req.protocol}://${req.get("host")}/public/img/rows/${
+  req.body.photo = `${process.env.FILEPATH}/public/img/rows/${
     req.file.filename
   }`; // If no sol, put the link here
   next();
