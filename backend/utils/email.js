@@ -6,18 +6,18 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.name.split(" ")[0];
     this.url = url;
-    this.from = `Admin<${process.env.EMAIL_USERNAME}>`;
+    this.from = `Admin <${process.env.EMAIL_USERNAME}>`;
   }
   newTransport() {
     try {
-        return nodemailer.createTransport({
-          service: "Outlook",
-          auth: {
-            user: process.env.EMAIL_USERNAME,
-            pass: process.env.EMAIL_PASSWORD,
-          },
-          tls: { rejectUnauthorized: false },
-        });
+      return nodemailer.createTransport({
+        service: "Outlook",
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+        tls: { rejectUnauthorized: false },
+      });
     } catch (err) {
       console.log(err);
     }
