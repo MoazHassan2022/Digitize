@@ -125,7 +125,7 @@ const handleChangeRowsPerPage = (event) => {
                 <TableRow>
                   {heads.map((head, index) => {
                       return (
-                        <TableCell style={{ minWidth: "150px" , lineHeight:".5rem" }} align='center' key={index} sx={{color: "white" , fontWeight: 700}} >{head}</TableCell>
+                        <TableCell style={{ minWidth: "150px" , lineHeight:".8rem" }} align='center' key={index} sx={{color: "white" , fontWeight: 700}} >{head}</TableCell>
                     );
                     })}
                 </TableRow>

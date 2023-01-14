@@ -69,7 +69,7 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
   const editdataButton = () =>{
     if(!selectedproject)
     {
-      setSnakeData([true, "من فضلك قم باختيار البيانات المطلوب تعديلها" , "success"]);
+      setSnakeData([true, "من فضلك قم باختيار البيانات المطلوب تعديلها" , "error"]);
       return;
     }
     setEdit(false);
