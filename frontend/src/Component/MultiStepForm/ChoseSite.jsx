@@ -44,7 +44,8 @@ useEffect(() => {
           setselection({ "projectCode" : selections[parseInt(vals[0])]["projectCode"] ,
                           "siteName" : selections[parseInt(vals[0])]["siteNames"][parseInt(vals[1])],
                           "squares" : selections[parseInt(vals[0])]["squares"] ,
-                          "_id": selections[parseInt(vals[0])]["_id"]
+                          "_id": selections[parseInt(vals[0])]["_id"] , 
+                          "map": selections[parseInt(vals[0])]["map"]
                         } );
           setss(e.target.value)}}
         label={ !loading ? label : "loading......"}

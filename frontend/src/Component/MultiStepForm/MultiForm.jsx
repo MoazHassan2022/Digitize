@@ -31,7 +31,7 @@ export const MultiForm = () => {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => {    return prevActiveStep - 1;});
+    setActiveStep((prevActiveStep) => {  return prevActiveStep - 1;});
   };
 
   const attribute= [     
@@ -135,6 +135,7 @@ const maxSteps = attribute.length;
   }
 
   const [Trival , setTrival] = useState(true);
+
   const handleChangeForm = (valuee) => {
     setFormData( (prev) => {
       let p = prev;
@@ -159,23 +160,9 @@ const maxSteps = attribute.length;
             </Grid>
           );}
         
-        // case 1: {
-        //   return (
-        //     <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}>
-        //       <DropDownwithapi disNext={setstopsubmit} selection={formData[getformKey(step)]} getapi={getapi[step]}  chose={attribute[step]}   setSnakeData={setSnakeData}  key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} />
-        //     </Grid>
-        //   );}
-        
-        // case 2: {
-        //   return (
-        //     <Grid item container xs={8} md={4} justifyContent="center"   sx={{ borderRadius: 2 , marginTop: 2 }}> 
-        //      <DropDownwithselctions selection={formData[getformKey(step)]} selections={formData[getformKey(step-1)]["siteNames"]}   key={step} setselection={handleChangeForm} label={" اختر "  + translator(step)} /> 
-        //     </Grid>
-        //      );}
-        
         case 2: 
         {
-          return <Map initsq={formData[getformKey(step)]["squares"]} setselection={handleChangeForm} imgurl={mediaApi + "/img/projectMaps/" + formData[getformKey(step-1)]["map"]} sd={setSnakeData} />
+          return <Map initsq={formData["project"]["squares"]} setselection={handleChangeForm} imgurl={mediaApi + "/img/projectMaps/" + formData["project"]["map"]} sd={setSnakeData} />
         } 
 
         case 3: 

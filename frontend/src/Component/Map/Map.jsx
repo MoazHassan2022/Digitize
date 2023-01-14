@@ -34,7 +34,6 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   const [showloadimg, setshowloadimg] = useState(true);
   const mapexist = imgurl.slice(imgurl.length-9) !== "undefined";
 
-
   const handlechose = () => {
       if(!mapexist){
         if(Imgs  === undefined) {sd([true , "من فضلك ارفق صورة", "error"]); return;}
