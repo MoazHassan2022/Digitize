@@ -13,15 +13,19 @@ services:
       - backend
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      # - ~/Digitize/storage/certbot/www/:/var/www/certbot/:ro
-      # - ~/Digitize/storage/certbot/conf/:/etc/nginx/ssl/:ro
+      - ~/Digitize/storage/certbot/www/:/var/www/certbot/:ro
+      - ~/Digitize/storage/certbot/conf/:/etc/nginx/ssl/:ro
 
   # certbot:
   #   image: certbot/certbot:latest
   #   volumes:
-  #     - ../storage/certbot/conf/:/etc/letsencrypt/
-  #     - ../storage/certbot/www/:/var/www/certbot/
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef1@gmail.com -d www.Digitize.com --agree-tos
+  #     - ~/Digitize/storage/certbot/conf/:/etc/letsencrypt/
+  #     - ~/Digitize/storage/certbot/www/:/var/www/certbot/
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d sites.digitize.org --agree-tos
+  #   depends_on:
+  #     - frontend
+  #     - backend
+
 
   mongodb:
     container_name: mongodb
