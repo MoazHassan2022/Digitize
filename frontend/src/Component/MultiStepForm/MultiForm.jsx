@@ -265,6 +265,10 @@ return (
   justifyContent="center"
   className={classes.SignPage}
   > 
+        {/* <Grid item container sm={2} display={{ xs: "none", sm: "flex"}} >
+            <Grid item xs={12} sx={{bgcolor:theme.palette.primary.main , color : "white"}}>تابع تثدمك</Grid>
+            <Tracker activeStep={activeStep}/>
+      </Grid> */}
     <Grid item container xs={12} md={6} direction="column"  alignItems="center">
       <form className={classes.Form} onSubmit={HandleSubmit}>
         <Grid item container xs={12} md={12} component={Paper} sx={{marginTop:1}} direction="row" spacing={4} className={classes.SignCard} alignItems="center">

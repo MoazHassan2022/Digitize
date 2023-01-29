@@ -2,11 +2,9 @@ version: "3"
 services:
   web_server:
     image: nginx
-    ports:
-      - 80:80
-      - 443:443
     networks:
       - Digitize
+      - global
     restart: always
     depends_on:
       - frontend
@@ -79,3 +77,6 @@ networks:
   frontend_net:
   flutter_net:
   Digitize:
+  global:
+    external: true
+    driver: bridge

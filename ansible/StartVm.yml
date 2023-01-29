@@ -3,66 +3,51 @@
   become_user: root
   tasks:
 
-  # - name: Add Docker Group
-  #   group: name=docker state=present
+  - name: Add Docker Group
+    group: name=docker state=present
 
-  # - name: Install required system packages
-  #   apt:
-  #     pkg:
-  #       - apt-transport-https
-  #       - ca-certificates
-  #       - curl
-  #       - software-properties-common
-  #       - python3-pip
-  #       - virtualenv
-  #       - python3-setuptools
-  #     state: latest
-  #     update_cache: true
+  - name: Install required system packages
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      state: latest
+      update_cache: true
 
-  # - name: Add Docker GPG apt Key
-  #   apt_key:
-  #     url: https://download.docker.com/linux/ubuntu/gpg
-  #     state: present
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
 
-  # - name: Add Docker Repository
-  #   apt_repository:
-  #     repo: deb https://download.docker.com/linux/ubuntu focal stable
-  #     state: present
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
 
-  # - name: Update apt and install docker-ce
-  #   apt:
-  #     name: docker-ce
-  #     state: latest
-  #     update_cache: true
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
 
-  # - name: Install Docker Module for Python
-  #   pip:
-  #     name: docker
+  - name: Install Docker Module for Python
+    pip:
+      name: docker
 
-  # - name: Add remote "ubuntu" user to "docker" group
-  #   user:
-  #     name: ubuntu
-  #     groups: docker
-  #     append: yes
+  - name: Add remote "ubuntu" user to "docker" group
+    user:
+      name: ubuntu
+      groups: docker
+      append: yes
   
-  # - name: Install Docker compose
-  #   pip:
-  #     name: docker-compose
-
-  # - name: check permission of docker socke
-  #   ansible.builtin.file:
-  #     path: /var/run/docker.sock
-  #     owner: "root"
-  #     group: "root"
-  #     mode: '0666'
-
-# ############3##########################################################
-
-  - name: copying deploment files
-    become: true 
-    copy:
-      src: /mnt/d/Created_by_me/Digitize
-      dest: /home/ubuntu/Digitize/digitize_deployment
+  - name: Install Docker compose
+    pip:
+      name: docker-compose
 
   - name: check permission of docker socke
     ansible.builtin.file:
@@ -71,33 +56,50 @@
       group: "root"
       mode: '0666'
 
-  - name: Creates directory for certification
-    file:
-      path: /home/ubuntu/Digitize/certbot
-      state: directory
+# ############3##########################################################
 
-  - name: Creates directory for certification www
-    file:
-      path: /home/ubuntu/Digitize/certbot/www
-      state: directory
+  # - name: copying deploment files
+  #   become: true 
+  #   copy:
+  #     src: /mnt/d/Created_by_me/Digitize
+  #     dest: /home/ubuntu/Digitize/
 
-  - name: Creates directory for certification conf
-    file:
-      path: /home/ubuntu/Digitize/certbot/conf
-      state: directory
+  # - name: check permission of docker socke
+  #   ansible.builtin.file:
+  #     path: /var/run/docker.sock
+  #     owner: "root"
+  #     group: "root"
+  #     mode: '0666'
 
-  - name: Creates directory for mongodb
-    file:
-      path: /home/ubuntu/Digitize/storage/database
-      state: directory
+  # - name: Creates directory for certification
+  #   file:
+  #     path: /home/ubuntu/Digitize/certbot
+  #     state: directory
 
-  - name: deploy Docker Compose stack
-    community.docker.docker_compose:
-      project_src: /home/ubuntu/Digitize/digitize_deployment/
-      files:
-      - docker-compose.yaml
-      pull : yes
+  # - name: Creates directory for certification www
+  #   file:
+  #     path: /home/ubuntu/Digitize/certbot/www
+  #     state: directory
+
+  # - name: Creates directory for certification conf
+  #   file:
+  #     path: /home/ubuntu/Digitize/certbot/conf
+  #     state: directory
+
+  # - name: Creates directory for mongodb
+  #   file:
+  #     path: /home/ubuntu/Digitize/storage/database
+  #     state: directory
+
+  # - name: deploy Docker Compose stack
+  #   community.docker.docker_compose:
+  #     project_src: /home/ubuntu/Digitize/digitize_deployment/
+  #     files:
+  #     - docker-compose.yaml
+  #     pull : yes
 
 # ansible-playbook -i hosts /mnt/d/Created_by_me/Digitize/ansible/StartVm.yml --private-key=~/.ssh/Digitize.pem
 # ansible all -i hosts -m ping --private-key=~/.ssh/Digitize.pem
 # ssh -i ~/.ssh/Digitize.pem ubuntu@44.192.67.253
+#  167.235.151.47
+#  qApnJirj9Axpe7VkkbpC
