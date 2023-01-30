@@ -4,10 +4,9 @@ const useStyle = makeStyles({
     tabs: {
         float:"Right",
       }, 
-      tab:{
-        float:"Right",
-      }
-
+    tab:{
+      float:"Right",
+    }
 });
   
 export default useStyle;

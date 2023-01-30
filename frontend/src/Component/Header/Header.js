@@ -31,12 +31,12 @@ const Header = () => {
   const userType = cookies.userType;
 
   var settings = [
-   ['الاعدادات الشخصيه' , () =>  {return history("/PersonalSetting")}],
+   ['الاعدادات الشخصية' , () =>  {return history("/PersonalSetting")}],
    ['سجل الخروج' , Logout ]
   ];
-
+  
   if(userType === "0") {
-    pages = [['سجل استطلاع', () => {return history("/SubmitSurvey");}  ]];
+    pages = [['سجل استطلاع', () => {return window.location.assign("/SubmitSurvey");}  ]];
   }
   else {
     settings = [['تغيير بيانات الاستطلاع' , () =>  {return history("/Setting")}], ...settings];

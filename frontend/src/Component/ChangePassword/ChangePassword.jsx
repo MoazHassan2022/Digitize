@@ -36,7 +36,7 @@ export const ChangePassword = ({ setSnakeData }) => {
         headers: { authorization: auth },
       })
       .then((res) => {
-        setSnakeData([true, "تم تغيير كلمه السر الخاص بك بنجاح", "success"]);
+        setSnakeData([true, "تم تغيير كلمة السر الخاص بك بنجاح", "success"]);
         setTimeout(() => window.location.reload(), 2000);
       })
       .catch((err) => {
@@ -65,9 +65,9 @@ export const ChangePassword = ({ setSnakeData }) => {
         spacing={4}
       >
         <Grid item xs={12} alignItems="flex-start" justifyContent="flex-start">
-          <FormLabel component="legend">اكنب كلمه السر القديمة</FormLabel>
+          <FormLabel component="legend">اكنب كلمة السر القديمة</FormLabel>
           <TextField
-            label="كلمه السر الحاليه"
+            label="كلمة السر الحالية"
             type="password"
             required
             autoFocus
@@ -81,7 +81,7 @@ export const ChangePassword = ({ setSnakeData }) => {
 
         <Grid item xs={12} align="center">
           <TextField
-            label="كلمه السر الجديده"
+            label="كلمة السر الجديدة"
             type="text"
             required
             autoFocus
@@ -92,13 +92,13 @@ export const ChangePassword = ({ setSnakeData }) => {
             className={classes.textField}
           />
           <FormHelperText>
-            اجعل كلمه السر قويه كفاية لكي لا تكون سهله الملاحظه
+            اجعل كلمة السر قوية كفاية لكي لا تكون سهلة الملاحظة
           </FormHelperText>
         </Grid>
 
         <Grid item xs={12} align="center">
           <TextField
-            label="تاكيد كلمه السر الجديده"
+            label="تاكيد كلمة السر الجديدة"
             type="Password"
             required
             autoFocus

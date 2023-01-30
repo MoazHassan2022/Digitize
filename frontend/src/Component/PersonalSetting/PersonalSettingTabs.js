@@ -1,5 +1,4 @@
 import * as React from 'react';
-import useStyle from './PersonalSettingTabsStyles';
 import { Alert, Snackbar, Typography } from '@mui/material';
 import FormContainer from '../FormContainer/FormContainer';
 import ChangePassword from '../ChangePassword/ChangePassword';
@@ -7,11 +6,10 @@ import { useState } from 'react';
 
 export default function PersonalSettingTabs() {
   const [snakeData, setSnakeData] = useState([false, "", ""]);
-  const classes = useStyle();
 
   return (
     <>
-    <FormContainer Title={<Typography alignSelf="end" sx={{ color: "white" }} variant="h2">غير كلمه السر الخاصة بك</Typography>}>
+    <FormContainer Title={<Typography alignSelf="end" sx={{ color: "white" }} variant="h2">غير كلمة السر الخاصة بك</Typography>}>
       <ChangePassword setSnakeData={setSnakeData}/>
     </FormContainer>
 

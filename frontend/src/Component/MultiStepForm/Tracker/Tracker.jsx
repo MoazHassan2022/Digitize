@@ -8,17 +8,14 @@ import {
   StepContent,
 } from "@mui/material";
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 import theme from "../../../Utilities/Theme";
-import { explainSteps, translator } from "../../../Utilities/utilitesFunction";
+import { explainSteps } from "../../../Utilities/utilitesFunction";
 import useStyle from "./TrackerStyles";
 
 
 
 export const Tracker = ({ activeStep }) => {
   const classes = useStyle();
-  const [cookies] = useCookies();
-  const temp = "محمود"
 
   
 
@@ -57,7 +54,7 @@ export const Tracker = ({ activeStep }) => {
               <StepLabel
                 optional={
                   index === 13 ? (
-                    <Typography variant="caption">الخطوه الاخيره</Typography>
+                    <Typography variant="caption">الخطوة الاخيرة</Typography>
                   ) : null
                 }
               >

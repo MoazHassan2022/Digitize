@@ -7,6 +7,10 @@ import {AiFillSave} from "react-icons/ai";
 
 import AlertDialog from "./AlertDialog";
 import { baseapi } from "../../Utilities/utilitesFunction";
+import {BsImageFill} from "react-icons/bs";
+import theme from "../../Utilities/Theme";
+
+
 
 
 function EditRow({roww , snackbarShowMessage}) {
@@ -72,15 +76,28 @@ function EditRow({roww , snackbarShowMessage}) {
             return p;});
     }
   
+    const returnCell = (cell) =>{
+
+          return (cell=="photo") ? 
+          <IconButton sx={{color:theme.palette.primary.main}} onClick={() => window.open(roww[cell], '_blank') } > <BsImageFill /> </IconButton>:
+          <TextField  disabled={cell=="sender"} defaultValue={roww[cell]} onChange={(e) => chabgeCell(e,cell )} variant="standard" />;
+
+    }
+
   
     return (
       <>
         <AlertDialog Title={DialogTitle} Text={DialogText} open={open} handleClose={HanldeDialogRes} setOpen={setOpen}  />
         <TableRow key={1} >
-        {DataLables.map((cell, index) => 
-            <TableCell key={index} align="center">
-                <TextField  defaultValue={roww[cell]} onChange={(e) => chabgeCell(e,cell )} variant="standard" />
+        {DataLables.map((cell, index) => {
+          console.log(cell)
+
+          return <TableCell key={index} align="center">
+                {
+                  returnCell(cell)
+                }
             </TableCell>
+            }
         )
         }
         <TableCell align="center">
@@ -112,5 +129,7 @@ function EditRow({roww , snackbarShowMessage}) {
       </>
     );
   }
+
+
 
   export default EditRow;

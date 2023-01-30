@@ -10,6 +10,7 @@ import AddRemove from '../AddRemove/AddRemove';
 import FormContainer from "../FormContainer/FormContainer";
 import { FcAddRow, FcDeleteRow } from 'react-icons/fc';
 import { useState } from 'react';
+import theme from '../../Utilities/Theme';
 
 
 function TabPanel(props) {
@@ -131,9 +132,18 @@ export default function SettingTabs() {
         <Tabs value={value} onChange={handleChange} 
           variant="scrollable"
           scrollButtons="auto"
+          classes={{
+            indicator: classes.indicator
+          }}
+          TabIndicatorProps={{
+            sx: {
+              bgcolor: theme.palette.primary.main,
+              height: "5px",
+            }
+          }}
         >
           {tabschose.map((tab, index) => {
-          return <Tab key={index} label={tab} {...a11yProps(index)} className={classes.tab} />
+          return <Tab  key={index} label={tab} {...a11yProps(index)} className={classes.tab} />
           })}
         </Tabs>
       </Grid>
