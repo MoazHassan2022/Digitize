@@ -1,90 +1,82 @@
-import { Grid, Stepper, Typography, Step, StepLabel, Paper, StepContent } from "@mui/material";
+import {
+  Grid,
+  Stepper,
+  Typography,
+  Step,
+  StepLabel,
+  Paper,
+  StepContent,
+} from "@mui/material";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+import theme from "../../../Utilities/Theme";
+import { explainSteps, translator } from "../../../Utilities/utilitesFunction";
 import useStyle from "./TrackerStyles";
 
 
-const steps = [
-    {
-      label: 'رساله ترحيب',
-      description: `س`,
-    },
-    {
-      label: 'Create an ad group',
-      description:
-        'An ad group contains one or more ads which target a shared set of keywords.',
-    },
-    {
-      label: 'Create an ad',
-      description: `ي.`,
-    },
-    {
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },{
-        label: 'Create an ad',
-        description: `ي.`,
-      },
-  ];
 
-export const Tracker = ({activeStep}) => {
+export const Tracker = ({ activeStep }) => {
   const classes = useStyle();
+  const [cookies] = useCookies();
+  const temp = "محمود"
 
-  useEffect(() => {
-    const element = document.getElementById(activeStep);
-    element.scrollIntoView({ behavior: 'smooth' });
-  }, [activeStep])
   
 
-    return(<Grid container className={classes.TrackerContainer} >
-        
-        <Grid item>
-                <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
-                <Step key={step.label} id={index}>
-                    <StepLabel
-                    optional={
-                        index === 2 ? (
-                        <Typography variant="caption">Last step</Typography>
-                        ) : null
-                    }
-                    >
-                    {step.label}
-                    </StepLabel>
-                    <StepContent>
-                    <Typography>{step.description}</Typography>
-                    </StepContent>
-                </Step>
-                ))}
-            </Stepper>
-            {activeStep === steps.length && (
-                <Paper square elevation={0} sx={{ p: 3 }}>
-                <Typography>All steps completed - you&apos;re finished</Typography>
-                </Paper>
-            )}
-        </Grid>
-    </Grid>);
+  var steps = [];
 
-}
+  for(let i=0 ; i < 14;i++){
+    steps.push({
+      label:explainSteps(i)[0],
+      description:explainSteps(i)[1],
+    })
+  }
+
+
+  useEffect(() => {
+  
+    if(activeStep > 5){
+      // const element = document.getElementById(activeStep-2);
+      // element.scrollIntoView({ behavior: "smooth" });
+    }
+
+  }, [activeStep]);
+
+  return (
+    <Grid
+      container
+      item
+      xs={12}
+      textAlign="center"
+      justifyContent="center"
+      className={classes.TrackerContainer}
+    >
+      <Grid item>
+        <Stepper sx={{ borderColor:"red" }} activeStep={activeStep} orientation="vertical">
+          {steps.map((step, index) => (
+            <Step  key={step.label} id={index}>
+              <StepLabel
+                optional={
+                  index === 13 ? (
+                    <Typography variant="caption">الخطوه الاخيره</Typography>
+                  ) : null
+                }
+              >
+                <Typography>{step.label}</Typography>
+              </StepLabel>
+              <StepContent>
+                <Typography sx={{color:theme.palette.primary.main}}>{step.description}</Typography>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length-1 && (
+          <Paper square elevation={0} sx={{ p: 3 }}>
+            <Typography>لقد قمت باتمام كل خطوات الاستطلاع بنجاح</Typography>
+          </Paper>
+        )}
+      </Grid>
+    </Grid>
+  );
+};
 
 export default Tracker;

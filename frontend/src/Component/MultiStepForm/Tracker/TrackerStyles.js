@@ -2,9 +2,10 @@ import { makeStyles } from "@mui/styles";
 
 const useStyle = makeStyles({
     TrackerContainer:{
-        maxHeight:"49vh",
-        overflowY:"hidden",
-
+        overflowY:"scroll",
+        color:"white",
+        maxHeight:"60vh",
+        padding:"2rem",
     }
   
 });
