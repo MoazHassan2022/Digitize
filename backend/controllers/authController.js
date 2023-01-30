@@ -148,3 +148,17 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // Log the user in: send JWT
   createAndSendToken(user, 200, res);
 });
+
+exports.changePassword = catchAsync(async (req, res, next) => {
+  // Get user
+  const user = await User.findById(req.user._id).select("+password");
+  // check if POSTed current password is correct
+  if (!(await user.correctPassword(req.body.oldPassword, user.password)))
+    return next(new AppError("!كلمة السر خاطئة"), 401);
+  // if so, update the password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // Log the user in: send JWT
+  createAndSendToken(user, 200, res);
+});
