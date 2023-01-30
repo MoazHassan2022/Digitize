@@ -7,12 +7,12 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import {HiMenu} from 'react-icons/hi';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import {  useCookies } from "react-cookie";
+import {IoMdSettings} from "react-icons/io"
 
 const Header = () => {
   const history = useNavigate();
@@ -30,13 +30,16 @@ const Header = () => {
   var pages;
   const userType = cookies.userType;
 
-  var settings = [['سجل الخروج' , Logout ]];
+  var settings = [
+   ['الاعدادات الشخصيه' , () =>  {return history("/PersonalSetting")}],
+   ['سجل الخروج' , Logout ]
+  ];
 
   if(userType === "0") {
     pages = [['سجل استطلاع', () => {return history("/SubmitSurvey");}  ]];
   }
   else {
-    settings = [['الاعدادات' , () =>  {return history("/Setting")}], ...settings];
+    settings = [['تغيير بيانات الاستطلاع' , () =>  {return history("/Setting")}], ...settings];
     pages = [['احدث خرائط المشاريع' , () => {return history("/ProjectMaps");}],['طلب تنزيل بيانات' , () => {return history("/RequestData");}] , ["اضف مشرف" , () => {return history("/AddSupervisor")}] ];
   }
 
@@ -70,7 +73,6 @@ const Header = () => {
             variant="h3"
             noWrap
             component="a"
-            href="https://digitize.org/"
             sx={{
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'Montserrat',
@@ -122,7 +124,6 @@ const Header = () => {
             variant="h5"
             noWrap
             component="a"
-            href="https://digitize.org/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -152,8 +153,8 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={cookies.name}  />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, fontSize:"25px", color:"white" }} >
+                <IoMdSettings />
               </IconButton>
             </Tooltip>
             <Menu
