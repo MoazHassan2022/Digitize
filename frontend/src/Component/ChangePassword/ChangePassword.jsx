@@ -1,96 +1,123 @@
-import { Alert, Avatar, Button,  Grid,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+} from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
-import {HiLogin } from "react-icons/hi";
+import { useCookies } from "react-cookie";
+import { CgPassword } from "react-icons/cg";
+import { baseapi } from "../../Utilities/utilitesFunction";
 import useStyle from "./ChangePasswordStyles";
 
-export const ChangePassword = () => {
+export const ChangePassword = ({ setSnakeData }) => {
   const classes = useStyle();
+  const [cookies] = useCookies(["user"]);
 
-  const [OldPassword , setOldPassword] = useState("");
-  const [NewPassWord , setNewPassWord] = useState("");
+  const [OldPassword, setOldPassword] = useState("");
+  const [NewPassWord, setNewPassWord] = useState("");
   const [ConfirmNewPassword, setConfirmNewPassword] = useState("");
-  const [snakeData, setSnakeData] = useState([false,"",""]);
 
-
-  const HandleSubmit = (e) =>{
+  const HandleSubmit = (e) => {
     e.preventDefault();
-    setTimeout(history("/Setting") , 5000);
-  }
+    const auth = "Bearer " + cookies.token;
+    let pass = {
+      oldPassword: OldPassword,
+      password: NewPassWord,
+      passwordConfirm: ConfirmNewPassword,
+    };
 
-return (
-  <Grid 
-  container 
-  alignItems="center"
-  justifyContent="center"
-  className={classes.SignPage}
-  > 
-    <Grid item container xs={12} md={6} direction="column"  alignItems="center">
-      <form className={classes.Form} onSubmit={HandleSubmit}>
-        <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
-          <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
-          </Grid>
+    axios
+      .patch(baseapi + `/users/changePassword`, pass, {
+        headers: { authorization: auth },
+      })
+      .then((res) => {
+        setSnakeData([true, "تم تغيير كلمه السر الخاص بك بنجاح", "success"]);
+        setTimeout(() => window.location.reload(), 2000);
+      })
+      .catch((err) => {
+        setSnakeData([true, err.response.data.message, "error"]);
+      });
+  };
 
-          <Grid item xs={12} textAlign="center">
-            <Typography
-                variant="h2"
-                color="primary"
-              >
-                Change your password
-            </Typography>
-          </Grid>
-
-          <Grid item xs={12} align="center">
-            <TextField
-            label="old password"
+  return (
+    <Grid
+      container
+      direction="row"
+      component={Paper}
+      sx={{ padding: 6, border: "5px solid", borderRadius: 6 }}
+      xs={10}
+      sm={8}
+      md={6}
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      <Stack
+        component={"form"}
+        onSubmit={HandleSubmit}
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={4}
+      >
+        <Grid item xs={12} alignItems="flex-start" justifyContent="flex-start">
+          <FormLabel component="legend">اكنب كلمه السر القديمة</FormLabel>
+          <TextField
+            label="كلمه السر الحاليه"
             type="password"
             required
             autoFocus
             value={OldPassword}
-            onChange={(e) => {setOldPassword(e.target.value)}}
+            onChange={(e) => {
+              setOldPassword(e.target.value);
+            }}
             className={classes.textField}
-            />
-          </Grid>
+          />
+        </Grid>
 
-          <Grid item xs={12} align="center">
-            <TextField
-            label="new password"
+        <Grid item xs={12} align="center">
+          <TextField
+            label="كلمه السر الجديده"
             type="text"
             required
             autoFocus
             value={NewPassWord}
-            onChange={(e) => {setNewPassWord(e.target.value)}}
+            onChange={(e) => {
+              setNewPassWord(e.target.value);
+            }}
             className={classes.textField}
-            />
-          </Grid>
+          />
+          <FormHelperText>
+            اجعل كلمه السر قويه كفاية لكي لا تكون سهله الملاحظه
+          </FormHelperText>
+        </Grid>
 
-          <Grid item xs={12} align="center">
-            <TextField
-            label="confirm new password"
+        <Grid item xs={12} align="center">
+          <TextField
+            label="تاكيد كلمه السر الجديده"
             type="Password"
             required
             autoFocus
             value={ConfirmNewPassword}
-            onChange={(e) => {setConfirmNewPassword(e.target.value)}}
+            onChange={(e) => {
+              setConfirmNewPassword(e.target.value);
+            }}
             className={classes.textField}
-            />
-          </Grid>
-
-          <Grid item xs={12} align="center">
-            <Button type="submit" variant="contained" endIcon={<HiLogin /> } >Change Password</Button>
-          </Grid>
+          />
         </Grid>
-      </form>
+
+        <Grid item xs={12} align="center">
+          <Button type="submit" variant="contained" endIcon={<CgPassword />}>
+            Change Password
+          </Button>
+        </Grid>
+      </Stack>
     </Grid>
-    <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
-            <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
-                {snakeData[1]}
-            </Alert >
-    </Snackbar>
-  </Grid>
-);
-
-
-}
+  );
+};
 
 export default ChangePassword;
