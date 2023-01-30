@@ -17,6 +17,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
 
 
   const HandleSubmit = (e) => {
+
     e.preventDefault();
 
     let data = specifcselections;
@@ -48,6 +49,7 @@ export const Removeafterselect = ({setk,getapi , getlabel , obsenget , sendapi, 
     await axios.patch(sendapi+`/${allselections[el]["_id"]}`,ob ,{headers:{authorization: auth,}})
     .then(res => { 
         setSnakeData([true, `تم التحديث بنجاح` , "success"]);
+        setTimeout(() => window.location.reload(), 2000);
     } )
     .catch((err) =>{
         setSnakeData([true, err.response.data.message , "error"])
@@ -102,7 +104,6 @@ useEffect(() => {
 
     return(
         <Grid item container  xs={10} md={10}>
-          <form onSubmit={HandleSubmit}>
             <Grid item container  xs={12} md={12} spacing={3} >
               <Grid item container xs={12} justifyContent="flex-end">
               <Autocomplete
@@ -153,10 +154,9 @@ useEffect(() => {
               </Grid>
 
               <Grid item xs={12} style={{textAlign: "end"}}>
-                <Button type="submit" variant="contained" startIcon={<IoRemoveCircle />}>احذف </Button>
+                <Button type="button" onClick={HandleSubmit} variant="contained" startIcon={<IoRemoveCircle />}>احذف </Button>
               </Grid>
             </Grid>
-          </form>
         </Grid>
     );
 }
