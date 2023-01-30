@@ -8,6 +8,8 @@ import axios from "axios";
 import {MdVisibility , MdVisibilityOff} from "react-icons/md"
 import { useTheme } from "@emotion/react";
 import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
+import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
+import { IoMailSharp } from "react-icons/io5";
 
 export const SignIn = () => {
   const classes = useStyle();
@@ -54,81 +56,134 @@ export const SignIn = () => {
   },[]);
 
 return (
-  <Grid 
-  container 
-  alignItems="center"
-  justifyContent="center"
-  className={classes.SignPage}
-  > 
-
-    <Grid item container xs={12} md={6} direction="column"  alignItems="center">
-      <form className={classes.Form} onSubmit={HandleSubmit}>
-        <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
-          <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
-          </Grid>
-
-          <Grid item xs={12} textAlign="center">
-            <Typography
-                variant="h2"
-                color="primary"
-              >
+  <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      className={classes.BackGound}
+    >
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        xs={11}
+        sx={{ bgcolor: "#f2f5fa", borderRadius: "1.3rem", minHeight: "75vh" }}
+      >
+        <Grid item container xs={11} md={4}>
+          <Grid
+            component={"form"}
+            onSubmit={HandleSubmit}
+            container
+            spacing={4}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item sx={{ margin: "auto" }} xs={12}>
+              <Avatar
+                variant="rounded"
+                sx={{ width: "auto", height: "auto", transform: "scale(.45)" }}
+                src={mediaApi + "/Assets/Digitize.png"}
+                alt="CO"
+              />
+            </Grid>
+            <Grid item xs={12} textAlign="center">
+              <Typography variant="h2" color="primary">
                 قم بالتسجيل بالحساب الخاص بك
-            </Typography>
-          </Grid>
+              </Typography>
+            </Grid>
 
-          <Grid item xs={12} align="center">
-            <TextField
-            label="ايميل"
-            type="email"
-            required
-            autoFocus
-            value={Email}
-            onChange={(e) => {setEmail(e.target.value)}}
-            className={classes.textField}
-            />
-          </Grid>
+            <Grid item xs={12} align="center" justifyContent="center">
+              <TextField
+                label="ايميل"
+                type="email"
+                required
+                autoFocus
+                value={Email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                sx={{ width: { xs: "90%", sm: "60%", md: "60%" } }}
+              />
+            </Grid>
 
-          <Grid item xs={12} align="center">
-            <TextField
-            label="كلمة السر"
-            required
-            autoFocus
-            value={PassWord}
-            onChange={(e) => {setPassWord(e.target.value)}}
-            type={showPassword ? "text" : "password"}
-            InputProps={{ // <-- This is where the toggle button is added.
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <MdVisibility color={theme.palette.primary.main} size={24} /> : <MdVisibilityOff size={24}/>}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            className={classes.textField}
-            />
-          </Grid>
-          <Grid item xs={12} md={12} align="center">
-            <Link onClick={() => history("/SubmitEmail")} sx={{ textDecoration:"none" , cursor:"pointer" }}>هل نسيت كلمة السر الخاص بك ؟اضغط لاعادة التعيين</Link>
-          </Grid>
-          <Grid item xs={12} align="center">
-            <Button type="submit" variant="contained" endIcon={<BiLogInCircle /> } >سجل الدخول</Button>
-          </Grid>
+            <Grid item xs={12} align="center" justifyContent="center">
+              <TextField
+                className={classes.TextFiled}
+                label="كلمة السر"
+                required
+                autoFocus
+                value={PassWord}
+                onChange={(e) => {
+                  setPassWord(e.target.value);
+                }}
+                sx={{ width: { xs: "90%", sm: "60%", md: "60%" } }}
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? (
+                          <MdVisibility
+                            color={theme.palette.primary.main}
+                            size={24}
+                          />
+                        ) : (
+                          <MdVisibilityOff size={24} />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={12} align="center">
+              <Link
+                onClick={() => history("/SubmitEmail")}
+                sx={{ textDecoration: "none", cursor: "pointer" }}
+              >
+                هل نسيت كلمة السر الخاص بك ؟اضغط لاعادة التعيين
+              </Link>
+            </Grid>
+            <Grid item xs={12} align="center">
+              <Button
+                type="submit"
+                variant="contained"
+                endIcon={<BiLogInCircle />}
+                size="large"
+              >
+                سجل الدخول
+              </Button>
+            </Grid>
+            <Grid item xs={12} align="center">
+              <IconButton href="https://www.instagram.com/digitize365/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
+              <IconButton href="https://www.facebook.com/Digitize-104836954632184" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
+              <IconButton href="https://www.linkedin.com/company/digitize-org/"  sx={{fontSize:"40px", color:"#0A66C2"}}><AiFillLinkedin /> </IconButton>
+              <IconButton href="mailto:info@digitize.org"  sx={{fontSize:"40px", color:"#BB001B"}}><IoMailSharp /> </IconButton>
+            </Grid>
 
+          </Grid>
         </Grid>
-      </form>
 
-    </Grid>
-    <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
+        <Grid
+          item
+          xs={0}
+          md={8}
+          className={classes.Right}
+          display={{ xs: "none", md: "flex" }}
+        ></Grid>
+      </Grid>
+      <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
             <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>
-  </Grid>
+    </Grid>
 );
 
 

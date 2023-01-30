@@ -1,4 +1,4 @@
-import { Alert, Avatar, Box, Button,  Grid,  Paper, Snackbar ,Typography } from "@mui/material";
+import { Alert, Avatar, Box, Button,  Grid,  Paper, Snackbar ,Stack,Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import useStyle from "./RequestDataFormStyles";
 import {  useCookies } from "react-cookie";
@@ -7,6 +7,7 @@ import {getSelectedone , baseapi, mediaApi} from "../../Utilities/utilitesFuncti
 import {AiOutlineDownload} from "react-icons/ai"
 import {FiEdit} from "react-icons/fi"
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
+import FormContainer from "../FormContainer/FormContainer";
 
 
 export const RequestDataForm = ({setEdit, selecteddata}) => {
@@ -69,7 +70,7 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
   const editdataButton = () =>{
     if(!selectedproject)
     {
-      setSnakeData([true, "من فضلك قم باختيار البيانات المطلوب تعديلها" , "success"]);
+      setSnakeData([true, "من فضلك قم باختيار البيانات المطلوب تعديلها" , "error"]);
       return;
     }
     setEdit(false);
@@ -82,21 +83,34 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
     }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     } , [])
+    
   return (
-    <Grid 
-    container 
-    alignItems="center"
-    justifyContent="center"
-    className={classes.SignPage}
-    > 
-      <Grid item container xs={12} md={8} direction="column" alignItems="center" justifyContent="center" >
-        <form className={classes.Form} onSubmit={HandleSubmit}>
-          <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center" justifyContent="center">
+    <FormContainer Title={<Typography alignSelf="end" sx={{ color: "white" }} variant="h2">طلب تنزيل بيانات</Typography>}>
+          <Grid
+      container
+      direction="row"
+      component={Paper}
+      sx={{ padding: 6, border: "5px solid", borderRadius: 6 }}
+      xs={10}
+      sm={8}
+      md={6}
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      <Stack
+        component={"form"}
+        onSubmit={HandleSubmit}
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
+
             <Grid item className={classes.Logo} xs={12} >
-                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
+                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.5)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
             </Grid>
   
-            <Grid item xs={12} textAlign="center">
+            <Grid item xs={12} textAlign="center" >
               <Typography
                   variant="h2"
                   color="primary"
@@ -112,7 +126,7 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
             </Grid>
   
 
-            <Grid item container xs={12} md={6} align="center">
+            <Grid container xs={12} columnSpacing={1} align="center">
               <Grid item xs={6} align="center">
                 <Button type="submit" variant="contained" endIcon={<AiOutlineDownload /> }  >تنزيل البيانات</Button>
               </Grid>
@@ -121,19 +135,16 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
               </Grid>
             </Grid>
 
-
-
+            </Stack>
+        </Grid>
 
             
-          </Grid>
-        </form>
-      </Grid>
       <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() =>  setSnakeData([false , "" , ""]) }>
               <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                   {snakeData[1]}
               </Alert >
       </Snackbar>
-    </Grid>
+    </FormContainer>
   );
   
 }

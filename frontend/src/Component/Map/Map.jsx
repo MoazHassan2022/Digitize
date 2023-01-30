@@ -34,7 +34,6 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   const [showloadimg, setshowloadimg] = useState(true);
   const mapexist = imgurl.slice(imgurl.length-9) !== "undefined";
 
-
   const handlechose = () => {
       if(!mapexist){
         if(Imgs  === undefined) {sd([true , "من فضلك ارفق صورة", "error"]); return;}
@@ -120,7 +119,8 @@ export const Map =({setselection , sd, imgurl,initsq}) =>{
   }
 
       return(
-        <Grid container  sx={{ minHeight:"30vh"}} >
+
+        <Grid container xs={12} md={12}  sx={{ maxHeight:"100%" , borderRadius:"10rem", padding:3}} >
           <Mapshow existMap={mapexist} >
           <Grid item xs={12} md={12} sx={{maxHeight:"60vh", margin:1}} >
               <MapImg keyy={Math.ceil(Math.random() * 8000)}  setp={setpos} imgurl={imgurl} squares={squares} curs={pos} trival={trival}/>

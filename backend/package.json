@@ -1,7 +1,7 @@
 {
   "name": "digitize",
   "version": "1.0.0",
-  "description": "IT solutions website Project",
+  "description": "Employees follow-up website Project",
   "main": "app.js",
   "scripts": {
     "start": "node server.js",

@@ -1,4 +1,4 @@
-import { Alert, Box, Grid, IconButton, Paper, Skeleton, Snackbar, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Alert, Box, Grid, IconButton, Paper, Snackbar, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TablePagination, TableRow } from "@mui/material";
 import { useState } from "react";
 import { useTheme } from "@emotion/react";
 import { useCookies } from "react-cookie";
@@ -125,15 +125,12 @@ const handleChangeRowsPerPage = (event) => {
                 <TableRow>
                   {heads.map((head, index) => {
                       return (
-                        <TableCell style={{ minWidth: "150px" , lineHeight:".5rem" }} align='center' key={index} sx={{color: "white" , fontWeight: 700}} >{head}</TableCell>
+                        <TableCell style={{ minWidth: "150px" , lineHeight:".8rem" }} align='center' key={index} sx={{color: "white" , fontWeight: 700}} >{head}</TableCell>
                     );
                     })}
                 </TableRow>
             </TableHead>
               <TableBody>
-                {
-                  console.log(page * rowsPerPage , page * rowsPerPage + rowsPerPage , rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
-                }
                 {
                 (rowsPerPage > 0
                   ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

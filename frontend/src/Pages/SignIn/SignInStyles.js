@@ -1,36 +1,30 @@
 import { makeStyles } from "@mui/styles";
 import theme from "../../Utilities/Theme";
+import Backfoundimg from "./BackGound.jpeg"
+import RightImg from "./Right.jpg"
 
 const useStyle = makeStyles({
-    SignPage: {
-      minHeight: "100vh",
-      padding: "2%",
+    BackGound:{
+    minHeight: "100vh",
+    backgroundImage: `url(${Backfoundimg})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
     },
-    logo: {
-      maxWidth: "3.5rem",
-      margin: "auto",
+    Right:{
+        height:"75vh",
+        backgroundImage: `url(${RightImg})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        borderRadius:"1.3rem",
     },
-    logoImg:{
-      width: "auto", 
-      height: "auto", 
-      transform:"scale(.4)"
-    },
-    SignCard: {
-      maxWidth: "30rem",
-      height: "fit-content",
-      boxSizing: "unset",
-      borderRight: `4px solid ${theme.palette.primary.main}`,
-      borderBottom: `4px solid ${theme.palette.primary.main}`,
-      padding: "1.5rem",
-    },
-    textField:{
-      width:300
-    }, 
-    Form:{
-      width: "100%",
+    Left:{
+        height:"80vh",
     }
 
-  });
+  
+});
   
   export default useStyle;
   

@@ -1,4 +1,4 @@
-import {   Button, Grid } from "@mui/material";
+import {   Button, Grid, Stack } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
@@ -55,15 +55,24 @@ export const ChangeProjectImg = ({ setSnakeData  }) => {
                 setSnakeData={setSnakeData}
                 />
               </Grid>
-            
               <Grid item xs={12} style={{textAlign: "center"}}>
+            
+              <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={2}
+                  >
                 <Button variant="contained" startIcon={<BsImageFill color="white" />} sx={{ marginRight: 1}} component="label" onChange={UploadImgs}>
                      ارفق الخريطة الجديدة
                     <input hidden accept="image/*" type="file" />
                 </Button>
 
                 <Button onClick={HandleSubmit} variant="contained" disabled={stopsubmit} startIcon={<IoAddCircle />}>اضف</Button>
+</Stack>
+
               </Grid>
+
             </Grid>
         </Grid>
     );

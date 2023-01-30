@@ -3,7 +3,7 @@ const GreyColor = "#999";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0510a8",
+      main: "#000f29",
     },
     secondary: {
       main: "#F7C815",

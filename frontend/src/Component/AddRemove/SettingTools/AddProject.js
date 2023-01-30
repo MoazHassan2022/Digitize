@@ -1,4 +1,5 @@
 import {  Button,  Grid,  TextField } from "@mui/material";
+import { Stack } from "@mui/system";
 import axios from "axios";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
@@ -44,8 +45,6 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
 
 
     return(
-        <Grid item container  xs={10} md={10}>
-          <form >
             <Grid item container  xs={12} md={12} spacing={3} >
               <Grid item xs={12} >
               <TextField
@@ -58,14 +57,19 @@ export const AddProject = ({ sendapi, obsen , label , setSnakeData  }) => {
               </Grid>
             
               <Grid item xs={12} style={{textAlign: "end"}}>
-                <Button variant="contained" startIcon={<BsImageFill color="white" />} sx={{ marginRight: 1}} component="label" onChange={UploadImgs}>
-                     ارفق خريطة الموقع
-                    <input hidden accept="image/*" type="file" />
-                </Button>
-                <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={2}
+                  >
+                  <Button variant="contained" startIcon={<BsImageFill color="white" />} sx={{ marginRight: 1}} component="label" onChange={UploadImgs}>
+                        ارفق خريطة 
+                      <input hidden accept="image/*" type="file" />
+                  </Button>
+                  <Button onClick={HandleSubmit} variant="contained" startIcon={<IoAddCircle />}>اضف</Button>
+                </Stack>
               </Grid>
-            </Grid>
-          </form>
         </Grid>
     );
 }
