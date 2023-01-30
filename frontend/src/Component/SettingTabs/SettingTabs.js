@@ -5,8 +5,12 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import useStyle from './SettingTabsStyles';
-import { Grid } from '@mui/material';
+import { Grid, IconButton, Paper, Stack } from '@mui/material';
 import AddRemove from '../AddRemove/AddRemove';
+import FormContainer from "../FormContainer/FormContainer";
+import { FcAddRow, FcDeleteRow } from 'react-icons/fc';
+import { useState } from 'react';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,55 +66,115 @@ export default function SettingTabs() {
   const objectgetlabel = ["","","","","","activityGroupName","","projectCode","","cabineCode"];
 
 
+
+
+  const EditformDataHeader = ({label , isAdd , setIsAdd}) =>{
+
+    return(
+      <Grid item  container xs={12} sx={{padding:".4rem"}}>
+          <Grid item container xs={2} >
+              {(label !== "عدل صور خرائط") && 
+          <IconButton onClick={()=>setIsAdd(!isAdd)} >
+              {isAdd ? <FcAddRow title="Add item" /> : <FcDeleteRow title="remove item" />}
+          </IconButton>
+          }
+          </Grid>
+          <Grid item container xs={10} justifyContent="flex-end" >
+              {(label !== "عدل صور خرائط") ?
+          <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" > {isAdd ? " اضف الي "  :"احذف من   "} {label}ك</Typography>
+          :
+          <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" >عدل صور خرائطك</Typography>
+      }
+          </Grid>
+      </Grid>
+    );
+  }
+
+  const [isAdd , setIsAdd] = useState(true);
+
   const renderChose = () => {
+
     switch (value) {
       //شركة توصيل
-        case 0: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // measerment wy
+        case 0: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // measerment wy
       //طريقة توصيل
-        case 1: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> //delever company
+        case 1: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> //delever company
       //مشرف ثانوي  
-        case 2: return <AddRemove key={value} textonly={true}  obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> //deleiver way
+        case 2: return <AddRemove isAdd={isAdd} key={value} textonly={true}  obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> //deleiver way
       //مشرف اساسي 
-        case 3: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site assest super visor
+        case 3: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site assest super visor
       //مهندس موقع
-        case 4: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site main supervisor
+        case 4: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site main supervisor
       //انواع النشاط
-        case 5: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity site engineer
+        case 5: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity site engineer
       //مجموعات نشاط
-        case 6: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity type
+        case 6: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity type
       //مواقع
-        case 7: return <AddRemove key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
+        case 7: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
       //مشاريع
-        case 8: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
+        case 8: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
       // الرقم المسلسل للكابينه
-        case 9: return <AddRemove key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // cabineCode
+        case 9: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // cabineCode
       // غير صور المشاريع مش تبع الجداول
-      case 10: return  <AddRemove key={value} label={"عدل صور خرائط"} />
+      case 10: return  <AddRemove isAdd={isAdd} key={value} label={"عدل صور خرائط"} />
             
         default: return <>not a chose</>;
       }
   }
 
 
+
+  
   return (
-    <Grid container sx={{ width: '100%' }} alignItems="flex-start">
+    <Grid container xs={12} alignItems="center">
       <Grid item xs={12} md={12} sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} 
           variant="scrollable"
-          scrollButtons={false}
+          scrollButtons="auto"
         >
           {tabschose.map((tab, index) => {
           return <Tab key={index} label={tab} {...a11yProps(index)} className={classes.tab} />
           })}
         </Tabs>
       </Grid>
-      <Grid item container direction="column" xs={12} md={12} >
-            {tabschose.map((tab, index) => {
-          return <TabPanel key={index} value={value} index={index} className={classes.tab}  >
+
+
+
+      <Grid item container sx={{bgcolor:"red"}} xs={12} md={12} >
+
+      <FormContainer Title={<EditformDataHeader  label={labels[value]} isAdd={isAdd} setIsAdd={setIsAdd}/>}>
+      <Grid
+        container
+        direction="row"
+        component={Paper}
+          sx={{ padding: 6, border: "5px solid", borderRadius: 6 }}
+        xs={11}
+        sm={11}
+        md={8}
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+      
+        >
+
+          {tabschose.map((tab, index) => {
+          return <TabPanel sx={{bgcolor:"blue"}}  key={index} value={value} index={index} className={classes.tab}  >
           {renderChose()}
           </TabPanel>
           })}
+
+          
+          </Stack>
+          </Grid>
+          </FormContainer>
+
       </Grid>
+      
     </Grid>
   );
 }
