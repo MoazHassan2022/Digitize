@@ -31,7 +31,6 @@ export const FormContainer = ({Title ,children }) =>{
                   direction="row"
                   alignItems="flex-start"
                 item
-                component={"form"}
                 xs={12}
                 sm={8}
                 textAlign="center"

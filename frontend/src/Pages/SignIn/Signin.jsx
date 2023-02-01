@@ -113,7 +113,6 @@ return (
                 className={classes.TextFiled}
                 label="كلمة السر"
                 required
-                autoFocus
                 value={PassWord}
                 onChange={(e) => {
                   setPassWord(e.target.value);

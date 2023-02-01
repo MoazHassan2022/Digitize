@@ -22,8 +22,6 @@ const useStyle = makeStyles({
     Left:{
         height:"80vh",
     }
-
-  
 });
   
   export default useStyle;
