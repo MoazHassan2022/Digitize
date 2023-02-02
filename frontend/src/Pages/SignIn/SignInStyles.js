@@ -12,7 +12,7 @@ const useStyle = makeStyles({
     backgroundSize: "cover",
     },
     Right:{
-        height:"75vh",
+        height:"80vh",
         backgroundImage: `url(${RightImg})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

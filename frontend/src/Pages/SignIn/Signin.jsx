@@ -80,10 +80,10 @@ return (
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item sx={{ margin: "auto" }} xs={12}>
+            <Grid item sx={{ margin: "auto", maxHeight:"35vh" }} xs={12} >
               <Avatar
                 variant="rounded"
-                sx={{ width: "auto", height: "auto", transform: "scale(.45)" }}
+                sx={{ width: "100%", height: "auto", transform: "scale(.45)" , bgcolor:"blue" }}
                 src={mediaApi + LogoPath}
                 alt="CO"
               />
@@ -141,6 +141,7 @@ return (
                 }}
               />
             </Grid>
+
             <Grid item xs={12} md={12} align="center">
               <Link
                 onClick={() => history("/SubmitEmail")}
@@ -149,6 +150,7 @@ return (
                 هل نسيت كلمة السر الخاص بك ؟اضغط لاعادة التعيين
               </Link>
             </Grid>
+
             <Grid item xs={12} align="center">
               <Button
                 type="submit"
@@ -159,6 +161,7 @@ return (
                 سجل الدخول
               </Button>
             </Grid>
+            
             <Grid item xs={12} align="center">
               <IconButton href="https://www.instagram.com/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
               <IconButton href="https://www.facebook.com/" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
