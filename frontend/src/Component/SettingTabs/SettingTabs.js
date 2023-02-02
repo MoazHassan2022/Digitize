@@ -62,10 +62,10 @@ export default function SettingTabs() {
 
   const getapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities ","/projects","/projects","/cabines"];
   const setapi = ["/deliveryTeams","/deliveryWays","/siteSupervisorAssistant","/siteSupervisorMain","/siteEngineers","/activities","/activities","/projects","/projects","/cabines"];
-  const labels = ["ممثل فريق توصيل","طريقة توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع نشاط","مجموعات نشاط","مواقع","مشاريع", "ارقام كبائن" , "صور المشاريع" ];
+  const HeadLabel = ["ممثل فريق توصيل","طريقة توصيل","مشرف ثانوي","مشرف اساسي","مهندس موقع","انواع نشاط","مجموعات نشاط","مواقع","مشاريع", "ارقام كبائن" , "صور المشاريع" ];
+  const labels = ["ممثلي فريق توصيل","طرق التوصيل","المشرفين الثانويين","المشرفين الاساسيين","مهندسي المواقع","انواع النشاط","مجموعات النشاط","مواقعك","مشاريعك", "ارقام الكبائن" , "صور المشاريع" ];
   const objectlabel = ["name","way","name","name","name","activityTypes","activityGroupName","siteNames","projectCode", "cabineCode"];
   const objectgetlabel = ["","","","","","activityGroupName","","projectCode","","cabineCode"];
-
 
 
 
@@ -82,7 +82,7 @@ export default function SettingTabs() {
           </Grid>
           <Grid item container xs={10} justifyContent="flex-end" >
               {(label !== "عدل صور خرائط") ?
-          <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" > {isAdd ? " اضف الي "  :"احذف من   "} {label}ك</Typography>
+          <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" > {isAdd ? " اضف الي "  :"احذف من   "} {label}</Typography>
           :
           <Typography component={'span'} sx={{color: "white" , fontSize:"1.3rem"}}  variant="h2" >عدل صور خرائطك</Typography>
       }
@@ -97,25 +97,25 @@ export default function SettingTabs() {
 
     switch (value) {
       //شركة توصيل
-        case 0: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // measerment wy
+        case 0: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // measerment wy
       //طريقة توصيل
-        case 1: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> //delever company
+        case 1: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> //delever company
       //مشرف ثانوي  
-        case 2: return <AddRemove isAdd={isAdd} key={value} textonly={true}  obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> //deleiver way
+        case 2: return <AddRemove isAdd={isAdd} key={value} textonly={true}  obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]}/> //deleiver way
       //مشرف اساسي 
-        case 3: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site assest super visor
+        case 3: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // site assest super visor
       //مهندس موقع
-        case 4: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // site main supervisor
+        case 4: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // site main supervisor
       //انواع النشاط
-        case 5: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity site engineer
+        case 5: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // activity site engineer
       //مجموعات نشاط
-        case 6: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity type
+        case 6: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // activity type
       //مواقع
-        case 7: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]} /> // activity group
+        case 7: return <AddRemove isAdd={isAdd} key={value} textonly={false} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]} /> // activity group
       //مشاريع
-        case 8: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // site
+        case 8: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value+1]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]}/> // site
       // الرقم المسلسل للكابينه
-        case 9: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={labels[value]}/> // cabineCode
+        case 9: return <AddRemove isAdd={isAdd} key={value} textonly={true} obsenget={objectgetlabel[value]} getlabel={labels[value]} obcal={objectlabel[value]} getApi={getapi[value]}  setApi={setapi[value]}  label={HeadLabel[value]}/> // cabineCode
       // غير صور المشاريع مش تبع الجداول
       case 10: return  <AddRemove isAdd={isAdd} key={value} label={"عدل صور خرائط"} />
             

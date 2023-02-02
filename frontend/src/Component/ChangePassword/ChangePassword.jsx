@@ -98,7 +98,7 @@ export const ChangePassword = ({ setSnakeData }) => {
 
         <Grid item xs={12} align="center">
           <Button type="submit" variant="contained" endIcon={<CgPassword />}>
-            Change Password
+            غير كلمة السر
           </Button>
         </Grid>
       </Stack>
