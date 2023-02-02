@@ -19,7 +19,9 @@ return (
       <form className={classes.Form} >
         <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
           <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + LogoPath} alt="CO" />
+                <Avatar variant="rounded" 
+                                sx={{ width: "100%", height: "auto", transform: "scale(.45)" , background:"radial-gradient(circle, rgba(169,169,171,1) 0%, rgba(11,45,103,1) 70%);" , borderRadius:"2rem"}}
+                               src={mediaApi + LogoPath} alt="CO" />
           </Grid>
 
           <Grid item xs={12} textAlign="center">
