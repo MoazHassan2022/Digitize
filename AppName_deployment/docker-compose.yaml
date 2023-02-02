@@ -11,14 +11,14 @@ services:
       - backend
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ~/Connect/storage/certbot/www/:/var/www/certbot/:ro
-      - ~/Connect/storage/certbot/conf/:/etc/nginx/ssl/:ro
+      - ../storage/certbot/www/:/var/www/certbot/:ro
+      - ../storage/certbot/conf/:/etc/nginx/ssl/:ro
 
   # certbot:
   #   image: certbot/certbot:latest
   #   volumes:
-  #     - ~/Connect/storage/certbot/conf/:/etc/letsencrypt/
-  #     - ~/Connect/storage/certbot/www/:/var/www/certbot/
+  #     - ../storage/certbot/conf/:/etc/letsencrypt/
+  #     - ../storage/certbot/www/:/var/www/certbot/
   #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d sites.Connect.org --agree-tos
   #   depends_on:
   #     - frontend
@@ -26,7 +26,6 @@ services:
 
 
   mongodb:
-    container_name: mongodb
     image: mongo
     command: mongod --auth
     restart: unless-stopped
@@ -36,7 +35,7 @@ services:
     networks:
       - private
     volumes:
-      - ~/Connect/storage/database:/data/db
+      - ../storage/database:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     
   backend:
@@ -54,7 +53,7 @@ services:
     links:
       - mongodb
     volumes:
-      - ~/Connect/storage/media:/usr/src/app/public
+      - ../storage/media:/usr/src/app/public
     # deploy:
     #   mode: replicated
     #   replicas: 1
