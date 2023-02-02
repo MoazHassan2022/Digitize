@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import {  useCookies } from "react-cookie";
 import {IoMdSettings} from "react-icons/io"
+import { AppName } from '../../Utilities/utilitesFunction';
 
 const Header = () => {
   const history = useNavigate();
@@ -82,7 +83,7 @@ const Header = () => {
               mr:4
             }}
           >
-            DIGITIZE
+            {AppName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } , marginLeft:-2 }}>
             <IconButton
@@ -135,7 +136,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            Digitize
+            {AppName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}/>
 

@@ -7,7 +7,7 @@ import {  useCookies } from "react-cookie";
 import axios from "axios";
 import {MdVisibility , MdVisibilityOff} from "react-icons/md"
 import { useTheme } from "@emotion/react";
-import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
+import {LogoPath, baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { IoMailSharp } from "react-icons/io5";
 
@@ -84,7 +84,7 @@ return (
               <Avatar
                 variant="rounded"
                 sx={{ width: "auto", height: "auto", transform: "scale(.45)" }}
-                src={mediaApi + "/Assets/Digitize.png"}
+                src={mediaApi + LogoPath}
                 alt="CO"
               />
             </Grid>
@@ -160,10 +160,10 @@ return (
               </Button>
             </Grid>
             <Grid item xs={12} align="center">
-              <IconButton href="https://www.instagram.com/digitize365/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
-              <IconButton href="https://www.facebook.com/Digitize-104836954632184" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
-              <IconButton href="https://www.linkedin.com/company/digitize-org/"  sx={{fontSize:"40px", color:"#0A66C2"}}><AiFillLinkedin /> </IconButton>
-              <IconButton href="mailto:info@digitize.org"  sx={{fontSize:"40px", color:"#BB001B"}}><IoMailSharp /> </IconButton>
+              <IconButton href="https://www.instagram.com/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
+              <IconButton href="https://www.facebook.com/" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
+              <IconButton href="https://www.linkedin.com/"  sx={{fontSize:"40px", color:"#0A66C2"}}><AiFillLinkedin /> </IconButton>
+              <IconButton href="mailto:info@componay.org"  sx={{fontSize:"40px", color:"#BB001B"}}><IoMailSharp /> </IconButton>
             </Grid>
 
           </Grid>

@@ -1,6 +1,6 @@
 import { Avatar,  Grid, Paper,  Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { mediaApi } from "../../Utilities/utilitesFunction";
+import { LogoPath, mediaApi } from "../../Utilities/utilitesFunction";
 import useStyle from "./UnAuthStyles";
 
 export const UnAuth = () => {
@@ -19,7 +19,7 @@ return (
       <form className={classes.Form} >
         <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
           <Grid item className={classes.Logo} xs={12} >
-                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
+                <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.4)" }} src={mediaApi + LogoPath} alt="CO" />
           </Grid>
 
           <Grid item xs={12} textAlign="center">

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useStyle from "./RequestDataFormStyles";
 import {  useCookies } from "react-cookie";
 import axios from "axios";
-import {getSelectedone , baseapi, mediaApi} from "../../Utilities/utilitesFunction"
+import {getSelectedone , baseapi, mediaApi, LogoPath} from "../../Utilities/utilitesFunction"
 import {AiOutlineDownload} from "react-icons/ai"
 import {FiEdit} from "react-icons/fi"
 import DropDownwithselctions from "../MultiStepForm/DropDownwithselctions";
@@ -107,7 +107,7 @@ export const RequestDataForm = ({setEdit, selecteddata}) => {
       >
 
             <Grid item className={classes.Logo} xs={12} >
-                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.5)" }} src={mediaApi + "/Assets/Digitize.png"} alt="CO" />
+                  <Avatar variant="rounded" sx={{ width: "auto", height: "auto", transform:"scale(.5)" }} src={mediaApi + LogoPath} alt="CO" />
             </Grid>
   
             <Grid item xs={12} textAlign="center" >
