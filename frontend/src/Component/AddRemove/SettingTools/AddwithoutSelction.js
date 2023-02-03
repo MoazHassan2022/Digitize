@@ -36,7 +36,7 @@ export const AddwithoutSelction = ({ sendapi, obsen , label , setSnakeData  }) =
   }
 
   useEffect(()=>{
-    setSnakeData([true, `بعد كتابة كل مجموعة  Enter  اضغط` , "info"]);
+    setSnakeData([true, `بعد كتابة كل ${label} جديد  Enter  اضغط` , "info"]);
       // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 

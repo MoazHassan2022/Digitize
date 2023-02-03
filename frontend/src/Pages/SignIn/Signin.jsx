@@ -67,11 +67,12 @@ return (
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
+        alignItems="stretch"
         xs={11}
-        sx={{ bgcolor: "#f2f5fa", borderRadius: "1.3rem", minHeight: "75vh" }}
+        sx={{ bgcolor: "#f2f5fa", borderRadius: "1.3rem", height: "100%"}}
       >
         <Grid item container xs={11} md={4}>
+          
           <Grid
             component={"form"}
             onSubmit={HandleSubmit}
@@ -170,6 +171,7 @@ return (
             </Grid>
 
           </Grid>
+
         </Grid>
 
         <Grid
@@ -179,6 +181,7 @@ return (
           className={classes.Right}
           display={{ xs: "none", md: "flex" }}
         ></Grid>
+
       </Grid>
       <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
             <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >

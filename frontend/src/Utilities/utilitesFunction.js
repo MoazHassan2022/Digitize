@@ -1,4 +1,4 @@
-export const baseapi = "/api" // for deployment just let /api
+export const baseapi = "http://44.213.46.206/api" // for deployment just let /api
 export const mediaApi = baseapi + "/public" // for deployment just let /public
 export const AppName = "SafcoTech"
 export const LogoPath = "/Assets/logoicon.png"
