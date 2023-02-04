@@ -534,30 +534,40 @@ export const MultiForm = () => {
           justifyContent="flex-start"
           className={classes.StepsContainer}
         >
-          <Grid
-            item
-            xs={12}
-            component={Paper}
-            sx={{
-              verticalAlign: "middle",
-              height: 75,
-              pl: 6,
-              bgcolor: theme.palette.primary.main,
-              paddingTop: 1,
-              fontSize: "1.2rem",
-              fontWeight: 900,
-              borderRadius: "0",
-              borderTopLeftRadius: "1rem",
-              borderTopRightRadius: "1rem",
-            }}
-            textAlign="center"
-          >
-            <Typography alignSelf="center" sx={{ color: "white" }} variant="h2">
-              {translator(activeStep)}
-            </Typography>
+          <Grid xs={12} textAlign="center" justifyContent="stretch">
+            <Stack
+              component={Paper}
+              sx={{
+                padding: 2,
+                height: 75,
+                bgcolor: theme.palette.primary.main,
+                fontSize: "1rem",
+                fontWeight: 700,
+                borderRadius: "0",
+                borderTopLeftRadius: "1rem",
+                borderTopRightRadius: "1rem",
+              }}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Typography
+                alignSelf="center"
+                sx={{ color: "white" }}
+                variant="h1"
+              >
+                {translator(activeStep)}
+              </Typography>
+            </Stack>
           </Grid>
 
-          <Grid item container sx={{ padding:2}} alignItems="flex-start" justifyContent="center">
+          <Grid
+            item
+            container
+            sx={{ padding: 2 }}
+            alignItems="flex-start"
+            justifyContent="center"
+          >
             {renderStep(activeStep)}
           </Grid>
 
@@ -599,6 +609,7 @@ export const MultiForm = () => {
             />
           </Grid>
         </Grid>
+        
 
         <Grid
           item

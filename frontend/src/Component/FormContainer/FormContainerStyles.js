@@ -12,8 +12,7 @@ const useStyle = makeStyles({
     },
 
     FormContainer:{
-      height:"100vh",
-      maxHeight:"70vh",
+      maxHeight:"auto",
     },
     StepsContainer:{
       borderRadius:"2rem" ,
@@ -21,6 +20,10 @@ const useStyle = makeStyles({
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
+    },
+    ChildContainer:{
+      marginTop:50,
+      marginBottom:50
     }
 
 

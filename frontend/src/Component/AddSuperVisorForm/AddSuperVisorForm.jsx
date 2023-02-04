@@ -18,7 +18,7 @@ import axios from "axios";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useTheme } from "@emotion/react";
 import { HiUserAdd } from "react-icons/hi";
-import { baseapi, mediaApi } from "../../Utilities/utilitesFunction";
+import { LogoPath, baseapi, mediaApi } from "../../Utilities/utilitesFunction";
 import FormContainer from "../FormContainer/FormContainer";
 
 export const AddSuperVisorForm = () => {
@@ -83,11 +83,13 @@ export const AddSuperVisorForm = () => {
           <Grid item className={classes.Logo}>
             <Avatar
               variant="rounded"
-              sx={{ width: "auto", height: "auto", transform: "scale(.5)" }}
-              src={mediaApi + "/Assets/Digitize.png"}
+              sx={{ width: "100%", height: "auto", transform: "scale(.7)" }}
+              src={mediaApi + LogoPath}
               alt="CO"
             />
           </Grid>
+ 
+  
 
 
           <Grid item xs={12} align="center">

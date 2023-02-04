@@ -13,6 +13,7 @@ import { useCookies } from "react-cookie";
 import { CgPassword } from "react-icons/cg";
 import { baseapi } from "../../Utilities/utilitesFunction";
 import useStyle from "./ChangePasswordStyles";
+import TextFieldWithShowPassword from "../TextFieldWithShowPassword/TextFieldWithShowPassword";
 
 export const ChangePassword = ({ setSnakeData }) => {
   const classes = useStyle();
@@ -65,31 +66,22 @@ export const ChangePassword = ({ setSnakeData }) => {
         spacing={4}
       >
         <Grid item xs={12} alignItems="flex-start" justifyContent="flex-start">
-          <FormLabel component="legend">اكنب كلمة السر القديمة</FormLabel>
-          <TextField
-            label="كلمة السر الحالية"
-            type="password"
-            required
-            autoFocus
-            value={OldPassword}
-            onChange={(e) => {
-              setOldPassword(e.target.value);
-            }}
-            className={classes.textField}
+          <FormLabel component="legend" sx={{margin:1}}>اكنب كلمة السر القديمة</FormLabel>          
+          
+          <TextFieldWithShowPassword 
+          key={54}
+          Label={"كلمة السر الحالية"}
+          PassWord={OldPassword}
+          setPassWord={setOldPassword}
           />
         </Grid>
 
         <Grid item xs={12} align="center">
-          <TextField
-            label="كلمة السر الجديدة"
-            type="text"
-            required
-            autoFocus
-            value={NewPassWord}
-            onChange={(e) => {
-              setNewPassWord(e.target.value);
-            }}
-            className={classes.textField}
+        <TextFieldWithShowPassword 
+          key={55}
+          Label={"كلمة السر الجديدة"}
+          PassWord={NewPassWord}
+          setPassWord={setNewPassWord}
           />
           <FormHelperText>
             اجعل كلمة السر قوية كفاية لكي لا تكون سهلة الملاحظة
@@ -97,24 +89,20 @@ export const ChangePassword = ({ setSnakeData }) => {
         </Grid>
 
         <Grid item xs={12} align="center">
-          <TextField
-            label="تاكيد كلمة السر الجديدة"
-            type="Password"
-            required
-            autoFocus
-            value={ConfirmNewPassword}
-            onChange={(e) => {
-              setConfirmNewPassword(e.target.value);
-            }}
-            className={classes.textField}
+        <TextFieldWithShowPassword 
+          key={56}
+          Label={"تاكيد كلمة السر الجديدة"}
+          PassWord={ConfirmNewPassword}
+          setPassWord={setConfirmNewPassword}
           />
         </Grid>
 
         <Grid item xs={12} align="center">
           <Button type="submit" variant="contained" endIcon={<CgPassword />}>
-            Change Password
+            غير كلمة السر
           </Button>
         </Grid>
+        
       </Stack>
     </Grid>
   );

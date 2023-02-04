@@ -7,7 +7,7 @@ import {  useCookies } from "react-cookie";
 import axios from "axios";
 import {MdVisibility , MdVisibilityOff} from "react-icons/md"
 import { useTheme } from "@emotion/react";
-import {baseapi, mediaApi} from "../../Utilities/utilitesFunction"
+import {LogoPath, baseapi, mediaApi} from "../../Utilities/utilitesFunction"
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { IoMailSharp } from "react-icons/io5";
 
@@ -67,11 +67,12 @@ return (
         container
         direction="row"
         justifyContent="center"
-        alignItems="center"
+        alignItems="stretch"
         xs={11}
-        sx={{ bgcolor: "#f2f5fa", borderRadius: "1.3rem", minHeight: "75vh" }}
+        sx={{ bgcolor: "#f2f5fa", borderRadius: "1.3rem", height: "100%"}}
       >
         <Grid item container xs={11} md={4}>
+          
           <Grid
             component={"form"}
             onSubmit={HandleSubmit}
@@ -80,11 +81,11 @@ return (
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item sx={{ margin: "auto" }} xs={12}>
+            <Grid item sx={{ margin: "auto", maxHeight:"35vh" }} xs={12} >
               <Avatar
                 variant="rounded"
-                sx={{ width: "auto", height: "auto", transform: "scale(.45)" }}
-                src={mediaApi + "/Assets/Digitize.png"}
+                sx={{ width: "100%", height: "auto" , minHeight:"23vh", transform: "scale(.6)" ,   borderRadius:"2rem"}}
+                src={mediaApi + LogoPath}
                 alt="CO"
               />
             </Grid>
@@ -113,7 +114,6 @@ return (
                 className={classes.TextFiled}
                 label="كلمة السر"
                 required
-                autoFocus
                 value={PassWord}
                 onChange={(e) => {
                   setPassWord(e.target.value);
@@ -142,6 +142,7 @@ return (
                 }}
               />
             </Grid>
+
             <Grid item xs={12} md={12} align="center">
               <Link
                 onClick={() => history("/SubmitEmail")}
@@ -150,6 +151,7 @@ return (
                 هل نسيت كلمة السر الخاص بك ؟اضغط لاعادة التعيين
               </Link>
             </Grid>
+
             <Grid item xs={12} align="center">
               <Button
                 type="submit"
@@ -160,14 +162,16 @@ return (
                 سجل الدخول
               </Button>
             </Grid>
+            
             <Grid item xs={12} align="center">
-              <IconButton href="https://www.instagram.com/digitize365/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
-              <IconButton href="https://www.facebook.com/Digitize-104836954632184" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
-              <IconButton href="https://www.linkedin.com/company/digitize-org/"  sx={{fontSize:"40px", color:"#0A66C2"}}><AiFillLinkedin /> </IconButton>
-              <IconButton href="mailto:info@digitize.org"  sx={{fontSize:"40px", color:"#BB001B"}}><IoMailSharp /> </IconButton>
+              <IconButton href="https://www.instagram.com/" sx={{fontSize:"40px", color:"#962fbf"}}><AiFillInstagram /> </IconButton>
+              <IconButton href="https://www.facebook.com/" color="primary" sx={{fontSize:"40px"}}><AiFillFacebook /> </IconButton>
+              <IconButton href="https://www.linkedin.com/"  sx={{fontSize:"40px", color:"#0A66C2"}}><AiFillLinkedin /> </IconButton>
+              <IconButton href="mailto:info@componay.org"  sx={{fontSize:"40px", color:"#BB001B"}}><IoMailSharp /> </IconButton>
             </Grid>
 
           </Grid>
+
         </Grid>
 
         <Grid
@@ -177,6 +181,7 @@ return (
           className={classes.Right}
           display={{ xs: "none", md: "flex" }}
         ></Grid>
+
       </Grid>
       <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
             <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >

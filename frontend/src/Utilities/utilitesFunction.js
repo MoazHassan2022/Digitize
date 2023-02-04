@@ -1,6 +1,9 @@
-
-export const baseapi = "https://sites.digitize.org/api" // for deployment just let /api
+export const baseapi = "/api" // for deployment just let /api
 export const mediaApi = baseapi + "/public" // for deployment just let /public
+export const AppName = "Digitize"
+export const LogoPath = "/Assets/Digitize.png"
+export const LogoIconPath = "/Assets/logoicon.ico"
+
 
 export function getSelectedone (sel , all , par) {
     return all.find( (pro) => { return pro[par] === sel; } );
