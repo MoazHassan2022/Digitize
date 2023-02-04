@@ -13,7 +13,7 @@ const useStyle = makeStyles({
     logoImg:{
       width: "auto", 
       height: "auto", 
-      transform:"scale(.4)"
+      transform:"scale(.6)"
     },
     SignCard: {
       maxWidth: "30rem",

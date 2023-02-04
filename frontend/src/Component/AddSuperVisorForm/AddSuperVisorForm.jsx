@@ -83,7 +83,7 @@ export const AddSuperVisorForm = () => {
           <Grid item className={classes.Logo}>
             <Avatar
               variant="rounded"
-              sx={{ width: "100%", height: "auto", transform: "scale(.5)" , background:"radial-gradient(circle, rgba(169,169,171,1) 0%, rgba(11,45,103,1) 70%);" , borderRadius:"2rem"}}
+              sx={{ width: "100%", height: "auto", transform: "scale(.7)" }}
               src={mediaApi + LogoPath}
               alt="CO"
             />

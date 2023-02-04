@@ -1,7 +1,7 @@
-export const baseapi = "http://44.213.46.206/api" // for deployment just let /api
+export const baseapi = "https://sites.digitize.org/api" // for deployment just let /api
 export const mediaApi = baseapi + "/public" // for deployment just let /public
-export const AppName = "SafcoTech"
-export const LogoPath = "/Assets/logoicon.png"
+export const AppName = "Digitize"
+export const LogoPath = "/Assets/Digitize.png"
 export const LogoIconPath = "/Assets/logoicon.ico"
 
 
