@@ -3,7 +3,7 @@ services:
   web_server:
     image: nginx
     networks:
-      - Connect
+      - Digitize
       - global
     restart: always
     depends_on:
@@ -11,21 +11,22 @@ services:
       - backend
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../storage/certbot/www/:/var/www/certbot/:ro
-      - ../storage/certbot/conf/:/etc/nginx/ssl/:ro
+      - ~/Digitize/storage/certbot/www/:/var/www/certbot/:ro
+      - ~/Digitize/storage/certbot/conf/:/etc/nginx/ssl/:ro
 
   # certbot:
   #   image: certbot/certbot:latest
   #   volumes:
-  #     - ../storage/certbot/conf/:/etc/letsencrypt/
-  #     - ../storage/certbot/www/:/var/www/certbot/
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d sites.Connect.org --agree-tos
+  #     - ~/Digitize/storage/certbot/conf/:/etc/letsencrypt/
+  #     - ~/Digitize/storage/certbot/www/:/var/www/certbot/
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d sites.digitize.org --agree-tos
   #   depends_on:
   #     - frontend
   #     - backend
 
 
   mongodb:
+    container_name: mongodb
     image: mongo
     command: mongod --auth
     restart: unless-stopped
@@ -35,7 +36,7 @@ services:
     networks:
       - private
     volumes:
-      - ../storage/database:/data/db
+      - ~/Digitize/storage/database:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     
   backend:
@@ -47,13 +48,13 @@ services:
       - frontend_net
       - private
       - flutter_net
-      - Connect
+      - Digitize
     depends_on:
       - mongodb
     links:
       - mongodb
     volumes:
-      - ../storage/media:/usr/src/app/public
+      - ~/Digitize/storage/media:/usr/src/app/public
     # deploy:
     #   mode: replicated
     #   replicas: 1
@@ -63,7 +64,7 @@ services:
     env_file: ./envfiles/frontend.env
     networks:
       - frontend_net
-      - Connect
+      - Digitize
     depends_on:
       - backend
     restart: always
@@ -75,7 +76,7 @@ networks:
   private:
   frontend_net:
   flutter_net:
-  Connect:
+  Digitize:
   global:
     external: true
     driver: bridge
