@@ -30,8 +30,6 @@ services:
     command: mongod --auth
     restart: unless-stopped
     env_file: ./envfiles/DB.env
-    ports:
-    - 27017:27017
     networks:
       - private
     volumes:
