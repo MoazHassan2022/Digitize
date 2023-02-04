@@ -51,7 +51,7 @@ return (
 
           <Grid item className={classes.Logo} xs={12} >
                 <Avatar variant="rounded" 
-                                sx={{ width: "100%", height: "auto", transform: "scale(.4)"}}
+                                sx={{ width: "100%", height: "auto", transform: "scale(.7)"}}
                                 src={mediaApi + LogoPath} alt="CO" />
           </Grid>
 
