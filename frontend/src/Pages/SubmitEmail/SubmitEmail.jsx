@@ -1,9 +1,10 @@
-import { Alert, Avatar, Button,  Grid,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Avatar, Button,  Grid,  Paper, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import {BiReset } from "react-icons/bi";
 import useStyle from "./SubmitEmailStyles";
 import axios from "axios";
 import { LogoPath, baseapi, mediaApi } from "../../Utilities/utilitesFunction";
+import FormContainer from "../../Component/FormContainer/FormContainer";
 
 export const SubmitEmail = () => {
   const classes = useStyle();
@@ -26,15 +27,28 @@ export const SubmitEmail = () => {
   }
 
 return (
-  <Grid 
-  container 
-  alignItems="center"
-  justifyContent="center"
-  className={classes.SignPage}
-  > 
-    <Grid item container xs={12} md={6} direction="column"  alignItems="center">
-      <form className={classes.Form} onSubmit={HandleSubmit}>
-        <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
+  <>
+  <FormContainer Title={<Typography alignSelf="end" sx={{ color: "white" }} variant="h2">اعد تعيين كلمه السر</Typography>}>
+  <Grid
+      container
+      direction="row"
+      component={Paper}
+      sx={{ padding: 6, border: "5px solid", borderRadius: 6 }}
+      xs={10}
+      sm={8}
+      md={6}
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      <Stack
+        component={"form"}
+        onSubmit={HandleSubmit}
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={4}
+      >
+
           <Grid item className={classes.Logo} xs={12} >
                 <Avatar variant="rounded" 
                                 sx={{ width: "100%", height: "auto", transform: "scale(.4)"}}
@@ -66,15 +80,16 @@ return (
 
             <Button type="submit" variant="contained" endIcon={<BiReset color="white" /> } >اعد تعيين كلمة السر</Button>
           </Grid>
-        </Grid>
-      </form>
+
+          </Stack>
     </Grid>
+    </FormContainer>
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={15000} onClose={() => setSnakeData([false , "" , ""]) }>
             <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>
-  </Grid>
+  </>
 );
 
 

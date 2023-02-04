@@ -1,4 +1,4 @@
-import { Alert, Avatar, Button,  Grid,  IconButton,  InputAdornment,  Paper, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Avatar, Button,  Grid,  IconButton,  InputAdornment,  Paper, Snackbar, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import {BiLogInCircle } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import axios from "axios";
 import {MdVisibility , MdVisibilityOff} from "react-icons/md"
 import { useTheme } from "@emotion/react";
 import { LogoPath, baseapi, mediaApi } from "../../Utilities/utilitesFunction";
+import FormContainer from "../../Component/FormContainer/FormContainer";
 
 export const Resetpassword = () => {
   const classes = useStyle();
@@ -44,19 +45,32 @@ export const Resetpassword = () => {
 
 
 return (
-  <Grid 
-  container 
-  alignItems="center"
-  justifyContent="center"
-  className={classes.SignPage}
-  > 
-    <Grid item container xs={12} md={6} direction="column"  alignItems="center">
-      <form className={classes.Form} onSubmit={HandleSubmit}>
-        <Grid item container xs={12} md={12} component={Paper} direction="row" spacing={4} className={classes.SignCard} alignItems="center">
+  <>
+  <FormContainer Title={<Typography alignSelf="end" sx={{ color: "white" }} variant="h2">غير كلمة السر الخاصة بك</Typography>}>
+  <Grid
+      container
+      direction="row"
+      component={Paper}
+      sx={{ padding: 6, border: "5px solid", borderRadius: 6 }}
+      xs={10}
+      sm={8}
+      md={6}
+      justifyContent="space-around"
+      alignItems="center"
+    >
+      <Stack
+        component={"form"}
+        onSubmit={HandleSubmit}
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={4}
+      >
+
           <Grid item className={classes.Logo} xs={12} >
                 <Avatar variant="rounded" 
                                 sx={{ width: "100%", height: "auto", transform: "scale(.6)"}}
-                                src={mediaApi + + LogoPath} alt="CO" />
+                                src={mediaApi + LogoPath} alt="Digitize" />
           </Grid>
 
           <Grid item xs={12} textAlign="center">
@@ -120,15 +134,18 @@ return (
           <Grid item xs={12} align="center">
             <Button type="submit" variant="contained" endIcon={<BiLogInCircle /> } >اعد التعيين</Button>
           </Grid>
-        </Grid>
-      </form>
+          
+          </Stack>
     </Grid>
+    </FormContainer>
+
+
     <Snackbar sx={{ width:400, }} open={snakeData[0]} autoHideDuration={3000} onClose={() => setSnakeData([false , "" , ""]) }>
             <Alert onClose={() => setSnakeData([false , "" , ""])} severity={snakeData[2] === "success" ? "success" : (snakeData[2] === "error" ?"error" :"info")} >
                 {snakeData[1]}
             </Alert >
     </Snackbar>
-  </Grid>
+    </>
 );
 
 

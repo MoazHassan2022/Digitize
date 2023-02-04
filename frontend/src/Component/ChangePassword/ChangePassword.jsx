@@ -67,6 +67,7 @@ export const ChangePassword = ({ setSnakeData }) => {
       >
         <Grid item xs={12} alignItems="flex-start" justifyContent="flex-start">
           <FormLabel component="legend" sx={{margin:1}}>اكنب كلمة السر القديمة</FormLabel>          
+          
           <TextFieldWithShowPassword 
           key={54}
           Label={"كلمة السر الحالية"}
@@ -101,6 +102,7 @@ export const ChangePassword = ({ setSnakeData }) => {
             غير كلمة السر
           </Button>
         </Grid>
+        
       </Stack>
     </Grid>
   );
