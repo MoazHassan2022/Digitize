@@ -77,14 +77,15 @@ return (
             component={"form"}
             onSubmit={HandleSubmit}
             container
-            spacing={4}
+            spacing={3}
             justifyContent="center"
             alignItems="center"
+            sx={{paddingBottom:5}}
           >
-            <Grid item sx={{ margin: "auto", maxHeight:"35vh" }} xs={12} >
+            <Grid item sx={{  maxHeight:"35vh" }} xs={12} >
               <Avatar
                 variant="rounded"
-                sx={{ width: "100%", height: "auto", transform: "scale(.45)" }}
+                sx={{ width: "100%", height: "auto", transform: "scale(.4)" }}
                 src={mediaApi + LogoPath}
                 alt="CO"
               />
