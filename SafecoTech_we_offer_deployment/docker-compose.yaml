@@ -1,5 +1,6 @@
 version: "3"
 services:
+
   web_server:
     image: nginx
     networks:
@@ -19,7 +20,7 @@ services:
   #   volumes:
   #     - ../storage/certbot/conf/:/etc/letsencrypt/
   #     - ../storage/certbot/www/:/var/www/certbot/
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d sites.Connect.org --agree-tos
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email elwaeryousef@gmail.com -d app.safecotech.com --agree-tos
   #   depends_on:
   #     - frontend
   #     - backend
@@ -44,7 +45,6 @@ services:
     networks:
       - frontend_net
       - private
-      - flutter_net
       - Connect
     depends_on:
       - mongodb
@@ -72,7 +72,6 @@ services:
 networks:
   private:
   frontend_net:
-  flutter_net:
   Connect:
   global:
     external: true
