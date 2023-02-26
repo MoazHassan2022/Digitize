@@ -54,5 +54,33 @@
     "isActive": true,
     "isAdmin": true,
     "__v": 0
+  },
+  {
+    "_id": "63e78f4541e4fe07aba42ac5",
+    "name": "Admin",
+    "email": "admin@admin.com",
+    "password": "$2a$12$imDnMWUpLpI5TlmTRfn5me8IhHpx2ORszDFHh3yh1q5mI.uZgaqIy",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1676119856639"
+      }
+    },
+    "isActive": true,
+    "isAdmin": true,
+    "__v": 0
+  },
+  {
+    "_id": "63e78f5941e4fe07aba42aca",
+    "name": "Worker",
+    "email": "worker@worker.com",
+    "password": "$2a$12$QYERpiW62ZBKPdoIk/GVgORZWerKFEO.f4c43.XwVirDAcDgXhzfy",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1676119856639"
+      }
+    },
+    "isActive": true,
+    "isAdmin": false,
+    "__v": 0
   }
 ]
