@@ -1,6 +1,6 @@
 # Digitize
 
-![alt text](./Images/logoicon.png)
+![alt text](./images/logoicon.png)
 
 <h2>Table of Contents</h2>
 <ul>
