@@ -2,6 +2,7 @@
 
 ![alt text](./images/logoicon.png)
 
+<hr>
 <h2>Table of Contents</h2>
 <ul>
   <li><a href="#built-with--">Built With</a></li>
@@ -12,6 +13,7 @@
   <li><a href="#Contributors">Contributors</a></li>
 </ul>
 
+<hr>
 <h2 href="#BuiltWith">Built With : </h2>
  <ul>
   <li><a href="https://www.w3schools.com/nodejs/">Node js</a></li>
@@ -23,6 +25,7 @@
   <li><a href="https://mui.com/material-ui/getting-started/templates/">Material UI</a></li>
  </ul>
 
+<hr>
 <h2 href="#GettingStarted">Getting Started</h2>
 <blockquote>
   <p>This is a list of needed instructions to set up your project locally, to get a local copy up and running follow these instructions.
@@ -58,8 +61,8 @@ EMAIL_FROM=[EMAIL USERNAME TO SEND MAILS] <br>
  </li>
  </ol>
 
+<hr>
 <h2 href="#Description">Description</h2>
-<blockquote>
   <p>
   This project was made for <a href="https://digitize.org/">Digitize</a> company.
   <br>
@@ -118,15 +121,13 @@ He have another  tabs for:
 </li>
 </ol>
  </p>
-</blockquote>
-
+<hr>
 <h2 href="#Documentation">Documentation</h2>
-<blockquote>
   <p>
   You can look on the API documentation at <a href="https://documenter.getpostman.com/view/22736405/2s93mAVL7z">API Documentation</a>
   </p>
-</blockquote>
 
+<hr>
 <h2 href="#Screenshots">Screenshots</h2>
 <ol>
     <li>
@@ -206,6 +207,7 @@ He have another  tabs for:
     </li>
 </ol>
 
+<hr>
 <h2 href="#Contributors">Contributors</h2>
 <h3>Frontend & DevOps</h3>
 <table> 
