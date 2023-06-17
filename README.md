@@ -134,7 +134,7 @@ He have another  tabs for:
     <img src="./images/1.png">
     </li>
     <li>
-    <img src="./images/2.jpg">
+    <img src="./images/2.png">
     </li>
     <li>
     <img src="./images/3.png">
