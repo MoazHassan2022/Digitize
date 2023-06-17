@@ -1,42 +1,86 @@
-[{
-  "_id": "63289be20a5933d54be51672",
-  "name": "Moaz Mohamed",
-  "email": "moaz25jan2015@gmail.com",
-  "password": "$2a$12$ISze2OoYqiRRZ/rFCXyndu9VsP9VmFeSmGNzo8trDj8SzrXiDoNAy",
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1672868832071"
-    }
+[
+  {
+    "_id": "63289be20a5933d54be51672",
+    "name": "Moaz Mohamed",
+    "email": "moaz25jan2015@gmail.com",
+    "password": "$2a$12$ISze2OoYqiRRZ/rFCXyndu9VsP9VmFeSmGNzo8trDj8SzrXiDoNAy",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1672868832071"
+      }
+    },
+    "isActive": true,
+    "isAdmin": true,
+    "__v": 0
   },
-  "isActive": true,
-  "isAdmin": true,
-  "__v": 0
-},
-{
-  "_id": "63c051a1b3d112dd703d0034",
-  "name": "Admin",
-  "email": "admin@digitize.org",
-  "password": "$2a$12$CUZQEAHJ.N2UEfaQdxhkbuVxTthI8VrlzCcA2Cxk4Oe4JMDEzMcIm",
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1673547850011"
-    }
+  {
+    "_id": "63c051a1b3d112dd703d0034",
+    "name": "Admin",
+    "email": "admin@digitize.org",
+    "password": "$2a$12$CUZQEAHJ.N2UEfaQdxhkbuVxTthI8VrlzCcA2Cxk4Oe4JMDEzMcIm",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1673547850011"
+      }
+    },
+    "isActive": true,
+    "isAdmin": true,
+    "__v": 0
   },
-  "isActive": true,
-  "isAdmin": true,
-  "__v": 0
-},
-{
-  "_id": "63b5f459bf01b276c2e4d7cd",
-  "name": "يوسف واعر",
-  "email": "elwaeryousef@gmail.com",
-  "password": "$2a$12$utuVsvZv08FCOYO9lIkzpuo57QNH5ImUKaPQeHWyREkmoTlST3xvS",
-  "createdAt": {
-    "$date": {
-      "$numberLong": "1672868859083"
-    }
+  {
+    "_id": "63b5f459bf01b276c2e4d7cd",
+    "name": "يوسف واعر",
+    "email": "elwaeryousef@gmail.com",
+    "password": "$2a$12$utuVsvZv08FCOYO9lIkzpuo57QNH5ImUKaPQeHWyREkmoTlST3xvS",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1672868859083"
+      }
+    },
+    "isActive": true,
+    "isAdmin": false,
+    "__v": 0
   },
-  "isActive": true,
-  "isAdmin": false,
-  "__v": 0
-}]
+  {
+    "_id": "63de6c8a231c1c13de6385a4",
+    "name": "Admin",
+    "email": "admin@safecotech.org",
+    "password": "$2a$12$wk0fqyZGaaJuUQ59.uZqNuD4Vf0c.h6kaBrePAGO6rsteZP7BJ6di",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1675521051965"
+      }
+    },
+    "isActive": true,
+    "isAdmin": true,
+    "__v": 0
+  },
+  {
+    "_id": "63e78f4541e4fe07aba42ac5",
+    "name": "Admin",
+    "email": "admin@admin.com",
+    "password": "$2a$12$imDnMWUpLpI5TlmTRfn5me8IhHpx2ORszDFHh3yh1q5mI.uZgaqIy",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1676119856639"
+      }
+    },
+    "isActive": true,
+    "isAdmin": true,
+    "__v": 0
+  },
+  {
+    "_id": "63e78f5941e4fe07aba42aca",
+    "name": "Worker",
+    "email": "worker@worker.com",
+    "password": "$2a$12$QYERpiW62ZBKPdoIk/GVgORZWerKFEO.f4c43.XwVirDAcDgXhzfy",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1676119856639"
+      }
+    },
+    "isActive": true,
+    "isAdmin": false,
+    "__v": 0
+  }
+]
