@@ -6,7 +6,6 @@ import {
   Paper,
   Snackbar,
   Typography,
-  Box,
   Stack,
 } from "@mui/material";
 import { useState } from "react";
@@ -14,7 +13,6 @@ import useStyle from "./MultiFormStyles";
 import { useCookies } from "react-cookie";
 import { useTheme } from "@emotion/react";
 import { DropDownwithapi } from "./DropDownwithapi";
-// import ManualInsert from './ManualInsert';
 import axios from "axios";
 import {
   translator,
@@ -208,7 +206,7 @@ export const MultiForm = () => {
             container
             xs={12}
             md={12}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <Hello />
@@ -223,7 +221,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <ChoseSite
@@ -258,7 +256,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={6}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             {/* <ManualInsert  selection={formData[getformKey(step)]}   key={step} setselection={handleChangeForm} label={" ادخل "  + translator(step)} /> */}
@@ -282,7 +280,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -306,7 +304,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithselctions
@@ -327,7 +325,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -351,7 +349,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <ManualInsertNumber
@@ -371,7 +369,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -395,7 +393,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -419,7 +417,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -443,7 +441,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -466,7 +464,7 @@ export const MultiForm = () => {
             container
             xs={8}
             md={4}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <DropDownwithapi
@@ -490,7 +488,7 @@ export const MultiForm = () => {
             container
             xs={12}
             md={12}
-            justifyContent="center"
+            justifyContent='center'
             sx={{ borderRadius: 2, marginTop: 2 }}
           >
             <Review data={formData} keys={getformKey} />
@@ -505,9 +503,9 @@ export const MultiForm = () => {
   return (
     <Grid
       container
-      direction="row"
-      justifyContent="center"
-      alignItems="flex-start"
+      direction='row'
+      justifyContent='center'
+      alignItems='flex-start'
       className={classes.SignPage}
     >
       <Grid
@@ -518,9 +516,9 @@ export const MultiForm = () => {
         sx={{ borderRadius: "2rem", bgcolor: "transparent" }}
         xs={12}
         md={8}
-        direction="row"
-        justifyContent="space-around"
-        alignItems="stretch"
+        direction='row'
+        justifyContent='space-around'
+        alignItems='stretch'
         className={classes.FormContainer}
       >
         <Grid
@@ -530,11 +528,11 @@ export const MultiForm = () => {
           onSubmit={HandleSubmit}
           xs={12}
           sm={8}
-          textAlign="center"
-          justifyContent="flex-start"
+          textAlign='center'
+          justifyContent='flex-start'
           className={classes.StepsContainer}
         >
-          <Grid xs={12} textAlign="center" justifyContent="stretch">
+          <Grid xs={12} textAlign='center' justifyContent='stretch'>
             <Stack
               component={Paper}
               sx={{
@@ -547,14 +545,14 @@ export const MultiForm = () => {
                 borderTopLeftRadius: "1rem",
                 borderTopRightRadius: "1rem",
               }}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
+              direction='row'
+              justifyContent='center'
+              alignItems='center'
             >
               <Typography
-                alignSelf="center"
+                alignSelf='center'
                 sx={{ color: "white" }}
-                variant="h1"
+                variant='h1'
               >
                 {translator(activeStep)}
               </Typography>
@@ -565,26 +563,26 @@ export const MultiForm = () => {
             item
             container
             sx={{ padding: 2 }}
-            alignItems="flex-start"
-            justifyContent="center"
+            alignItems='flex-start'
+            justifyContent='center'
           >
             {renderStep(activeStep)}
           </Grid>
 
           <Grid item xs={12}>
             <MobileStepper
-              variant="progress"
+              variant='progress'
               steps={maxSteps}
-              position="static"
+              position='static'
               activeStep={activeStep}
               nextButton={
                 <Button
-                  type="submit"
+                  type='submit'
                   disabled={stopsubmit}
-                  size="small"
+                  size='small'
                   endIcon={
                     activeStep === maxSteps - 1 ? (
-                      <GiFinishLine color="white" />
+                      <GiFinishLine color='white' />
                     ) : (
                       ""
                     )
@@ -599,7 +597,7 @@ export const MultiForm = () => {
               }
               backButton={
                 <Button
-                  size="small"
+                  size='small'
                   onClick={handleBack}
                   disabled={activeStep === 0}
                 >
@@ -608,16 +606,14 @@ export const MultiForm = () => {
               }
             />
           </Grid>
-          
         </Grid>
-        
 
         <Grid
           item
           container
-          direction="row"
-          justifyContent="center"
-          alignItems="stretch"
+          direction='row'
+          justifyContent='center'
+          alignItems='stretch'
           sm={3}
           md={3}
           className={classes.Tracker}
@@ -627,7 +623,7 @@ export const MultiForm = () => {
             item
             xs={12}
             sx={{ color: "white" }}
-            textAlign="center"
+            textAlign='center'
             className={classes.TrackerLabel}
           >
             تابع تقدمك

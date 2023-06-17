@@ -1,13 +1,9 @@
 import { makeStyles } from "@mui/styles";
-import theme from "../../Utilities/Theme";
 
 const useStyle = makeStyles({
+  textField: {
+    width: "15rem",
+  },
+});
 
-    textField:{
-      width:"15rem"
-    }  
-  
-  });
-  
-  export default useStyle;
-  
+export default useStyle;
