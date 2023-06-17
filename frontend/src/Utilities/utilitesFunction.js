@@ -1,4 +1,4 @@
-export const baseapi = "/api" // for deployment just let /api
+export const baseapi = "https://sites.digitize.org/api" // for deployment just let /api
 export const mediaApi = baseapi + "/public" // for deployment just let /public
 export const AppName = "Digitize"
 export const LogoPath = "/Assets/Digitize.png"
